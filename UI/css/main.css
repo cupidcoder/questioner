@@ -44,9 +44,19 @@ li {list-style-type:none;}
     background-color: #0376f9
 }
 
+
+footer {
+    font-size: 120%;
+    text-align: center;
+    font-family: 'Tangerine', cursive !important;
+    color: #0376f9;
+}
+
 /*
 * End of General CSS
 */
+
+
 
 
 
