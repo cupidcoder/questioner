@@ -5,6 +5,8 @@
 * General CSS
 */
 
+
+
 /* Body */
 
 body {
@@ -26,9 +28,33 @@ a:link, a:visited {
 /* Lists */
 li {list-style-type:none;}
 
+/* Buttons */
+.darkBtn {
+    padding: 15px;
+    background-color: #305b8c;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+}
+
+.darkBtn:hover {
+    background-color: #0376f9
+}
+
+/*
+* End of General CSS
+*/
+
+
+
 /*
 * Landing Page
 */
+
+
 
 /* Header */
 #landingHeader {
@@ -54,3 +80,27 @@ li {list-style-type:none;}
 }
 
 #headerNav p:first-child {border-right: 3px solid #305b8c;}
+
+
+/* Hero Image */
+#landingPageHeroImage {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/bg-hero.jpg");
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align:center;
+    margin:auto;
+    padding:0;
+}
+
+#landingPageHeroImage h1 {
+    font-size: 250%;
+    font-weight: lighter;
+    margin: auto;
+    padding-top: 250px;
+    color: #fff;
+}
+
+#landingPageHeroImage p {margin-top:35px;}
