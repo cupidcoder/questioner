@@ -114,3 +114,69 @@ footer {
 }
 
 #landingPageHeroImage p {margin-top:35px;}
+
+/*
+* End of Landing Page
+*/
+
+
+/*
+* Sign Up section
+*/
+
+#signUpSection {
+    height: 70vh;
+}
+
+#signUpSection div {float: left;}
+
+/* Sign Up image */
+#signUpImage {
+    width: 50%;
+    height: 100%;
+    background-image: url('../img/bg-signup.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* Sign Up Form */
+#signUpFormSection {
+    width: 50%;
+    height: 100%;
+    background-color: #d0caca;
+}
+
+.form {
+    width: 50%; 
+    height: 80%;
+    display: block;
+    margin-top: 40px;
+    margin-left: 25%;
+    border: 1px solid #4c4a4a;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    overflow: scroll;
+}
+
+.form p:first-child {
+    font-size: 80%;
+    color: #305b8c;
+    border-bottom: 1px solid #d0caca;
+    padding-bottom: 15px;
+}
+
+#formSubHeading {font-size: 70%;}
+
+#formSubHeading a {
+    color: #305b8c !important;
+    text-decoration: underline;
+}
+
+.form input {
+    padding: 2%;
+    margin-bottom: 5px;
+}
+
+
