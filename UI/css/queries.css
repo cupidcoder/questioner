@@ -19,3 +19,17 @@
 @media only screen and (max-width: 480px) {
 
 }
+
+/* Media queries for small phones from 0 to 320px */
+@media only screen and (max-width: 320px) {
+    
+    /* Landing page headerNav */
+    #headerNav {
+        font-size: 90%;
+    }
+
+    /* Hero image text */
+    #landingPageHeroImage h1 { font-size: 100%; }
+
+    #landingPageHeroImage p { font-size: 70%; }
+}
