@@ -44,6 +44,13 @@ li {list-style-type:none;}
     background-color: #0376f9
 }
 
+/* Background images */
+.bgImage {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
 
 footer {
     font-size: 120%;
@@ -135,9 +142,6 @@ footer {
     width: 50%;
     height: 100%;
     background-image: url('../img/bg-signup.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
 }
 
 /* Sign Up Form */
