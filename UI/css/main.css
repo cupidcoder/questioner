@@ -128,24 +128,24 @@ footer {
 
 
 /*
-* Sign Up section
+* Sign Up section / Sign In section
 */
 
-#signUpSection {
+#signUpSection, #signInSection {
     height: 70vh;
 }
 
-#signUpSection div {float: left;}
+#signUpSection div, #signInSection div {float: left;}
 
-/* Sign Up image */
-#signUpImage {
+/* Sign Up / In image */
+#signUpImage, #signInImage {
     width: 50%;
     height: 100%;
     background-image: url('../img/bg-signup.jpg');
 }
 
-/* Sign Up Form */
-#signUpFormSection {
+/* Sign Up / Sign In Form */
+#signUpFormSection, #signInFormSection {
     width: 50%;
     height: 100%;
     background-color: #d0caca;
