@@ -1,0 +1,56 @@
+/*==== Main CSS for application ===*/
+
+
+/*
+* General CSS
+*/
+
+/* Body */
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* links */
+
+a { text-decoration: none; }
+
+a:link, a:visited {
+    color: #fff;
+}
+
+/* Lists */
+li {list-style-type:none;}
+
+/*
+* Landing Page
+*/
+
+/* Header */
+#landingHeader {
+    background-color: #f39e3e;
+}
+
+.headerDiv {
+    display: inline-block;
+}
+
+#headerLogo {
+    font-family: 'Tangerine', cursive !important;
+    font-size: 120%;
+    padding-left: 1%;
+}
+
+#headerNav {float: right;}
+
+#headerNav p {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+#headerNav p:first-child {border-right: 3px solid #305b8c;}
