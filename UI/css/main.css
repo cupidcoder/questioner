@@ -51,12 +51,59 @@ li {list-style-type:none;}
     background-repeat: no-repeat;
 }
 
+/* Forms */
+.form {
+    width: 50%; 
+    height: 80%;
+    display: block;
+    margin-top: 40px;
+    margin-left: 25%;
+    border: 1px solid #4c4a4a;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    overflow: scroll;
+}
+
+.form p:first-child {
+    font-size: 80%;
+    color: #305b8c;
+    border-bottom: 1px solid #d0caca;
+    padding-bottom: 15px;
+}
+
+#formSubHeading {font-size: 70%;}
+
+#formSubHeading a {
+    color: #305b8c !important;
+    text-decoration: underline;
+}
+
+.form input {
+    padding: 2%;
+    margin-bottom: 5px;
+}
+
+
+/* Icons */
+i {color: #305b8c;}
+
+.iconText {float: right;}
+
+.clear {clear: both;}
+
 
 footer {
     font-size: 120%;
     text-align: center;
     font-family: 'Tangerine', cursive !important;
     color: #0376f9;
+    height: 50px;
+}
+
+footer p { 
+    margin: 0;
+    padding-top: 10px;
 }
 
 /*
@@ -96,7 +143,7 @@ footer {
     padding: 10px;
 }
 
-#headerNav p:first-child {border-right: 3px solid #305b8c;}
+#headerNav p:not(:last-child) {border-right: 3px solid #305b8c;}
 
 
 /* Hero Image */
@@ -151,36 +198,67 @@ footer {
     background-color: #d0caca;
 }
 
-.form {
-    width: 50%; 
-    height: 80%;
-    display: block;
-    margin-top: 40px;
-    margin-left: 25%;
-    border: 1px solid #4c4a4a;
-    border-radius: 5px;
-    background-color: #fff;
+
+/*
+* Meetups Section
+*/
+
+#meetUpsSection {
+    height: 100%;
+    background-color: #d0caca;
+    /* overflow: scroll; */
+}
+
+
+#meetUpsSection h3 {
+    margin: 0 0 30px 0;
     text-align: center;
-    overflow: scroll;
-}
-
-.form p:first-child {
-    font-size: 80%;
+    padding: 20px 0 25px 0;
     color: #305b8c;
-    border-bottom: 1px solid #d0caca;
-    padding-bottom: 15px;
+    font-size: 170%;
+    font-weight: 300;
 }
 
-#formSubHeading {font-size: 70%;}
-
-#formSubHeading a {
-    color: #305b8c !important;
-    text-decoration: underline;
+.meetupBox {
+    margin-left: 50px;
+    height: 300px;
+    width: 20%;
+    display: block;
+    background-color: #fff;
+    border-radius: 10px;
+    float: left;
+    margin-bottom: 20px;
 }
 
-.form input {
-    padding: 2%;
-    margin-bottom: 5px;
+.meetupBox img {
+    width: 100%;
+    height: 60%;
 }
+
+.meetupBoxInfo {
+    width: 100%;
+    overflow: hidden;
+}
+
+.meetupBoxInfo p {
+    padding-left: 2%;
+    color: #305b8c;
+    font-size: 90%;
+    font-weight: 700;
+    overflow-wrap: break-word;
+}
+
+.meetupBoxInfo div {
+    float: left;
+    padding-left: 2%;
+}
+
+.attendeesLogo {
+    margin-left: 20%;
+}
+
+
+
+
 
 
