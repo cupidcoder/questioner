@@ -92,6 +92,8 @@ i {color: #305b8c;}
 
 .clear {clear: both;}
 
+.sectionBackground {background-color: #d0caca;}
+
 
 footer {
     font-size: 120%;
@@ -195,7 +197,6 @@ footer p {
 #signUpFormSection, #signInFormSection {
     width: 50%;
     height: 100%;
-    background-color: #d0caca;
 }
 
 
@@ -205,12 +206,11 @@ footer p {
 
 #meetUpsSection {
     height: 100%;
-    background-color: #d0caca;
     /* overflow: scroll; */
 }
 
 
-#meetUpsSection h3 {
+.sectionHeading {
     margin: 0 0 30px 0;
     text-align: center;
     padding: 20px 0 25px 0;
@@ -258,7 +258,53 @@ footer p {
 }
 
 
+/*
+* Meetup Details Section
+*/
 
+#meetUpDetailsSection {
+    height: 100%;
+}
 
+#meetUpDetailsImage {
+    width: 40%;
+    height: 100%;
+}
 
+#meetUpDetailsImage img {
+    padding: 0 10%;
+    width: 60%;
+    height: 40%;
+    /* border-right: 1px solid #4c4a4a; */
+}
 
+#meetUpDetailsInfo {
+    width: 60%;
+    height: 100%;
+}
+
+.meetUpDetailsInfoDesc {
+    text-align: left;
+    margin-left: -60px;
+    margin-bottom: 30px;
+}
+
+.details {float: left;}
+
+.meetUpDetailsQuestion {
+    height: 100px;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.meetUpDetailsQuestion p {
+    padding: 10px;
+    overflow-wrap: break-word;
+    color: #305b8c;
+}
+
+.meetUpDetailsQuestion i {
+    padding: 5px;
+    margin-right: 10px;
+}
