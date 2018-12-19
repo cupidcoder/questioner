@@ -92,6 +92,8 @@ i {color: #305b8c;}
 
 .clear {clear: both;}
 
+.sectionBackground {background-color: #d0caca;}
+
 
 footer {
     font-size: 120%;
@@ -195,7 +197,6 @@ footer p {
 #signUpFormSection, #signInFormSection {
     width: 50%;
     height: 100%;
-    background-color: #d0caca;
 }
 
 
@@ -205,7 +206,6 @@ footer p {
 
 #meetUpsSection {
     height: 100%;
-    background-color: #d0caca;
     /* overflow: scroll; */
 }
 
@@ -264,7 +264,6 @@ footer p {
 
 #meetUpDetailsSection {
     height: 100%;
-    background-color: #d0caca;
 }
 
 #meetUpDetailsImage {
