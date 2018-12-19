@@ -351,3 +351,42 @@ footer p {
 #passwordResetFormBox .darkBtn {
     width: 100%;
 }
+
+
+/*
+* Create Meetup Section
+*/
+
+#createMeetupSection {
+    height: 100%;
+}
+
+#createMeetupSectionImage {
+    height: 180px;
+    width: 100%;
+    background-image: url("../img/uploads/create-img.jpg");
+}
+
+#createMeetupSectionImage h3 {
+    color: #fff !important;
+}
+
+.createMeetupEntryBox {
+    width: 40%;
+    display: block;
+    margin: auto;
+    text-align: left;
+    padding-bottom: 30px;
+}
+
+.createMeetupEntryBoxForm p {
+    font-weight: 700;
+    font-size: 140%;
+}
+
+.createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 100%;
+}
