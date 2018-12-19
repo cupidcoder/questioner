@@ -88,6 +88,11 @@ li {list-style-type:none;}
 /* Icons */
 i {color: #305b8c;}
 
+/* Inputs */
+input:focus {
+    outline-color: #f39e3e;
+}
+
 .iconText {float: right;}
 
 .clear {clear: both;}
@@ -180,7 +185,7 @@ footer p {
 * Sign Up section / Sign In section
 */
 
-#signUpSection, #signInSection {
+#signUpSection, #signInSection, #passwordResetSection {
     height: 70vh;
 }
 
@@ -307,4 +312,42 @@ footer p {
 .meetUpDetailsQuestion i {
     padding: 5px;
     margin-right: 10px;
+}
+
+/*
+* Password reset Section
+*/
+
+#passwordResetSection {
+    text-align: center;
+}
+
+.passwordResetSubHeading {
+    border-bottom: 1px dotted #4c4a4a;
+    width: 70%;
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+#passwordResetFormBox {
+    height: 50%;
+    width: 20%;
+    display: block;
+    margin: auto;
+}
+
+#passwordResetFormBox p {
+    text-align: left;
+}
+
+#passwordResetFormBox input {
+    background-color: #fff;
+    padding: 20px;
+    width: 80%;
+    font-size: 120%;
+    margin-bottom: 10px;
+}
+
+#passwordResetFormBox .darkBtn {
+    width: 100%;
 }
