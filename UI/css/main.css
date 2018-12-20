@@ -361,13 +361,13 @@ footer p {
     height: 100%;
 }
 
-#createMeetupSectionImage {
+#createMeetupSectionImage, #dashboardSectionImage {
     height: 180px;
     width: 100%;
     background-image: url("../img/uploads/create-img.jpg");
 }
 
-#createMeetupSectionImage h3 {
+#createMeetupSectionImage h3, #dashboardSectionImage h3 {
     color: #fff !important;
 }
 
@@ -390,3 +390,59 @@ footer p {
     border-radius: 10px;
     font-size: 100%;
 }
+
+
+/*
+*  Dashboard Section
+*/
+
+#dashboardSectionSummary {
+    width: 90%;
+    display: block;
+    margin: auto;
+}
+
+.dashboardStat {float: left;}
+
+.dashboardStatBox {
+    background-color: #fff;
+    margin: 30px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dashboardStatBoxIcon {font-size: 200%;}
+
+#summaryBoxMeetupLink {
+    color: #0376f9 !important;
+}
+
+#summaryBox {width: 30%;}
+
+#feedBox {width: 70%;}
+
+#feedBox h2 {color: #305b8c;}
+
+#feedBoxQuestions {
+    background-color: #fff;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+    margin-bottom: 40px;
+}
+
+#feedBoxQuestions h4 {
+    padding: 30px;
+    border-bottom: 1px solid #0376f9;
+}
+
+.feedQuestion {
+    width: 80%;
+    display: block;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #4c4a4a;
+    padding-bottom: 5px;
+}
+
+.feedQuestion i {padding: 5px;}
