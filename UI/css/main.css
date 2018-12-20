@@ -418,7 +418,10 @@ footer p {
     color: #0376f9 !important;
 }
 
-#summaryBox {width: 30%;}
+#summaryBox {
+    width: 30%;
+    margin-top: 65px;
+}
 
 #feedBox {width: 70%;}
 
