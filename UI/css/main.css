@@ -361,13 +361,13 @@ footer p {
     height: 100%;
 }
 
-#createMeetupSectionImage, #dashboardSectionImage {
+#createMeetupSectionImage, #dashboardSectionImage, #myMeetupSectionImage {
     height: 180px;
     width: 100%;
     background-image: url("../img/uploads/create-img.jpg");
 }
 
-#createMeetupSectionImage h3, #dashboardSectionImage h3 {
+#createMeetupSectionImage h3, #dashboardSectionImage h3, #myMeetupSectionImage h3 {
     color: #fff !important;
 }
 
@@ -449,3 +449,38 @@ footer p {
 }
 
 .feedQuestion i {padding: 5px;}
+
+
+/*
+* My Meetup Section
+*/
+
+#myMeetupSection {
+    height: 100%;
+}
+
+#meetupListingSection {
+    width: 60%;
+    display: block;
+    margin: auto;
+    padding-top: 50px;
+    text-align: center;
+    font-size: 150%;
+}
+
+.meetupListingQuestion {
+    width: 80%;
+    /* padding: 40px; */
+    display: block;
+    margin-left: 10%;
+    background-color: #fff;
+    box-shadow: 2px 2px #4c4a4a;
+    margin-bottom: 20px;
+}
+
+.meetupListingQuestion p {display: inline-block;}
+
+.meetupListingQuestion i {margin-left: 5%;}
+
+#deleteMeetupButton:hover {cursor: pointer;}
+
