@@ -324,6 +324,7 @@ footer p {
 
 #passwordResetSection {
     text-align: center;
+    height: 80vh;
 }
 
 .passwordResetSubHeading {
@@ -347,7 +348,6 @@ footer p {
 #passwordResetFormBox input {
     background-color: #fff;
     padding: 20px;
-    width: 80%;
     font-size: 120%;
     margin-bottom: 10px;
 }
