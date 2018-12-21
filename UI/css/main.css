@@ -93,6 +93,10 @@ input:focus {
     outline-color: #f39e3e;
 }
 
+textarea:focus {
+    outline-color: #f39e3e;
+}
+
 .iconText {float: right;}
 
 .clear {clear: both;}
