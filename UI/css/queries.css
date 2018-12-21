@@ -55,6 +55,13 @@
         margin-bottom: 20px;
     }
 
+    
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 30%; }
+
 }
 
 /* Media queries for medium sized devices from 481px to 855px */

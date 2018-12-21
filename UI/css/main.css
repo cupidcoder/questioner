@@ -144,7 +144,15 @@ footer p {
 
 #headerNav {float: right;}
 
+#headerNavCopy {float: right;}
+
 #headerNav p {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+#headerNavCopy p {
     display: inline-block;
     margin-top: 40px;
     padding: 10px;
@@ -153,6 +161,8 @@ footer p {
 #headerNavBurger {display: none;}
 
 #headerNav p:not(:last-child) {border-right: 3px solid #305b8c;}
+
+#headerNavCopy p:not(:last-child) {border-right: 3px solid #305b8c;}
 
 
 /* Hero Image */
