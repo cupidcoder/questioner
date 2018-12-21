@@ -160,6 +160,8 @@ footer p {
 
 #headerNavBurger {display: none;}
 
+#headerNavCopy {display: none;}
+
 #headerNav p:not(:last-child) {border-right: 3px solid #305b8c;}
 
 #headerNavCopy p:not(:last-child) {border-right: 3px solid #305b8c;}
