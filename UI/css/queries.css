@@ -1,17 +1,75 @@
 /* Media queries for big tablets to 1200px (Widths smaller than the 1140px row) */
 @media only screen and (max-width: 1200px) {
+    /* Header */
+    #headerNav {display: none;}
 
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 75%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
 }
 
-/* Media queries for small tablets to big tablets from 768px to 1023px */
-@media only screen and (max-width: 1023px) {
+/* Media queries for small tablets to big tablets from 768px to 1024px */
+@media only screen and (max-width: 1024px) {
+    /* Header */
+    #headerNav {display: none;}
 
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 75%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    /*
+    * Meet Up Details Section
+    */ 
+    #meetUpDetailsSection {height: 100vh;}
 }
 
 /* Media queries for medium sized devices from 481px to 855px */
 @media only screen and (max-width: 855px) {
+
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 70%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
     #landingPageHeroImage h1 {
         font-size: 200%;
+    }
+
+    /*
+    *   Meetup Details page
+    */
+
+    #meetUpDetailsImage {display: none;}
+
+    #meetUpDetailsInfo {
+        display: block;
+        margin-left: 10%;
+        width: 90%;
+    }
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
     }
 }
 
@@ -75,6 +133,18 @@
     }
 
     #feedBox {width: 100%;}
+
+    /*
+    *   Meetup Details page
+    */
+
+    .sectionHeading {font-size: 100%;}
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
+        font-size: 80%;
+    }
 }
 
 /* Media queries for small phones from 0 to 375px */
@@ -106,10 +176,35 @@
     }
 
     #feedBox {width: 100%;}
+
+    /*
+    *   Meetup Details page
+    */
+
+    .sectionHeading {font-size: 100%;}
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
+        font-size: 80%;
+    }
 }
 
 /* Media queries for small phones from 0 to 320px */
 @media only screen and (max-width: 320px) {
+
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 40%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
     
     /* Landing page headerNav */
     #headerNav {
@@ -120,4 +215,16 @@
     #landingPageHeroImage h1 { font-size: 100%; }
 
     #landingPageHeroImage p { font-size: 70%; }
+
+    /*
+    *   Meetup Details page
+    */
+
+    .sectionHeading {font-size: 100%;}
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
+        font-size: 70%;
+    }
 }
