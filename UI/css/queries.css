@@ -3,6 +3,8 @@
     /* Header */
     #headerNav {display: none;}
 
+    #headerNavCopy {display: inline-block;}
+
     #headerNavBurger {
         display: inline-block;
         margin-left: 75%;
