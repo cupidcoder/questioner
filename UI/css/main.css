@@ -62,7 +62,8 @@ li {list-style-type:none;}
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .form p:first-child {
@@ -90,6 +91,10 @@ i {color: #305b8c;}
 
 /* Inputs */
 input:focus {
+    outline-color: #f39e3e;
+}
+
+textarea:focus {
     outline-color: #f39e3e;
 }
 
@@ -159,6 +164,8 @@ footer p {
 }
 
 #headerNavBurger {display: none;}
+
+#headerNavCopy {display: none;}
 
 #headerNav p:not(:last-child) {border-right: 3px solid #305b8c;}
 

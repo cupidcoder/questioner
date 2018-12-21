@@ -3,6 +3,8 @@
     /* Header */
     #headerNav {display: none;}
 
+    #headerNavCopy {display: inline-block;}
+
     #headerNavBurger {
         display: inline-block;
         margin-left: 75%;
@@ -61,6 +63,29 @@
     */
 
     #passwordResetFormBox { width: 30%; }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 30%;
+        margin-left: 35%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 80vh;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 50%;
+    }
 
 }
 
@@ -137,6 +162,30 @@
     */
 
     #passwordResetFormBox { width: 40%; }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 40%;
+        margin-left: 30%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 80vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 70%;
+    }
 }
 
 /* Media queries for medium sized devices from 481px to 650px */
@@ -254,6 +303,30 @@
         font-size: 120%;
         margin-bottom: 10px;
     }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 70vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 /* Media queries for small phones from 0 to 375px */
@@ -340,6 +413,30 @@
         font-size: 120%;
         margin-bottom: 10px;
     }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 70vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 /* Media queries for small phones from 0 to 320px */
@@ -418,5 +515,29 @@
         padding: 1%;
         font-size: 113%;
         margin-bottom: 10px;
+    }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 70vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 100%;
     }
 }
