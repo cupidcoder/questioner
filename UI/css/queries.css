@@ -131,6 +131,12 @@
         border-radius: 10px;
         margin-bottom: 20px;
     }
+
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 40%; }
 }
 
 /* Media queries for medium sized devices from 481px to 650px */
@@ -236,6 +242,18 @@
         border-radius: 10px;
         margin-bottom: 40px;
     }
+
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 100%; }
+
+    #passwordResetFormBox input {
+        padding: 10%;
+        font-size: 120%;
+        margin-bottom: 10px;
+    }
 }
 
 /* Media queries for small phones from 0 to 375px */
@@ -310,6 +328,18 @@
         border-radius: 10px;
         margin-bottom: 40px;
     }
+
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 100%; }
+
+    #passwordResetFormBox input {
+        padding: 5%;
+        font-size: 120%;
+        margin-bottom: 10px;
+    }
 }
 
 /* Media queries for small phones from 0 to 320px */
@@ -363,5 +393,30 @@
         padding-top: 20px;
         text-align: center;
         font-size: 70%;
+    }
+
+    /*
+    * Password reset Section
+    */
+
+    #headerNavCopy p {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 7px;
+    }
+
+    .passwordResetSubHeading {
+        font-size: 90%;
+        width: 70%;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    #passwordResetFormBox { width: 100%; }
+
+    #passwordResetFormBox input {
+        padding: 1%;
+        font-size: 113%;
+        margin-bottom: 10px;
     }
 }
