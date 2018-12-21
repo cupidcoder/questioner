@@ -144,6 +144,8 @@ footer p {
 
 #headerNav {float: right;}
 
+#headerNavBurger {display: none;}
+
 #headerNav p {
     display: inline-block;
     margin-top: 40px;
