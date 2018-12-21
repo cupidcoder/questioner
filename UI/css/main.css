@@ -150,6 +150,8 @@ footer p {
     padding: 10px;
 }
 
+#headerNavBurger {display: none;}
+
 #headerNav p:not(:last-child) {border-right: 3px solid #305b8c;}
 
 
