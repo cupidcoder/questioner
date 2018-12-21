@@ -15,9 +15,97 @@
     }
 }
 
+/* Media queries for medium sized devices from 481px to 650px */
+@media only screen and (max-width: 650px) {
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 60%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    #dashboardSectionSummary {padding-bottom: 15px;}
+    
+    /*
+    * Dashboard Section
+    */
+
+    .dashboardStat {float: none;}
+
+    #summaryBox {
+        width: 100%;
+        margin-top: 65px;
+    }
+
+    #feedBox {width: 100%;}
+}
+
 /* Media queries for small phones from 0 to 480px */
 @media only screen and (max-width: 480px) {
+    /* Header */
+    #headerNav {display: none;}
 
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 40%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    #dashboardSectionSummary {padding-bottom: 15px;}
+    
+    /*
+    * Dashboard Section
+    */
+
+    .dashboardStat {float: none;}
+
+    #summaryBox {
+        width: 100%;
+        margin-top: 65px;
+    }
+
+    #feedBox {width: 100%;}
+}
+
+/* Media queries for small phones from 0 to 375px */
+@media only screen and (max-width: 375px) {
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 40%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    #dashboardSectionSummary {padding-bottom: 15px;}
+    
+    /*
+    * Dashboard Section
+    */
+
+    .dashboardStat {float: none;}
+
+    #summaryBox {
+        width: 100%;
+        margin-top: 65px;
+    }
+
+    #feedBox {width: 100%;}
 }
 
 /* Media queries for small phones from 0 to 320px */
