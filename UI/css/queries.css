@@ -33,6 +33,13 @@
     * Meet Up Details Section
     */ 
     #meetUpDetailsSection {height: 100vh;}
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 90vh;}
+
 }
 
 /* Media queries for medium sized devices from 481px to 855px */
@@ -70,6 +77,21 @@
     .meetUpDetailsInfoDesc {
         margin-left: 0;
         overflow-wrap: break-word;
+    }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100vh;}
+
+    #meetupListingSection {
+        width: 80%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 120%;
     }
 }
 
@@ -145,6 +167,21 @@
         overflow-wrap: break-word;
         font-size: 80%;
     }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100vh;}
+
+    #meetupListingSection {
+        width: 90%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 80%;
+    }
 }
 
 /* Media queries for small phones from 0 to 375px */
@@ -188,6 +225,21 @@
         overflow-wrap: break-word;
         font-size: 80%;
     }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100vh;}
+
+    #meetupListingSection {
+        width: 90%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 80%;
+    }
 }
 
 /* Media queries for small phones from 0 to 320px */
@@ -225,6 +277,21 @@
     .meetUpDetailsInfoDesc {
         margin-left: 0;
         overflow-wrap: break-word;
+        font-size: 70%;
+    }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100vh;}
+
+    #meetupListingSection {
+        width: 90%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
         font-size: 70%;
     }
 }
