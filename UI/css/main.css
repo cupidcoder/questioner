@@ -163,7 +163,21 @@ footer p {
     padding: 10px;
 }
 
+#burgerMenuNav {
+    display: none;
+    text-align: center;
+}
+
+#burgerMenuNav p {
+    padding-bottom: 2px;
+    margin: 0;
+}
+
+#burgerMenuNav p:not(:last-child) {border-bottom: 1px solid #305b8c;}
+
 #headerNavBurger {display: none;}
+
+#headerNavBurger:hover {cursor: pointer;}
 
 #headerNavCopy {display: none;}
 
