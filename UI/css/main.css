@@ -352,6 +352,51 @@ footer p {
     left: 72%;
 }
 
+#meetUpCommentSection {
+    display: block;
+    width: 100%;
+    margin: auto;
+    height: 90vh;
+}
+
+#meetUpCommentSection h3 {
+    margin: 0;
+    text-align: center;
+}
+
+#commentContainer {
+    display: block;
+    width: 70%;
+    height: 100%;
+    margin: auto;
+}
+
+#postCommentBox { 
+    position: relative;
+    margin-bottom: 80px;
+}
+
+.commentBox {
+    width: 80%;
+    display: block;
+    margin-left: 10%;
+    padding-bottom: 5px;
+}
+
+.meetUpComment:not(:last-child) {border-bottom: 1px solid #4c4a4a;}
+
+
+#postCommentBox textarea {
+    width: 100%;
+    padding: 2%;
+}
+
+#postCommentBox button{
+    color: #fff;
+    position: absolute;
+}
+
+
 /*
 * Password reset Section
 */
