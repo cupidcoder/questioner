@@ -335,6 +335,23 @@ footer p {
     margin-right: 10px;
 }
 
+#postQuestionBox {
+    background-color: transparent !important;
+    position: relative;
+}
+
+#postQuestionBox textarea{
+    width: 70%;
+    background-color: cornsilk;
+    height: 100%;
+}
+
+#postQuestionBox button {
+    color: #fff;
+    position: absolute;
+    left: 72%;
+}
+
 /*
 * Password reset Section
 */
