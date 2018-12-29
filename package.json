@@ -1,0 +1,23 @@
+{
+  "name": "questioner",
+  "version": "1.0.0",
+  "description": "A  questions crowd-sourcing application for meetup administrators",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cupidcoder/questioner.git"
+  },
+  "keywords": [],
+  "author": "Chukwudi Umeilechukwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cupidcoder/questioner/issues"
+  },
+  "homepage": "https://github.com/cupidcoder/questioner#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
