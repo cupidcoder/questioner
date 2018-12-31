@@ -1,5 +1,5 @@
 import express from 'express';
-import meetups from './routes/meetups';
+import meetups from './src/routes/meetups';
 
 const app = express();
 

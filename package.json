@@ -4,8 +4,8 @@
   "description": "A  questions crowd-sourcing application for meetup administrators",
   "main": "app.js",
   "scripts": {
-    "test": "mocha dist/tests/**/*.test.js --exit",
-    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "test": "mocha dist/test/**/*.test.js --exit",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md --copy-files",
     "start": "npm run build && node dist/app.js",
     "dev": "npm run build && babel-watch app.js"
   },
