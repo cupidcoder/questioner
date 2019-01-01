@@ -9,6 +9,8 @@ const statusCodes = {
   unauthorized: 401,
   // forbidden due to correct credentials but unprivileged resource
   forbidden: 403,
+  // not found
+  notFound: 404,
   // generic server error
   unavailable: 503,
 };
