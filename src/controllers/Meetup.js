@@ -60,6 +60,27 @@ const Meetup = {
       data: meetups,
     });
   },
+  /**
+   * Returns a specific meetup record
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} meetup record
+   */
+  getOne(req, res) {
+    const { id } = req.params;
+    const meetupRecord = MeetupModel.filter(el => el.id === id);
+    if (meetupRecord.length === 0) {
+      return res.status(404).send({
+        status: 404,
+        error: 'Meetup not found',
+      });
+    }
+    // At this point, a meetup was found
+    return res.status(statusCodes.success).send({
+      status: statusCodes.success,
+      data: meetupRecord,
+    });
+  },
 };
 
 export default Meetup;

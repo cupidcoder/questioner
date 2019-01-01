@@ -96,3 +96,51 @@ describe('get all meetup records', () => {
       });
   });
 });
+
+describe('get specific meetup record', () => {
+  // Sample valid meetup request data
+  const meetupRecord = {
+    location: 'Ogba',
+    topic: 'Book club',
+    description: 'We believe through the lens of a good library, life is amazing',
+    happeningOn: new Date().getTime(),
+  };
+
+  // meetupRecord response
+  let meetupRecordResponse;
+
+  // Make POST request to save meetup
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send(meetupRecord)
+      .end((err, res) => {
+        [meetupRecordResponse] = res.body.data;
+        done();
+      });
+  });
+  it('should return meetup with same id if meetup record exists', (done) => {
+    // Make GET request to get saved meetup
+    chai.request(app)
+      .get(`/api/v1/meetups/${meetupRecordResponse.id}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('data');
+        res.body.data[0].should.have.property('id').eql(meetupRecordResponse.id);
+        done();
+      });
+  });
+
+  it('should return 404 if meetup record does not exist', (done) => {
+    // Non-existing id
+    const id = '10ba038e-48da-487b-96e8-8d3b99b6d18a';
+    chai.request(app)
+      .get(`/api/v1/meetups/${id}`)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('error');
+        res.body.error.should.be.eql('Meetup not found');
+        done();
+      });
+  });
+});
