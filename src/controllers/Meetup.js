@@ -8,6 +8,17 @@ import statusCodes from '../helpers/status';
  */
 
 const Meetup = {
+
+  /**
+   * Find one meetup record from the meetups array
+   * @param {*} id
+   * @returns {Array} meetup object array
+   */
+  findOne(id) {
+    const meetupRecord = MeetupModel.filter(el => el.id === id);
+    return meetupRecord;
+  },
+
   /**
    * Creates a meetup record
    * @param {object} req
@@ -58,6 +69,28 @@ const Meetup = {
     return res.status(statusCodes.success).send({
       status: statusCodes.success,
       data: meetups,
+    });
+  },
+
+  /**
+   * Returns a specific meetup record
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} meetup record
+   */
+  getOne(req, res) {
+    const { id } = req.params;
+    const meetupRecord = Meetup.findOne(id);
+    if (meetupRecord.length === 0) {
+      return res.status(statusCodes.notFound).send({
+        status: statusCodes.notFound,
+        error: 'Meetup not found',
+      });
+    }
+    // At this point, a meetup was found
+    return res.status(statusCodes.success).send({
+      status: statusCodes.success,
+      data: meetupRecord,
     });
   },
 };

@@ -3,4 +3,4 @@
 node_modules/
 
 # Babel build directory
-dist/
+build/
