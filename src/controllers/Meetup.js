@@ -1,5 +1,6 @@
 import uuid from 'uuid/v4';
 import MeetupModel from '../models/Meetup';
+import statusCodes from '../helpers/status';
 
 /**
  * Meetup controller performs different actions for the meetup entity
@@ -16,8 +17,8 @@ const Meetup = {
   create(req, res) {
     const meetup = req.body;
     if (!meetup.location || !meetup.topic || !meetup.description || !meetup.happeningOn) {
-      return res.status(400).send({
-        status: 400,
+      return res.status(statusCodes.badRequest).send({
+        status: statusCodes.badRequest,
         error: 'Required fields are empty',
       });
     }
@@ -33,8 +34,8 @@ const Meetup = {
     };
 
     MeetupModel.push(newMeetupRecord);
-    return res.status(201).send({
-      status: 201,
+    return res.status(statusCodes.created).send({
+      status: statusCodes.created,
       data: [newMeetupRecord],
     });
   },
@@ -47,15 +48,15 @@ const Meetup = {
    */
   getAll(req, res) {
     if (MeetupModel.length === 0) {
-      return res.status(200).send({
-        status: 200,
+      return res.status(statusCodes.success).send({
+        status: statusCodes.success,
         data: [],
       });
     }
     // At this point, MeetupModel.length > 0
     const meetups = MeetupModel;
-    return res.status(200).send({
-      status: 200,
+    return res.status(statusCodes.success).send({
+      status: statusCodes.success,
       data: meetups,
     });
   },
