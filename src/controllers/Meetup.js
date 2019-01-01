@@ -37,6 +37,27 @@ const Meetup = {
       data: [newMeetupRecord],
     });
   },
+
+  /**
+   * Returns all created meetups
+   * @param {object} res
+   * @param {object} req
+   * @returns {Array} meetups
+   */
+  getAll(req, res) {
+    if (MeetupModel.length === 0) {
+      return res.status(200).send({
+        status: 200,
+        data: [],
+      });
+    }
+    // At this point, MeetupModel.length > 0
+    const meetups = MeetupModel;
+    return res.status(200).send({
+      status: 200,
+      data: meetups,
+    });
+  },
 };
 
 export default Meetup;
