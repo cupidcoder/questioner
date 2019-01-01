@@ -70,8 +70,8 @@ const Meetup = {
     const { id } = req.params;
     const meetupRecord = MeetupModel.filter(el => el.id === id);
     if (meetupRecord.length === 0) {
-      return res.status(404).send({
-        status: 404,
+      return res.status(statusCodes.notFound).send({
+        status: statusCodes.notFound,
         error: 'Meetup not found',
       });
     }

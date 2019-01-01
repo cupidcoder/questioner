@@ -1,5 +1,6 @@
 import chai from 'chai';
 import app from '../../app';
+import statusCodes from '../../src/helpers/status';
 
 chai.use(require('chai-http'));
 
@@ -28,7 +29,7 @@ describe('create meetup record', () => {
         .post('/api/v1/meetups')
         .send(meetupRecord)
         .end((err, res) => {
-          res.should.have.status(201);
+          res.should.have.status(statusCodes.created);
           res.body.should.have.property('data');
           res.body.data[0].should.have.property('id');
           res.body.data[0].should.have.property('createdOn');
@@ -47,7 +48,7 @@ describe('create meetup record', () => {
         .post('/api/v1/meetups')
         .send(invalidMeetupRecord)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(statusCodes.badRequest);
           res.body.should.have.property('error');
           res.body.error.should.eql('Required fields are empty');
           done();
@@ -71,7 +72,7 @@ describe('get all meetup records', () => {
       .post('/api/v1/meetups')
       .send(meetupRecord)
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(statusCodes.created);
         res.body.should.have.property('data');
         res.body.data[0].should.have.property('id');
         res.body.data[0].should.have.property('createdOn');
@@ -89,7 +90,7 @@ describe('get all meetup records', () => {
     chai.request(app)
       .get('/api/v1/meetups')
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(statusCodes.success);
         res.body.should.have.property('data');
         res.body.data.length.should.be.above(1);
         done();
@@ -124,7 +125,7 @@ describe('get specific meetup record', () => {
     chai.request(app)
       .get(`/api/v1/meetups/${meetupRecordResponse.id}`)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(statusCodes.success);
         res.body.should.have.property('data');
         res.body.data[0].should.have.property('id').eql(meetupRecordResponse.id);
         done();
@@ -137,7 +138,7 @@ describe('get specific meetup record', () => {
     chai.request(app)
       .get(`/api/v1/meetups/${id}`)
       .end((err, res) => {
-        res.should.have.status(404);
+        res.should.have.status(statusCodes.notFound);
         res.body.should.have.property('error');
         res.body.error.should.be.eql('Meetup not found');
         done();
