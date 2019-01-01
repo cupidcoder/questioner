@@ -93,6 +93,25 @@ const Meetup = {
       data: meetupRecord,
     });
   },
+
+  /**
+   * Return meetups in ascending order by happeningOn
+   * @returns {Array} upcomingMeetups
+   */
+  getUpcoming(req, res) {
+    if (MeetupModel.length > 0) {
+      const upcomingMeetups = MeetupModel;
+      upcomingMeetups.sort((a, b) => a.happeningOn - b.happeningOn);
+      return res.status(statusCodes.success).send({
+        status: statusCodes.success,
+        data: upcomingMeetups,
+      });
+    }
+    return res.status(statusCodes.success).send({
+      status: statusCodes.success,
+      data: [],
+    });
+  },
 };
 
 export default Meetup;
