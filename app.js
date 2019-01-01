@@ -1,5 +1,6 @@
 import express from 'express';
 import meetups from './src/routes/meetups';
+import questions from './src/routes/questions';
 
 const app = express();
 
@@ -8,6 +9,7 @@ app.use(express.json());
 
 // Routes middleware
 app.use('/api/v1/meetups', meetups);
+app.use('/api/v1/questions', questions);
 
 
 const port = process.env.port || 7000;
