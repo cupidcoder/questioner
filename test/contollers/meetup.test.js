@@ -1,4 +1,4 @@
-import chai from 'chai';
+import chai, { assert } from 'chai';
 import app from '../../app';
 import statusCodes from '../../src/helpers/status';
 
@@ -143,5 +143,21 @@ describe('get specific meetup record', () => {
         res.body.error.should.be.eql('Meetup not found');
         done();
       });
+  });
+});
+
+describe('get upcoming meetups', () => {
+  let upcomingMeetups;
+  before((done) => {
+    chai.request(app)
+      .get('/api/v1/meetups/upcoming')
+      .end((err, res) => {
+        upcomingMeetups = res.body.data;
+        done();
+      });
+  });
+  it('should return all meetups in ascending order by happeningOn property timestamp', () => {
+    const [upcomingMeetupOne, upcomingMeetupTwo] = upcomingMeetups;
+    assert.isAbove(upcomingMeetupTwo.happeningOn, upcomingMeetupOne.happeningOn);
   });
 });

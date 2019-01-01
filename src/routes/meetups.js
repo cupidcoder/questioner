@@ -3,6 +3,8 @@ import MeetupController from '../controllers/Meetup';
 
 const router = express.Router();
 
+router.get('/upcoming/', MeetupController.getUpcoming);
+
 router.post('/', MeetupController.create);
 
 router.get('/', MeetupController.getAll);
