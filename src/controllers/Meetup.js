@@ -11,6 +11,7 @@ const Meetup = {
    * Creates a meetup record
    * @param {object} req
    * @param {object} res
+   * @returns {object} apiResponse
    */
   create(req, res) {
     const meetup = req.body;
