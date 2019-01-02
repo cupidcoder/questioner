@@ -161,3 +161,116 @@ describe('get upcoming meetups', () => {
     assert.isAbove(upcomingMeetupTwo.happeningOn, upcomingMeetupOne.happeningOn);
   });
 });
+
+describe('rsvp to meetup', () => {
+  describe('request', () => {
+    let meetupRecordResponse;
+    // Sample valid meetup request data
+    const meetupRecord = {
+      location: 'Radison Blue',
+      topic: 'Chess nation',
+      description: 'We hold mini chess tournaments with amazing rewards.',
+      happeningOn: new Date().getTime(),
+    };
+    // Create meetup record
+    before((done) => {
+      chai.request(app)
+        .post('/api/v1/meetups')
+        .send(meetupRecord)
+        .end((err, res) => {
+          [meetupRecordResponse] = res.body.data;
+          done();
+        });
+    });
+
+    let rsvpResponse;
+    const rsvpRecord = {
+      user: 9,
+      response: 'yes',
+    };
+
+    // Make initial rsvp request
+    before((done) => {
+      chai.request(app)
+        .post(`/api/v1/meetups/${meetupRecordResponse.id}/rsvp`)
+        .send(rsvpRecord)
+        .end((err, res) => {
+          [rsvpResponse] = res.body.data;
+          done();
+        });
+    });
+    it('should return error message if user has already RSVPed to a meetup', (done) => {
+      chai.request(app)
+        .post(`/api/v1/meetups/${rsvpResponse.meetup}/rsvp`)
+        .send(rsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.forbidden);
+          res.body.should.have.property('error').eql('You have already responded to this meetup');
+          done();
+        });
+    });
+    it('should return error message if meetup does not exist', (done) => {
+      const fakeMeetupID = 737;
+      chai.request(app)
+        .post(`/api/v1/meetups/${fakeMeetupID}/rsvp`)
+        .send(rsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.forbidden);
+          res.body.should.have.property('error').eql('Cannot respond to a meetup that does not exist');
+          done();
+        });
+    });
+  });
+
+  describe('response', () => {
+    let meetupRecordResponse;
+    // Sample valid meetup request data
+    const meetupRecord = {
+      location: 'Radison Blue',
+      topic: 'Chess nation',
+      description: 'We hold mini chess tournaments with amazing rewards.',
+      happeningOn: new Date().getTime(),
+    };
+    // Create meetup record
+    before((done) => {
+      chai.request(app)
+        .post('/api/v1/meetups')
+        .send(meetupRecord)
+        .end((err, res) => {
+          [meetupRecordResponse] = res.body.data;
+          done();
+        });
+    });
+    const validRsvpRecord = {
+      user: 10,
+      response: 'yes',
+    };
+
+    const invalidRsvpRecord = {
+      user: 11,
+      response: '',
+    };
+    it('should return newly created rsvp record if input is valid', (done) => {
+      chai.request(app)
+        .post(`/api/v1/meetups/${meetupRecordResponse.id}/rsvp`)
+        .send(validRsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.created);
+          res.body.data[0].should.have.property('meetup');
+          res.body.data[0].should.have.property('topic');
+          res.body.data[0].should.have.property('status');
+          done();
+        });
+    });
+    it('should return error message if input is not valid', (done) => {
+      chai.request(app)
+        .post(`/api/v1/meetups/${meetupRecordResponse.id}/rsvp`)
+        .send(invalidRsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.badRequest);
+          res.body.should.have.property('error').eql('Required fields are empty');
+          done();
+        });
+    });
+  });
+});

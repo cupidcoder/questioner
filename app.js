@@ -6,6 +6,7 @@ const app = express();
 
 // JSON middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Routes middleware
 app.use('/api/v1/meetups', meetups);
