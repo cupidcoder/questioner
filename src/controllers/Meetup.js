@@ -134,6 +134,14 @@ const Meetup = {
         error: 'Required fields are empty',
       });
     }
+
+    // rsvp data to be saved
+    const newRsvpRecord = {
+      id: uuid(),
+      meetup: req.params.id,
+      user: rsvp.user,
+      response: rsvp.response,
+    };
     // Let's check if rsvp data is empty
     const rsvpRecords = RsvpModel;
     if (rsvpRecords.length > 0) {
@@ -147,12 +155,6 @@ const Meetup = {
         });
       }
       // At this point, no duplicate entry exist
-      const newRsvpRecord = {
-        id: uuid(),
-        meetup: req.params.id,
-        user: rsvp.user,
-        response: rsvp.response,
-      };
       RsvpModel.push(newRsvpRecord);
       const [meetup] = meetupRecord;
       return res.status(statusCodes.created).send({
@@ -165,12 +167,6 @@ const Meetup = {
       });
     }
     // At this point, RsvpModel is emtpy
-    const newRsvpRecord = {
-      id: uuid(),
-      meetup: req.params.id,
-      user: rsvp.user,
-      response: rsvp.response,
-    };
     RsvpModel.push(newRsvpRecord);
     const [meetup] = meetupRecord;
     return res.status(statusCodes.created).send({
