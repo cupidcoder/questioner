@@ -1,5 +1,6 @@
 import uuid from 'uuid/v4';
 import MeetupModel from '../models/Meetup';
+import RsvpModel from '../models/Rsvp';
 import statusCodes from '../helpers/status';
 
 /**
@@ -110,6 +111,75 @@ const Meetup = {
     return res.status(statusCodes.success).send({
       status: statusCodes.success,
       data: [],
+    });
+  },
+  /**
+   * Respond to attend meetup
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} rsvp
+   */
+  respondToMeetup(req, res) {
+    const meetupRecord = Meetup.findOne(req.params.id);
+    if (meetupRecord.length === 0) {
+      return res.status(statusCodes.forbidden).send({
+        status: statusCodes.forbidden,
+        error: 'Cannot respond to a meetup that does not exist',
+      });
+    }
+    const rsvp = req.body;
+    if (!rsvp.user || !rsvp.response) {
+      return res.status(statusCodes.badRequest).send({
+        status: statusCodes.badRequest,
+        error: 'Required fields are empty',
+      });
+    }
+    // Let's check if rsvp data is empty
+    const rsvpRecords = RsvpModel;
+    if (rsvpRecords.length > 0) {
+      // Here records already exist in the RsvpModel, Let's check if this user has responded already
+      const duplic = rsvpRecords.filter(el => el.meetup === req.params.id && el.user === rsvp.user);
+
+      if (duplic.length > 0) {
+        return res.status(statusCodes.forbidden).send({
+          status: statusCodes.forbidden,
+          error: 'You have already responded to this meetup',
+        });
+      }
+      // At this point, no duplicate entry exist
+      const newRsvpRecord = {
+        id: uuid(),
+        meetup: req.params.id,
+        user: rsvp.user,
+        response: rsvp.response,
+      };
+      RsvpModel.push(newRsvpRecord);
+      const [meetup] = meetupRecord;
+      return res.status(statusCodes.created).send({
+        status: statusCodes.created,
+        data: [{
+          meetup: meetup.id,
+          topic: meetup.topic,
+          status: rsvp.response,
+        }],
+      });
+    }
+    // At this point, RsvpModel is emtpy
+    const newRsvpRecord = {
+      id: uuid(),
+      meetup: req.params.id,
+      user: rsvp.user,
+      response: rsvp.response,
+    };
+    RsvpModel.push(newRsvpRecord);
+    const [meetup] = meetupRecord;
+    return res.status(statusCodes.created).send({
+      status: statusCodes.created,
+      data: [{
+        meetup: meetup.id,
+        topic: meetup.topic,
+        status: rsvp.response,
+      }],
     });
   },
 };
