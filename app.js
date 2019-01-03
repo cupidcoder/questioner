@@ -20,7 +20,7 @@ app.use('/api/v1/meetups', meetups);
 app.use('/api/v1/questions', questions);
 
 
-const port = process.env.port || 7000;
+const port = process.env.PORT || 7000;
 
 app.listen(port);
 
