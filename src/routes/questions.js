@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post('/', QuestionController.create);
 router.patch('/:id/upvote', QuestionController.upvote);
+router.patch('/:id/downvote', QuestionController.downvote);
 
 module.exports = router;
