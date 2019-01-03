@@ -4,11 +4,10 @@
   "description": "A  questions crowd-sourcing application for meetup administrators",
   "main": "app.js",
   "scripts": {
-    "test" : "nyc ---reporter=html --reporter=text mocha build/test/**/*.test.js --timeout 10000 --exit",
-    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md --copy-files",
+    "test": "mocha build/test/**/*.test.js --exit",
+    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md --copy-files",
     "start": "npm run build && node build/app.js",
-    "dev": "npm run build && babel-watch app.js",
-    "coverage": "nyc report ---reporter=text-lcov | coveralls"
+    "dev": "npm run build && babel-watch app.js"
   },
   "repository": {
     "type": "git",
@@ -31,12 +30,10 @@
     "babel-watch": "^2.0.7",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
-    "coveralls": "^3.0.2",
     "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
     "rimraf": "^2.6.2"
   }
 }

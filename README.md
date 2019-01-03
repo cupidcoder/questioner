@@ -4,7 +4,7 @@
 
 > and help them prioritize questions that should be answered based on votes by other attendees.
 
-[![Build Status](https://travis-ci.org/cupidcoder/questioner.svg?branch=develop)](https://travis-ci.org/cupidcoder/questioner) [![Coverage Status](https://coveralls.io/repos/github/cupidcoder/questioner/badge.svg?branch=develop)](https://coveralls.io/github/cupidcoder/questioner?branch=develop)
+[![Build Status](https://travis-ci.org/cupidcoder/questioner.svg?branch=develop)](https://travis-ci.org/cupidcoder/questioner)
 
 
 
@@ -13,7 +13,6 @@
 > If you're `README` has a lot of info, section headers might be nice.
 
 - [Installation](#installation)
-- [Test](#test)
 - [License](#license)
 
 ---
@@ -26,7 +25,7 @@
 
 ### Clone
 
-- Clone this repo to your local machine using `git clone https://github.com/cupidcoder/questioner.git`
+- Clone this repo to your local machine using `https://github.com/cupidcoder/questioner.git`
 
 ### Setup
 
@@ -45,17 +44,6 @@ $ npm start
 ```
 
 > Navigate to `http://localhost:7000/api/v1` to use the application
-
-
----
-
-## test
-
-> run test using the command below
-
-```shell
-$ npm test
-```
 
 
 ---
