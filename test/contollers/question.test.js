@@ -7,7 +7,7 @@ chai.use(require('chai-http'));
 
 const should = chai.should();
 
-describe('post question', () => {
+describe('POST /api/v1/questions', () => {
   // Sample valid question request data
   const questionRecord = {
     createdBy: uuid(),
@@ -57,7 +57,7 @@ describe('post question', () => {
   });
 });
 
-describe('PATCH /questions/:questionID/upvote', () => {
+describe('PATCH /api/v1/questions/:id/upvote', () => {
   it('should respond with error if question does not exist', (done) => {
     const fakeQuestionID = 982;
     chai.request(app)
@@ -103,7 +103,7 @@ describe('PATCH /questions/:questionID/upvote', () => {
   });
 });
 
-describe('PATCH /questions/:questionID/downvote', () => {
+describe('PATCH /api/v1/questions/:id/downvote', () => {
   it('should respond with error if question does not exist', (done) => {
     const fakeQuestionID = 982;
     chai.request(app)
