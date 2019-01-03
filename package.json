@@ -8,7 +8,7 @@
     "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md --copy-files",
     "start": "npm run build && node build/app.js",
     "dev": "npm run build && babel-watch app.js",
-    "cover": "istanbul cover _mocha build/test/**/*.test.js --exit",
+    "cover": "istanbul cover _mocha build/test/**/*.test.js",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
