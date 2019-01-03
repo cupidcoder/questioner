@@ -4,3 +4,9 @@ node_modules/
 
 # Babel build directory
 build/
+
+# Coverage directory
+coverage/
+
+# npm
+npm-debug.log
