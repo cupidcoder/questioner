@@ -13,6 +13,7 @@
 > If you're `README` has a lot of info, section headers might be nice.
 
 - [Installation](#installation)
+- [Test](#test)
 - [License](#license)
 
 ---
@@ -25,7 +26,7 @@
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/cupidcoder/questioner.git`
+- Clone this repo to your local machine using `git clone https://github.com/cupidcoder/questioner.git`
 
 ### Setup
 
@@ -44,6 +45,17 @@ $ npm start
 ```
 
 > Navigate to `http://localhost:7000/api/v1` to use the application
+
+
+---
+
+## test
+
+> run test using the command below
+
+```shell
+$ npm test
+```
 
 
 ---
