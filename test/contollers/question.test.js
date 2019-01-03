@@ -111,7 +111,7 @@ describe('PATCH /questions/:questionID/downvote', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.forbidden);
         res.body.should.have.property('error');
-        res.body.error.should.eql('Cannot upvote question that does not exist');
+        res.body.error.should.eql('Cannot downvote question that does not exist');
         done();
       });
   });
