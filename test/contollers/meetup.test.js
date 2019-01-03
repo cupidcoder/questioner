@@ -6,7 +6,7 @@ chai.use(require('chai-http'));
 
 const should = chai.should();
 
-describe('create meetup record', () => {
+describe('POST /api/v1/meetups', () => {
   // Sample valid meetup request data
   const meetupRecord = {
     location: 'Ikeja',
@@ -58,7 +58,7 @@ describe('create meetup record', () => {
 });
 
 
-describe('get all meetup records', () => {
+describe('GET /api/v1/meetups', () => {
   // Sample valid meetup request data
   const meetupRecord = {
     location: 'Radison Blue',
@@ -98,7 +98,7 @@ describe('get all meetup records', () => {
   });
 });
 
-describe('get specific meetup record', () => {
+describe('GET /api/v1/meetups/:id', () => {
   // Sample valid meetup request data
   const meetupRecord = {
     location: 'Ogba',
@@ -146,7 +146,7 @@ describe('get specific meetup record', () => {
   });
 });
 
-describe('get upcoming meetups', () => {
+describe('GET /api/v1/meetups/upcoming', () => {
   let upcomingMeetups;
   before((done) => {
     chai.request(app)
@@ -162,7 +162,7 @@ describe('get upcoming meetups', () => {
   });
 });
 
-describe('rsvp to meetup', () => {
+describe('POST /api/v1/meetups/:id/rsvp', () => {
   describe('request', () => {
     let meetupRecordResponse;
     // Sample valid meetup request data
