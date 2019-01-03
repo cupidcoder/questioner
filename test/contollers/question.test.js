@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import chai from 'chai';
+import chai, { assert } from 'chai';
 import app from '../../app';
 import statusCodes from '../../src/helpers/status';
 
@@ -54,5 +54,51 @@ describe('post question', () => {
           done();
         });
     });
+  });
+});
+
+describe('PATCH /questions/:questionID/upvote', () => {
+  it('should respond with error if question does not exist', (done) => {
+    const fakeQuestionID = 982;
+    chai.request(app)
+      .patch(`/api/v1/questions/${fakeQuestionID}/upvote`)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        res.body.should.have.property('error');
+        res.body.error.should.eql('Cannot upvote question that does not exist');
+        done();
+      });
+  });
+
+  let questionRecordResponse;
+  // Sample valid question request data
+  const questionRecord = {
+    createdBy: uuid(),
+    meetup: uuid(),
+    title: 'Item 7',
+    body: 'We would really like to have an item 7',
+  };
+  // Create sample question record
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/questions')
+      .send(questionRecord)
+      .end((err, res) => {
+        [questionRecordResponse] = res.body.data;
+        done();
+      });
+  });
+  let questionUpvoteResponse;
+  // Make upvote on newly created question
+  before((done) => {
+    chai.request(app)
+      .patch(`/api/v1/questions/${questionRecordResponse.id}/upvote`)
+      .end((err, res) => {
+        [questionUpvoteResponse] = res.body.data;
+        done();
+      });
+  });
+  it('should increase votes by 1 after hitting upvote endpoint', () => {
+    assert.equal(questionRecordResponse.votes + 1, questionUpvoteResponse.votes);
   });
 });
