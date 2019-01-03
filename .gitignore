@@ -8,5 +8,11 @@ build/
 # Coverage directory
 coverage/
 
+# nyc directory
+.nyc_output/
+
+# Coveralls token
+.coveralls.yml
+
 # npm
 npm-debug.log
