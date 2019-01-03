@@ -4,7 +4,7 @@
 
 > and help them prioritize questions that should be answered based on votes by other attendees.
 
-[![Build Status](https://travis-ci.org/cupidcoder/questioner.svg?branch=develop)](https://travis-ci.org/cupidcoder/questioner)
+[![Build Status](https://travis-ci.org/cupidcoder/questioner.svg?branch=develop)](https://travis-ci.org/cupidcoder/questioner) [![Coverage Status](https://coveralls.io/repos/github/cupidcoder/questioner/badge.svg?branch=develop)](https://coveralls.io/github/cupidcoder/questioner?branch=develop)
 
 
 
