@@ -1,11 +1,7 @@
-# Questioner
+# Questioner &middot; [![Build Status](https://travis-ci.org/cupidcoder/questioner.svg?branch=develop)](https://travis-ci.org/cupidcoder/questioner) [![Coverage Status](https://coveralls.io/repos/github/cupidcoder/questioner/badge.svg?branch=develop)](https://coveralls.io/github/cupidcoder/questioner?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/d4c093b47b636c5942fc/maintainability)](https://codeclimate.com/github/cupidcoder/questioner/maintainability)
 
-> Questioner helps meetup organisers crowd-source questions to be asked concerning the meetup
 
-> and help them prioritize questions that should be answered based on votes by other attendees.
-
-[![Build Status](https://travis-ci.org/cupidcoder/questioner.svg?branch=develop)](https://travis-ci.org/cupidcoder/questioner) [![Coverage Status](https://coveralls.io/repos/github/cupidcoder/questioner/badge.svg?branch=develop)](https://coveralls.io/github/cupidcoder/questioner?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/d4c093b47b636c5942fc/maintainability)](https://codeclimate.com/github/cupidcoder/questioner/maintainability)
-
+> Questioner helps meetup organisers crowd-source questions to be asked concerning the meetup and help them prioritize questions that should be answered based on votes by other attendees.
 
 
 ## Table of Contents
