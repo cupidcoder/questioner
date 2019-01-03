@@ -78,6 +78,39 @@ const Question = {
       }],
     });
   },
+
+  /**
+   * Downvotes a question
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} questionRecord
+   */
+  downvote(req, res) {
+    const questionRecord = Question.findOne(req.params.id);
+    if (questionRecord.length === 0) {
+      return res.status(statusCodes.forbidden).send({
+        status: statusCodes.forbidden,
+        error: 'Cannot downvote question that does not exist',
+      });
+    }
+
+    // At this point, the question being upvoted, exists
+    const questionRecordIndex = QuestionModel.indexOf(questionRecord[0]);
+    if (QuestionModel[questionRecordIndex].votes === 0) {
+      QuestionModel[questionRecordIndex].votes = 0;
+    } else if (QuestionModel[questionRecordIndex].votes > 0) {
+      QuestionModel[questionRecordIndex].votes -= 1;
+    }
+    return res.status(statusCodes.success).send({
+      status: statusCodes.success,
+      data: [{
+        meetup: questionRecord[0].meetup,
+        title: questionRecord[0].title,
+        body: questionRecord[0].body,
+        votes: questionRecord[0].votes,
+      }],
+    });
+  },
 };
 
 export default Question;
