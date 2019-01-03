@@ -2,6 +2,7 @@ import uuid from 'uuid/v4';
 import MeetupModel from '../models/Meetup';
 import RsvpModel from '../models/Rsvp';
 import statusCodes from '../helpers/status';
+import APIResponse from '../helpers/Response';
 
 /**
  * Meetup controller performs different actions for the meetup entity
@@ -27,12 +28,11 @@ const Meetup = {
    * @returns {object} apiResponse
    */
   create(req, res) {
+    const response = new APIResponse();
     const meetup = req.body;
     if (!meetup.location || !meetup.topic || !meetup.description || !meetup.happeningOn) {
-      return res.status(statusCodes.badRequest).send({
-        status: statusCodes.badRequest,
-        error: 'Required fields are empty',
-      });
+      response.setFailure(statusCodes.badRequest, 'Required fields are empty');
+      return response.send(res);
     }
     const newMeetupRecord = {
       id: uuid(),
@@ -46,10 +46,8 @@ const Meetup = {
     };
 
     MeetupModel.push(newMeetupRecord);
-    return res.status(statusCodes.created).send({
-      status: statusCodes.created,
-      data: [newMeetupRecord],
-    });
+    response.setSuccess(statusCodes.created, newMeetupRecord);
+    return response.send(res);
   },
 
   /**
@@ -59,18 +57,15 @@ const Meetup = {
    * @returns {Array} meetups
    */
   getAll(req, res) {
+    const response = new APIResponse();
     if (MeetupModel.length === 0) {
-      return res.status(statusCodes.success).send({
-        status: statusCodes.success,
-        data: [],
-      });
+      response.setSuccess(statusCodes.success);
+      return response.send(res);
     }
     // At this point, MeetupModel.length > 0
     const meetups = MeetupModel;
-    return res.status(statusCodes.success).send({
-      status: statusCodes.success,
-      data: meetups,
-    });
+    response.setSuccess(statusCodes.success, meetups);
+    return response.send(res);
   },
 
   /**
@@ -80,19 +75,16 @@ const Meetup = {
    * @returns {object} meetup record
    */
   getOne(req, res) {
+    const response = new APIResponse();
     const { id } = req.params;
     const meetupRecord = Meetup.findOne(id);
     if (meetupRecord.length === 0) {
-      return res.status(statusCodes.notFound).send({
-        status: statusCodes.notFound,
-        error: 'Meetup not found',
-      });
+      response.setFailure(statusCodes.notFound, 'Meetup not found');
+      return response.send(res);
     }
     // At this point, a meetup was found
-    return res.status(statusCodes.success).send({
-      status: statusCodes.success,
-      data: meetupRecord,
-    });
+    response.setSuccess(statusCodes.success, meetupRecord);
+    return response.send(res);
   },
 
   /**
@@ -100,18 +92,15 @@ const Meetup = {
    * @returns {Array} upcomingMeetups
    */
   getUpcoming(req, res) {
+    const response = new APIResponse();
     if (MeetupModel.length > 0) {
       const upcomingMeetups = MeetupModel;
       upcomingMeetups.sort((a, b) => a.happeningOn - b.happeningOn);
-      return res.status(statusCodes.success).send({
-        status: statusCodes.success,
-        data: upcomingMeetups,
-      });
+      response.setSuccess(statusCodes.success, upcomingMeetups);
+      return response.send(res);
     }
-    return res.status(statusCodes.success).send({
-      status: statusCodes.success,
-      data: [],
-    });
+    response.setSuccess(statusCodes.success);
+    return response.send(res);
   },
   /**
    * Respond to attend meetup
@@ -120,19 +109,16 @@ const Meetup = {
    * @returns {object} rsvp
    */
   respondToMeetup(req, res) {
+    const response = new APIResponse();
     const meetupRecord = Meetup.findOne(req.params.id);
     if (meetupRecord.length === 0) {
-      return res.status(statusCodes.forbidden).send({
-        status: statusCodes.forbidden,
-        error: 'Cannot respond to a meetup that does not exist',
-      });
+      response.setFailure(statusCodes.forbidden, 'Cannot respond to a meetup that does not exist');
+      return response.send(res);
     }
     const rsvp = req.body;
     if (!rsvp.user || !rsvp.response) {
-      return res.status(statusCodes.badRequest).send({
-        status: statusCodes.badRequest,
-        error: 'Required fields are empty',
-      });
+      response.setFailure(statusCodes.badRequest, 'Required fields are empty');
+      return response.send(res);
     }
 
     // rsvp data to be saved
@@ -149,34 +135,28 @@ const Meetup = {
       const duplic = rsvpRecords.filter(el => el.meetup === req.params.id && el.user === rsvp.user);
 
       if (duplic.length > 0) {
-        return res.status(statusCodes.forbidden).send({
-          status: statusCodes.forbidden,
-          error: 'You have already responded to this meetup',
-        });
+        response.setFailure(statusCodes.forbidden, 'You have already responded to this meetup');
+        return response.send(res);
       }
       // At this point, no duplicate entry exist
       RsvpModel.push(newRsvpRecord);
       const [meetup] = meetupRecord;
-      return res.status(statusCodes.created).send({
-        status: statusCodes.created,
-        data: [{
-          meetup: meetup.id,
-          topic: meetup.topic,
-          status: rsvp.response,
-        }],
-      });
+      response.setSuccess(statusCodes.created, [{
+        meetup: meetup.id,
+        topic: meetup.topic,
+        status: rsvp.response,
+      }]);
+      return response.send(res);
     }
     // At this point, RsvpModel is emtpy
     RsvpModel.push(newRsvpRecord);
     const [meetup] = meetupRecord;
-    return res.status(statusCodes.created).send({
-      status: statusCodes.created,
-      data: [{
-        meetup: meetup.id,
-        topic: meetup.topic,
-        status: rsvp.response,
-      }],
-    });
+    response.setSuccess(statusCodes.created, [{
+      meetup: meetup.id,
+      topic: meetup.topic,
+      status: rsvp.response,
+    }]);
+    return response.send(res);
   },
 };
 
