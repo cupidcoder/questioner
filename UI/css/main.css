@@ -30,14 +30,10 @@ li {list-style-type:none;}
 
 /* Buttons */
 .darkBtn {
-    padding: 15px;
+    padding: 10px;
     background-color: #305b8c;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    transition: background-color 0.3s;
-    -webkit-transition: background-color 0.3s;
-    -moz-transition: background-color 0.3s;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
 }
 
 /* Background images */
