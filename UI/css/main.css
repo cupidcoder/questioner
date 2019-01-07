@@ -268,7 +268,7 @@ footer p {
 }
 
 .meetupBoxInfo p {
-    padding-left: 2%;
+    text-align: center;
     color: #305b8c;
     font-size: 90%;
     font-weight: 700;
@@ -281,6 +281,10 @@ footer p {
 }
 
 .attendeesLogo {
+    margin-left: 10%;
+}
+
+.questionsLogo {
     margin-left: 20%;
 }
 
