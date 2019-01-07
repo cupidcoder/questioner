@@ -53,17 +53,14 @@ li {list-style-type:none;}
 
 /* Forms */
 .form {
-    width: 50%; 
-    height: 80%;
+    width: 40%; 
     display: block;
-    margin-top: 40px;
+    margin-top: 5%;
     margin-left: 25%;
     border: 1px solid #4c4a4a;
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .form p:first-child {
