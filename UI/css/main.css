@@ -40,10 +40,6 @@ li {list-style-type:none;}
     -moz-transition: background-color 0.3s;
 }
 
-.darkBtn:hover {
-    background-color: #0376f9
-}
-
 /* Background images */
 .bgImage {
     background-size: cover;
@@ -106,7 +102,7 @@ footer {
     font-size: 120%;
     text-align: center;
     font-family: 'Tangerine', cursive !important;
-    color: #0376f9;
+    color: #305b8c;
     height: 50px;
 }
 
@@ -541,7 +537,7 @@ footer p {
 .dashboardStatBoxIcon {font-size: 200%;}
 
 #summaryBoxMeetupLink {
-    color: #0376f9 !important;
+    color: #305b8c !important;
 }
 
 #summaryBox {
@@ -562,7 +558,7 @@ footer p {
 
 #feedBoxQuestions h4 {
     padding: 30px;
-    border-bottom: 1px solid #0376f9;
+    border-bottom: 1px solid #305b8c;
 }
 
 .feedQuestion {
