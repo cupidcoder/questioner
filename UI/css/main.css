@@ -317,6 +317,7 @@ footer p {
 }
 
 .meetUpDetailsInfoDesc {
+    width: 81%;
     text-align: left;
     margin-left: -60px;
     margin-bottom: 30px;
@@ -345,18 +346,20 @@ footer p {
 #postQuestionBox {
     background-color: transparent !important;
     position: relative;
+    margin-bottom: 90px;
 }
 
 #postQuestionBox textarea{
-    width: 70%;
+    width: 99%;
     background-color: cornsilk;
     height: 100%;
+    margin-bottom: 5px;
 }
 
-#postQuestionBox button {
+#postQuestionBox a {
     color: #fff;
     position: absolute;
-    left: 72%;
+    left: 90%;
 }
 
 

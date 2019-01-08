@@ -36,6 +36,8 @@
     */ 
     #meetUpDetailsSection {height: 100vh;}
 
+    #postQuestionBox a {left: 88%;}
+
     /*
     * My meetups Section
     */
@@ -120,6 +122,8 @@
         margin-left: 10%;
         width: 90%;
     }
+
+    #postQuestionBox a {left: 88%;}
 
     .meetUpDetailsInfoDesc {
         margin-left: 0;
@@ -217,6 +221,12 @@
     }
 
     #feedBox {width: 100%;}
+
+    /*
+    *   Meetup Details page
+    */
+
+    #postQuestionBox a {left: 81%;}
 }
 
 /* Media queries for small phones from 0 to 480px */
