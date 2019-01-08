@@ -380,6 +380,7 @@ footer p {
     margin: 15% auto;
     width: 80%;
     background-color: cornsilk;
+    border-radius: 20px;
 }
 
 .meetupDetailsCommentBtn:hover {
