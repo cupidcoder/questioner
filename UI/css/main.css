@@ -378,8 +378,8 @@ footer p {
 
 #meetUpCommentSection {
     margin: 15% auto;
-    width: 80%;
-    background-color: cornsilk;
+    width: 50%;
+    background-color: #fff;
     border-radius: 20px;
 }
 
@@ -388,7 +388,7 @@ footer p {
 }
 
 .close {
-    color: rgba(211, 73, 73, 0.5);
+    color: rgba(243, 158, 62, 0.5);
     float: right;
     font-size: 300%;
     font-weight: bold;
@@ -397,7 +397,7 @@ footer p {
 
 .close:hover,
 .close:focus {
-  color: rgb(211, 73, 73);
+  color: rgb(243, 158, 62);
   text-decoration: none;
   cursor: pointer;
 }
@@ -409,7 +409,6 @@ footer p {
 
 #commentContainer {
     display: block;
-    width: 70%;
     height: 100%;
     margin: auto;
 }
@@ -424,13 +423,26 @@ footer p {
     display: block;
     margin-left: 10%;
     padding-bottom: 5px;
+    font-size: 60%;
+}
+
+.commentBox p {margin:0;}
+
+.commentAuthor {
+    background-color: #d0caca;
+    text-align: right;
+}
+
+.commentAuthor span {
+    color: #305b8c;
+    font-weight: bold;
 }
 
 .meetUpComment:not(:last-child) {border-bottom: 1px solid #4c4a4a;}
 
 
 #postCommentBox textarea {
-    width: 100%;
+    width: 96%;
     padding: 2%;
 }
 
