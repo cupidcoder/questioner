@@ -1,7 +1,7 @@
 import uuid from 'uuid/v4';
 import chai, { assert } from 'chai';
 import app from '../../app';
-import statusCodes from '../../src/helpers/status';
+import statusCodes from '../../server/helpers/status';
 
 chai.use(require('chai-http'));
 
