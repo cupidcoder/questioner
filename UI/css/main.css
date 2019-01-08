@@ -330,6 +330,7 @@ footer p {
     width: 80%;
     background-color: #fff;
     border-radius: 5px;
+    padding: 0 0 14px 14px;
 }
 
 .meetUpDetailsQuestion p {
