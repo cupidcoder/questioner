@@ -519,15 +519,16 @@ footer p {
 
 .createMeetupEntryBoxForm p {
     font-weight: 700;
-    font-size: 140%;
+    font-size: 80%;
 }
 
 .createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
-    padding: 20px;
+    padding: 8px;
     width: 100%;
-    border-radius: 10px;
     font-size: 100%;
 }
+
+.createMeetupEntryBoxForm input[type="file"] {margin-bottom: 25px;}
 
 
 /*
@@ -607,6 +608,7 @@ footer p {
 }
 
 .meetupListingQuestion {
+    border-radius: 5px;
     width: 80%;
     /* padding: 40px; */
     display: block;
