@@ -18,20 +18,24 @@ class Question {
     // Dummy data
     const ids = [uuid(), uuid(), uuid(), uuid()];
     const date = new Date();
-    const createdOn = [date.getTime(), date.getTime() + 1, date.getTime() + 2, date.getTime() + 3];
-    const createdBy = [uuid(), uuid(), uuid(), uuid()];
+    const createdOnValues = [date.getTime(),
+      date.getTime() + 1,
+      date.getTime() + 2,
+      date.getTime() + 3,
+    ];
+    const createdByValues = [uuid(), uuid(), uuid(), uuid()];
     const meetupIDs = [uuid(), uuid(), uuid(), uuid()];
     const questionTitles = ['First title', 'Second title', 'Third title', 'Fourth title'];
-    const questionBody = ['First body', 'Second body', 'Third body', 'Fourth body'];
+    const questionBodyValues = ['First body', 'Second body', 'Third body', 'Fourth body'];
     // Seed dummy data
     for (let i = 0; i < 4; i += 1) {
       const questionRecord = {
         id: ids[i],
-        createdOn: createdOn[i],
-        createdBy: createdBy[i],
+        createdOn: createdOnValues[i],
+        createdBy: createdByValues[i],
         meetup: meetupIDs[i],
         title: questionTitles[i],
-        body: questionBody[i],
+        body: questionBodyValues[i],
         votes: 0,
       };
       this.questions.push(questionRecord);

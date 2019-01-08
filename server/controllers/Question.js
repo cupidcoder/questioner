@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import QuestionModel from '../models/Question';
+import QuestionModels from '../models/Question';
 import statusCodes from '../helpers/status';
 import APIResponse from '../helpers/Response';
 
@@ -16,7 +16,7 @@ const Question = {
      * @returns {Array} question object array
      */
   findOne(id) {
-    const questionRecord = QuestionModel.filter(el => el.id === id);
+    const questionRecord = QuestionModels.filter(QuestionModel => QuestionModel.id === id);
     return questionRecord;
   },
 
@@ -43,7 +43,7 @@ const Question = {
       votes: 0, // Starts at zero
     };
 
-    QuestionModel.push(newQuestionRecord);
+    QuestionModels.push(newQuestionRecord);
     response.setSuccess(statusCodes.created, newQuestionRecord);
     return response.send(res);
   },
@@ -63,8 +63,8 @@ const Question = {
     }
 
     // At this point, the question being upvoted, exists
-    const questionRecordIndex = QuestionModel.indexOf(questionRecord[0]);
-    QuestionModel[questionRecordIndex].votes += 1;
+    const questionRecordIndex = QuestionModels.indexOf(questionRecord[0]);
+    QuestionModels[questionRecordIndex].votes += 1;
     response.setSuccess(statusCodes.success, [{
       meetup: questionRecord[0].meetup,
       title: questionRecord[0].title,
@@ -89,11 +89,11 @@ const Question = {
     }
 
     // At this point, the question being upvoted, exists
-    const questionRecordIndex = QuestionModel.indexOf(questionRecord[0]);
-    if (QuestionModel[questionRecordIndex].votes === 0) {
-      QuestionModel[questionRecordIndex].votes = 0;
-    } else if (QuestionModel[questionRecordIndex].votes > 0) {
-      QuestionModel[questionRecordIndex].votes -= 1;
+    const questionRecordIndex = QuestionModels.indexOf(questionRecord[0]);
+    if (QuestionModels[questionRecordIndex].votes === 0) {
+      QuestionModels[questionRecordIndex].votes = 0;
+    } else if (QuestionModels[questionRecordIndex].votes > 0) {
+      QuestionModels[questionRecordIndex].votes -= 1;
     }
     response.setSuccess(statusCodes.success, [{
       meetup: questionRecord[0].meetup,

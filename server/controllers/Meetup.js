@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import MeetupModel from '../models/Meetup';
+import MeetupModels from '../models/Meetup';
 import RsvpModel from '../models/Rsvp';
 import statusCodes from '../helpers/status';
 import APIResponse from '../helpers/Response';
@@ -17,7 +17,7 @@ const Meetup = {
    * @returns {Array} meetup object array
    */
   findOne(id) {
-    const meetupRecord = MeetupModel.filter(el => el.id === id);
+    const meetupRecord = MeetupModels.filter(MeetupModel => MeetupModel.id === id);
     return meetupRecord;
   },
 
@@ -45,7 +45,7 @@ const Meetup = {
       tags: '',
     };
 
-    MeetupModel.push(newMeetupRecord);
+    MeetupModels.push(newMeetupRecord);
     response.setSuccess(statusCodes.created, newMeetupRecord);
     return response.send(res);
   },
@@ -58,12 +58,12 @@ const Meetup = {
    */
   getAll(req, res) {
     const response = new APIResponse();
-    if (MeetupModel.length === 0) {
+    if (MeetupModels.length === 0) {
       response.setSuccess(statusCodes.success);
       return response.send(res);
     }
     // At this point, MeetupModel.length > 0
-    const meetups = MeetupModel;
+    const meetups = MeetupModels;
     response.setSuccess(statusCodes.success, meetups);
     return response.send(res);
   },
@@ -93,9 +93,11 @@ const Meetup = {
    */
   getUpcoming(req, res) {
     const response = new APIResponse();
-    if (MeetupModel.length > 0) {
-      const upcomingMeetups = MeetupModel;
-      upcomingMeetups.sort((a, b) => a.happeningOn - b.happeningOn);
+    if (MeetupModels.length > 0) {
+      const upcomingMeetups = MeetupModels;
+      upcomingMeetups.sort(
+        (previousMeetup, nextMeetup) => previousMeetup.happeningOn - nextMeetup.happeningOn,
+      );
       response.setSuccess(statusCodes.success, upcomingMeetups);
       return response.send(res);
     }
@@ -132,9 +134,11 @@ const Meetup = {
     const rsvpRecords = RsvpModel;
     if (rsvpRecords.length > 0) {
       // Here records already exist in the RsvpModel, Let's check if this user has responded already
-      const duplic = rsvpRecords.filter(el => el.meetup === req.params.id && el.user === rsvp.user);
+      const duplicates = rsvpRecords.filter(
+        el => el.meetup === req.params.id && el.user === rsvp.user,
+      );
 
-      if (duplic.length > 0) {
+      if (duplicates.length > 0) {
         response.setFailure(statusCodes.forbidden, 'You have already responded to this meetup');
         return response.send(res);
       }
