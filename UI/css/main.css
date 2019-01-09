@@ -44,6 +44,17 @@ li {list-style-type:none;}
     background-repeat: no-repeat;
 }
 
+/* Image headers */
+.imageHeading {
+    height: 180px;
+    width: 100%;
+    background-image: url("../img/uploads/create-img.jpg");
+}
+
+.imageHeading h3 {
+    color: #fff !important;
+}
+
 /* Forms */
 .form {
     width: 40%; 
@@ -502,16 +513,6 @@ footer p {
 
 #createMeetupSection {
     height: 100%;
-}
-
-#createMeetupSectionImage, #dashboardSectionImage, #myMeetupSectionImage {
-    height: 180px;
-    width: 100%;
-    background-image: url("../img/uploads/create-img.jpg");
-}
-
-#createMeetupSectionImage h3, #dashboardSectionImage h3, #myMeetupSectionImage h3 {
-    color: #fff !important;
 }
 
 .createMeetupEntryBox {
