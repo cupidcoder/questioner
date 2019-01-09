@@ -34,6 +34,7 @@ li {list-style-type:none;}
     background-color: #305b8c;
     border-radius: 5px;
     -webkit-border-radius: 5px;
+    font-size: 100%;
 }
 
 /* Background images */
@@ -518,6 +519,7 @@ footer p {
     margin: auto;
     text-align: left;
     padding-bottom: 30px;
+    position: relative;
 }
 
 .createMeetupEntryBoxForm p {
@@ -527,11 +529,17 @@ footer p {
 
 .createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
     padding: 8px;
-    width: 100%;
+    width: 90%;
     font-size: 100%;
 }
 
 .createMeetupEntryBoxForm input[type="file"] {margin-bottom: 25px;}
+
+#createBtn {
+    position: absolute;
+    left: 65%;
+    bottom: 1%;
+}
 
 
 /*

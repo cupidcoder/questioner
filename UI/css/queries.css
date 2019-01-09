@@ -14,6 +14,9 @@
         font-size: 150%;
         color: #fff;
     }
+
+    /* Create meetup Section */
+    #createBtn {left: 50%;}
 }
 
 /* Media queries for small tablets to big tablets from 768px to 1024px */
@@ -88,6 +91,9 @@
         width: 100%;
         height: 50%;
     }
+
+    /* Create meetup Section */
+    #createBtn {left: 45%;}
 
 }
 
@@ -337,6 +343,9 @@
         width: 100%;
         height: 100%;
     }
+
+    /* Create meetup Section */
+    #createBtn {left: 6%;}
 }
 
 /* Media queries for small phones from 0 to 375px */
@@ -447,6 +456,9 @@
         width: 100%;
         height: 100%;
     }
+
+    /* Create meetup Section */
+    #createBtn {left: -3%;}
 }
 
 /* Media queries for small phones from 0 to 320px */
