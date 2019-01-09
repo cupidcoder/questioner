@@ -441,6 +441,7 @@ footer p {
     margin-left: 10%;
     padding-bottom: 5px;
     font-size: 60%;
+    margin-bottom: 5px;
 }
 
 .commentBox p {margin:0;}
@@ -448,15 +449,13 @@ footer p {
 .commentAuthor {
     background-color: #d0caca;
     text-align: right;
+    margin-bottom: 2px;
 }
 
 .commentAuthor span {
     color: #305b8c;
     font-weight: bold;
 }
-
-.meetUpComment:not(:last-child) {border-bottom: 1px solid #4c4a4a;}
-
 
 #postCommentBox textarea {
     width: 96%;
