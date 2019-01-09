@@ -48,7 +48,7 @@ li {list-style-type:none;}
 .imageHeading {
     height: 180px;
     width: 100%;
-    background-image: url("../img/uploads/create-img.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/uploads/sm-hero.jpg");
     margin-bottom: 20px;
 }
 
