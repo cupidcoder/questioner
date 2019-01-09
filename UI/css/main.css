@@ -255,8 +255,9 @@ footer p {
     text-align: center;
     padding: 20px 0 25px 0;
     color: #305b8c;
-    font-size: 170%;
+    font-size: 130%;
     font-weight: 300;
+    text-transform: uppercase;
 }
 
 .meetupBox {
