@@ -32,8 +32,8 @@ li {list-style-type:none;}
 .darkBtn {
     padding: 10px;
     background-color: #305b8c;
-    border-radius: 100px;
-    -webkit-border-radius: 100px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 
 /* Background images */
