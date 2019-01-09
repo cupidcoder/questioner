@@ -318,6 +318,58 @@ footer p {
     height: 100%;
 }
 
+#meetupDescription {
+    margin-bottom: 100px;
+    padding: 10px;
+    /* border: 1px solid #f39e3e; */
+    border-radius: 5px;
+}
+
+#meetupDescTitle {
+    border-bottom: 1px solid #4c4a4a;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+#rsvpBox {
+    position: relative;
+}
+
+.rsvpBadge {
+    display: inline-block;
+    padding-right: 10px;
+    height: 40px;
+    font-size: 70%;
+}
+
+.rsvpBadge p {
+    padding: 10px;
+    margin-top: 0;
+    border-radius: 5px;
+}
+
+.badgeRight {
+    float: right;
+    cursor: pointer;
+    color: #fff;
+}
+
+#rsvp p {
+    background-color: #fff;
+}
+
+#yesBadge p {background-color: green;}
+
+#noBadge p {background-color: red;}
+
+#maybeBadge p {background-color: #305b8c;}
+
+#rsvp span {
+    border-left: 1px solid #f39e3e;
+    padding-left: 5px;
+}
+
+
 #meetUpDetailsImage img {
     padding: 0 10%;
     width: 60%;
