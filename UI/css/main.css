@@ -49,6 +49,7 @@ li {list-style-type:none;}
     height: 180px;
     width: 100%;
     background-image: url("../img/uploads/create-img.jpg");
+    margin-bottom: 20px;
 }
 
 .imageHeading h3 {
