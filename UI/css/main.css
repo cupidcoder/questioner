@@ -666,6 +666,12 @@ footer p {
     border-bottom: 1px solid #d0caca;
 }
 
+#feedBoxQuestions a {color: #000;}
+
+#feedBoxQuestions a:hover {
+    text-decoration: underline;
+}
+
 .feedQuestion {
     width: 80%;
     display: block;
