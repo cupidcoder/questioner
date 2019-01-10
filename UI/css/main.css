@@ -689,6 +689,8 @@ footer p {
     margin-bottom: 20px;
 }
 
+.meetupListingQuestionWrapper {color: #000 !important;}
+
 .meetupListingQuestion p {display: inline-block;}
 
 .meetupListingQuestion i {margin-left: 5%;}
