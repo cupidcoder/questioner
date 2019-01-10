@@ -7,7 +7,7 @@
     "test": "nyc ---reporter=html --reporter=text mocha build/test/**/*.test.js --timeout 10000 --exit",
     "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md --copy-files",
     "start": "npm run build && node build/app.js",
-    "dev": "npm run build && babel-watch app.js",
+    "dev": "nodemon app.js --exec babel-node --",
     "coverage": "nyc report ---reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -29,7 +29,6 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
-    "babel-watch": "^2.0.7",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "coveralls": "^3.0.2",
@@ -37,6 +36,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
     "nyc": "^13.1.0",
     "rimraf": "^2.6.2"
   },
