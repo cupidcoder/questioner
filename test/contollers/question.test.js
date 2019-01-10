@@ -50,7 +50,6 @@ describe('POST /api/v1/questions', () => {
         .end((err, res) => {
           res.should.have.status(statusCodes.badRequest);
           res.body.should.have.property('error');
-          res.body.error.should.eql('Required fields are empty');
           done();
         });
     });
@@ -65,7 +64,6 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.forbidden);
         res.body.should.have.property('error');
-        res.body.error.should.eql('Cannot upvote question that does not exist');
         done();
       });
   });
@@ -111,7 +109,6 @@ describe('PATCH /api/v1/questions/:id/downvote', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.forbidden);
         res.body.should.have.property('error');
-        res.body.error.should.eql('Cannot downvote question that does not exist');
         done();
       });
   });

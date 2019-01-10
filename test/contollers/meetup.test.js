@@ -51,7 +51,6 @@ describe('POST /api/v1/meetups', () => {
         .end((err, res) => {
           res.should.have.status(statusCodes.badRequest);
           res.body.should.have.property('error');
-          res.body.error.should.eql('Required fields are empty');
           done();
         });
     });
@@ -141,7 +140,6 @@ describe('GET /api/v1/meetups/:id', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.notFound);
         res.body.should.have.property('error');
-        res.body.error.should.be.eql('Meetup not found');
         done();
       });
   });
@@ -186,7 +184,7 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
 
     let rsvpResponse;
     const rsvpRecord = {
-      user: 9,
+      user: '9703c362-b608-434e-99cb-f808bd40af8',
       response: 'yes',
     };
 
@@ -206,7 +204,6 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         .send(rsvpRecord)
         .end((err, res) => {
           res.should.have.status(statusCodes.forbidden);
-          res.body.should.have.property('error').eql('You have already responded to this meetup');
           done();
         });
     });
@@ -217,7 +214,6 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         .send(rsvpRecord)
         .end((err, res) => {
           res.should.have.status(statusCodes.forbidden);
-          res.body.should.have.property('error').eql('Cannot respond to a meetup that does not exist');
           done();
         });
     });
@@ -243,12 +239,12 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         });
     });
     const validRsvpRecord = {
-      user: 10,
+      user: '9703c362-b608-434e-99cb-f808bd40af8',
       response: 'yes',
     };
 
     const invalidRsvpRecord = {
-      user: 11,
+      user: '9703c362-b608-434e-99cb-f808bd40af8',
       response: '',
     };
     it('should return newly created rsvp record if input is valid', (done) => {
@@ -269,7 +265,6 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         .send(invalidRsvpRecord)
         .end((err, res) => {
           res.should.have.status(statusCodes.badRequest);
-          res.body.should.have.property('error').eql('Required fields are empty');
           done();
         });
     });

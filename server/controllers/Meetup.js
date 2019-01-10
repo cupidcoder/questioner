@@ -35,7 +35,6 @@ const Meetup = {
   validateRSVP(newRSVPObject) {
     const rsvpObjectRules = joi.object().keys({
       user: joi.string().required(),
-      meetup: joi.string().required(),
       response: joi.string().valid(['yes', 'no', 'maybe']).required(),
     });
     return joi.validate(newRSVPObject, rsvpObjectRules);
