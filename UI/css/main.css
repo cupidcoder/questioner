@@ -607,7 +607,7 @@ footer p {
 .createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
     padding: 8px;
     width: 90%;
-    font-size: 100%;
+    font-size: 50%;
 }
 
 .createMeetupEntryBoxForm input[type="file"] {margin-bottom: 25px;}
