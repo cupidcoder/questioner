@@ -676,14 +676,15 @@ footer p {
     padding-top: 50px;
     text-align: center;
     font-size: 150%;
+    
 }
 
 .meetupListingQuestion {
     border-radius: 5px;
-    width: 80%;
+    width: 70%;
     /* padding: 40px; */
     display: block;
-    margin-left: 10%;
+    margin-left: 15%;
     background-color: #fff;
     box-shadow: 2px 2px #4c4a4a;
     margin-bottom: 20px;
@@ -695,5 +696,26 @@ footer p {
 
 .meetupListingQuestion i {margin-left: 5%;}
 
-#deleteMeetupButton:hover {cursor: pointer;}
+.meetupListingQuestion div {display: inline-block;}
+
+.meetupListItem {float: left;}
+
+.meetupListQuestion {
+    width: 70%;
+}
+
+.meetupListDelete {
+    width: 30%;
+    padding-top: 25px;
+}
+
+.meetupListDelete i {
+    font-size: 80%;
+}
+
+#deleteMeetupButton {color: #4c4a4a;}
+
+#editMeetupButton {color: red;}
+
+.editDeleteMeetupButton:hover {cursor: pointer;}
 

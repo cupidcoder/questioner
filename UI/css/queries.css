@@ -409,7 +409,7 @@
     * My meetups Section
     */
 
-    #myMeetupSection {height: 100vh;}
+    #myMeetupSection {height: 100%;}
 
     #meetupListingSection {
         width: 90%;
