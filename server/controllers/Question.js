@@ -1,4 +1,5 @@
 import uuid from 'uuid/v4';
+import joi from 'joi';
 import QuestionModels from '../models/Question';
 import statusCodes from '../helpers/status';
 import APIResponse from '../helpers/Response';
@@ -9,6 +10,21 @@ import APIResponse from '../helpers/Response';
  */
 
 const Question = {
+
+  /**
+   * Validate question object
+   * @param {object} newQuestionObject
+   * @returns {object} joiErrorObject
+   */
+  validateQuestion(newQuestionObject) {
+    const questionObjectRules = {
+      createdBy: joi.string().required(),
+      meetup: joi.string().required(),
+      title: joi.string().min(3).required(),
+      body: joi.string().min(5).required(),
+    };
+    return joi.validate(newQuestionObject, questionObjectRules);
+  },
 
   /**
      * Find one question record from the questions array
@@ -29,8 +45,9 @@ const Question = {
   create(req, res) {
     const response = new APIResponse();
     const question = req.body;
-    if (!question.createdBy || !question.meetup || !question.title || !question.body) {
-      response.setFailure(statusCodes.badRequest, 'Required fields are empty');
+    const { error } = Question.validateQuestion(question);
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
       return response.send(res);
     }
     const newQuestionRecord = {

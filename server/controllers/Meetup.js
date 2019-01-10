@@ -1,4 +1,5 @@
 import uuid from 'uuid/v4';
+import joi from 'joi';
 import MeetupModels from '../models/Meetup';
 import RsvpModel from '../models/Rsvp';
 import statusCodes from '../helpers/status';
@@ -10,6 +11,35 @@ import APIResponse from '../helpers/Response';
  */
 
 const Meetup = {
+
+  /**
+   * Validate meetup object
+   * @param {object} newMeetupObject
+   * @returns {object} joiErrorObject
+   */
+  validateMeetup(newMeetupObject) {
+    const meetupObjectRules = {
+      location: joi.string().min(3).required(),
+      topic: joi.string().min(3).required(),
+      description: joi.string().min(3).required(),
+      happeningOn: joi.date().timestamp('javascript').required(),
+    };
+    return joi.validate(newMeetupObject, meetupObjectRules);
+  },
+
+  /**
+   * Validate rsvp object
+   * @param {object} newRSVPObject
+   * @returns {object} joiErrorObject
+   */
+  validateRSVP(newRSVPObject) {
+    const rsvpObjectRules = joi.object().keys({
+      user: joi.string().required(),
+      meetup: joi.string().required(),
+      response: joi.string().valid(['yes', 'no', 'maybe']).required(),
+    });
+    return joi.validate(newRSVPObject, rsvpObjectRules);
+  },
 
   /**
    * Find one meetup record from the meetups array
@@ -30,8 +60,10 @@ const Meetup = {
   create(req, res) {
     const response = new APIResponse();
     const meetup = req.body;
-    if (!meetup.location || !meetup.topic || !meetup.description || !meetup.happeningOn) {
-      response.setFailure(statusCodes.badRequest, 'Required fields are empty');
+    const { error } = Meetup.validateMeetup(meetup);
+
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
       return response.send(res);
     }
     const newMeetupRecord = {
@@ -112,14 +144,15 @@ const Meetup = {
    */
   respondToMeetup(req, res) {
     const response = new APIResponse();
+    const rsvp = req.body;
     const meetupRecord = Meetup.findOne(req.params.id);
     if (meetupRecord.length === 0) {
       response.setFailure(statusCodes.forbidden, 'Cannot respond to a meetup that does not exist');
       return response.send(res);
     }
-    const rsvp = req.body;
-    if (!rsvp.user || !rsvp.response) {
-      response.setFailure(statusCodes.badRequest, 'Required fields are empty');
+    const { error } = Meetup.validateRSVP(rsvp);
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
       return response.send(res);
     }
 
