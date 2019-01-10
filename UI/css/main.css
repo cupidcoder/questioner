@@ -300,11 +300,17 @@ footer p {
 
 .attendeesLogo {
     margin-left: 10%;
+    cursor: pointer;
 }
 
 .questionsLogo {
     margin-left: 20%;
+    cursor: pointer;
 }
+
+.adminMeetupEdit i {color: #4c4a4a;}
+
+.adminMeetupDelete i {color: red;}
 
 
 /*
