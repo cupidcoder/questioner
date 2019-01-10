@@ -91,6 +91,10 @@ li {list-style-type:none;}
 /* Icons */
 i {color: #305b8c;}
 
+.thumbs-down-red {color: red;}
+
+.thumbs-up-green {color: green !important;}
+
 /* Inputs */
 input:focus {
     outline-color: #f39e3e;
