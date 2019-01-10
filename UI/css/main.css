@@ -48,7 +48,7 @@ li {list-style-type:none;}
 .imageHeading {
     height: 180px;
     width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/uploads/sm-hero.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../img/uploads/sm-hero.jpg");
     margin-bottom: 20px;
 }
 
@@ -321,6 +321,16 @@ footer p {
     width: 40%;
     height: 100%;
 }
+
+#meetupEventDetails {
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+#meetupEventDetails i {margin-left: 15px;}
 
 #meetupDescription {
     margin-bottom: 100px;
