@@ -66,12 +66,12 @@ const Meetup = {
     }
     const newMeetupRecord = {
       id: uuid(),
-      createdOn: new Date().getTime(),
+      createdOn: new Date().toISOString(),
       location: meetup.location,
       images: '',
       topic: meetup.topic,
       description: meetup.description,
-      happeningOn: meetup.happeningOn,
+      happeningOn: new Date(meetup.happeningOn).toISOString(),
       tags: '',
     };
 
@@ -126,7 +126,8 @@ const Meetup = {
     if (MeetupModels.length > 0) {
       const upcomingMeetups = MeetupModels;
       upcomingMeetups.sort(
-        (previousMeetup, nextMeetup) => previousMeetup.happeningOn - nextMeetup.happeningOn,
+        (previousMeetup, nextMeetup) => new Date(previousMeetup.happeningOn)
+        - new Date(nextMeetup.happeningOn),
       );
       response.setSuccess(statusCodes.success, upcomingMeetups);
       return response.send(res);

@@ -52,7 +52,7 @@ const Question = {
     }
     const newQuestionRecord = {
       id: uuid(),
-      createdOn: new Date().getTime(),
+      createdOn: new Date().toISOString(),
       createdBy: question.createdBy,
       meetup: question.meetup,
       title: question.title,

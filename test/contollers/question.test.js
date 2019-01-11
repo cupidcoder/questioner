@@ -5,6 +5,7 @@ import statusCodes from '../../server/helpers/status';
 
 chai.use(require('chai-http'));
 
+// eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 describe('POST /api/v1/questions', () => {

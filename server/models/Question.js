@@ -18,10 +18,10 @@ class Question {
     // Dummy data
     const ids = [uuid(), uuid(), uuid(), uuid()];
     const date = new Date();
-    const createdOnValues = [date.getTime(),
-      date.getTime() + 1,
-      date.getTime() + 2,
-      date.getTime() + 3,
+    const createdOnValues = [date.toISOString(),
+      date.toISOString(),
+      date.toISOString(),
+      date.toISOString(),
     ];
     const createdByValues = [uuid(), uuid(), uuid(), uuid()];
     const meetupIDs = [uuid(), uuid(), uuid(), uuid()];

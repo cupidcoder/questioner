@@ -146,6 +146,24 @@ describe('GET /api/v1/meetups/:id', () => {
 });
 
 describe('GET /api/v1/meetups/upcoming', () => {
+  // Create meetup in the past
+  const pastMeetupRecord = {
+    location: 'Ikeja',
+    description: 'For the love of the game',
+    topic: 'Chess masters',
+    happeningOn: 1547078599932,
+  };
+  // create meetup in the past
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send(pastMeetupRecord)
+      .end((err, res) => {
+        res.body.should.not.have.property('error');
+        done();
+      });
+  });
+
   let upcomingMeetups;
   before((done) => {
     chai.request(app)
@@ -157,7 +175,9 @@ describe('GET /api/v1/meetups/upcoming', () => {
   });
   it('should return all meetups in ascending order by happeningOn property timestamp', () => {
     const [upcomingMeetupOne, upcomingMeetupTwo] = upcomingMeetups;
-    assert.isAbove(upcomingMeetupTwo.happeningOn, upcomingMeetupOne.happeningOn);
+    assert.isAbove(
+      new Date(upcomingMeetupTwo.happeningOn), new Date(upcomingMeetupOne.happeningOn),
+    );
   });
 });
 

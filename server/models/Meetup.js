@@ -19,18 +19,18 @@ class Meetup {
     // Dummy data
     const ids = [uuid(), uuid(), uuid(), uuid()];
     const date = new Date();
-    const createdOnValues = [date.getTime(),
-      date.getTime() + 1,
-      date.getTime() + 2,
-      date.getTime() + 3,
+    const createdOnValues = [date.toISOString(),
+      date.toISOString(),
+      date.toISOString(),
+      date.toISOString(),
     ];
     const meetupLocations = ['Ikeja', 'Mushin', 'Gbagada', 'Ogba'];
     const meetupTopics = ['Nodejs', 'Laravel', 'Golang', 'PyConf'];
     const meetupDescriptions = ['First description', 'Second description', 'Third description', 'Fourth description'];
-    const happeningOnValues = [date.getTime() + 1000,
-      date.getTime() + 432,
-      date.getTime() + 788,
-      date.getTime() + 23,
+    const happeningOnValues = [date.toISOString(),
+      date.toISOString(),
+      date.toISOString(),
+      date.toISOString(),
     ];
     // Seed dummy data
     for (let i = 0; i < 4; i += 1) {
