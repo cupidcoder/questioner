@@ -1,5 +1,4 @@
 import uuid from 'uuid/v4';
-import joi from 'joi';
 import MeetupModels from '../models/Meetup';
 import RsvpModel from '../models/Rsvp';
 import statusCodes from '../helpers/status';
@@ -11,34 +10,6 @@ import APIResponse from '../helpers/Response';
  */
 
 const Meetup = {
-
-  /**
-   * Validate meetup object
-   * @param {object} newMeetupObject
-   * @returns {object} joiErrorObject
-   */
-  validateMeetup(newMeetupObject) {
-    const meetupObjectRules = {
-      location: joi.string().trim().min(3).required(),
-      topic: joi.string().trim().min(3).required(),
-      description: joi.string().trim().min(3).required(),
-      happeningOn: joi.date().timestamp('javascript').required(),
-    };
-    return joi.validate(newMeetupObject, meetupObjectRules);
-  },
-
-  /**
-   * Validate rsvp object
-   * @param {object} newRSVPObject
-   * @returns {object} joiErrorObject
-   */
-  validateRSVP(newRSVPObject) {
-    const rsvpObjectRules = joi.object().keys({
-      response: joi.string().trim().valid(['yes', 'no', 'maybe']).required(),
-    });
-    return joi.validate(newRSVPObject, rsvpObjectRules);
-  },
-
   /**
    * Find one meetup record from the meetups array
    * @param {*} id
@@ -58,12 +29,6 @@ const Meetup = {
   create(req, res) {
     const response = new APIResponse();
     const meetup = req.body;
-    const { error } = Meetup.validateMeetup(meetup);
-
-    if (error) {
-      response.setFailure(statusCodes.badRequest, error.details[0].message);
-      return response.send(res);
-    }
     const newMeetupRecord = {
       id: uuid(),
       createdOn: new Date().toISOString(),
@@ -147,11 +112,6 @@ const Meetup = {
     const meetupRecord = Meetup.findOne(req.params.id);
     if (meetupRecord.length === 0) {
       response.setFailure(statusCodes.forbidden, 'Cannot respond to a meetup that does not exist');
-      return response.send(res);
-    }
-    const { error } = Meetup.validateRSVP(rsvp);
-    if (error) {
-      response.setFailure(statusCodes.badRequest, error.details[0].message);
       return response.send(res);
     }
 
