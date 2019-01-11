@@ -5,12 +5,17 @@
 * General CSS
 */
 
+/* Fonts */
+@font-face {
+    font-family: Boing;
+    src: url(fonts/Boing_SemiboldWEB.woff);
+}
 
 
 /* Body */
 
 body {
-    font-family: 'Josefin Slab', serif;
+    font-family: Boing, serif;
     font-size: 22px;
     box-sizing: border-box;
     margin: 0;
