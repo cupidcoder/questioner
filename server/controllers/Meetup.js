@@ -19,9 +19,9 @@ const Meetup = {
    */
   validateMeetup(newMeetupObject) {
     const meetupObjectRules = {
-      location: joi.string().min(3).required(),
-      topic: joi.string().min(3).required(),
-      description: joi.string().min(3).required(),
+      location: joi.string().trim().min(3).required(),
+      topic: joi.string().trim().min(3).required(),
+      description: joi.string().trim().min(3).required(),
       happeningOn: joi.date().timestamp('javascript').required(),
     };
     return joi.validate(newMeetupObject, meetupObjectRules);
@@ -34,7 +34,7 @@ const Meetup = {
    */
   validateRSVP(newRSVPObject) {
     const rsvpObjectRules = joi.object().keys({
-      response: joi.string().valid(['yes', 'no', 'maybe']).required(),
+      response: joi.string().trim().valid(['yes', 'no', 'maybe']).required(),
     });
     return joi.validate(newRSVPObject, rsvpObjectRules);
   },

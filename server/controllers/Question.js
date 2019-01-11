@@ -18,10 +18,10 @@ const Question = {
    */
   validateQuestion(newQuestionObject) {
     const questionObjectRules = {
-      createdBy: joi.string().required(),
-      meetup: joi.string().required(),
-      title: joi.string().min(3).required(),
-      body: joi.string().min(5).required(),
+      createdBy: joi.string().trim().required(),
+      meetup: joi.string().trim().required(),
+      title: joi.string().trim().min(3).required(),
+      body: joi.string().trim().min(5).required(),
     };
     return joi.validate(newQuestionObject, questionObjectRules);
   },
