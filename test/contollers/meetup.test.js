@@ -1,9 +1,10 @@
 import chai, { assert } from 'chai';
 import app from '../../app';
-import statusCodes from '../../src/helpers/status';
+import statusCodes from '../../server/helpers/status';
 
 chai.use(require('chai-http'));
 
+// eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 describe('POST /api/v1/meetups', () => {
@@ -50,7 +51,6 @@ describe('POST /api/v1/meetups', () => {
         .end((err, res) => {
           res.should.have.status(statusCodes.badRequest);
           res.body.should.have.property('error');
-          res.body.error.should.eql('Required fields are empty');
           done();
         });
     });
@@ -140,13 +140,30 @@ describe('GET /api/v1/meetups/:id', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.notFound);
         res.body.should.have.property('error');
-        res.body.error.should.be.eql('Meetup not found');
         done();
       });
   });
 });
 
 describe('GET /api/v1/meetups/upcoming', () => {
+  // Create meetup in the past
+  const pastMeetupRecord = {
+    location: 'Ikeja',
+    description: 'For the love of the game',
+    topic: 'Chess masters',
+    happeningOn: 1547078599932,
+  };
+  // create meetup in the past
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send(pastMeetupRecord)
+      .end((err, res) => {
+        res.body.should.not.have.property('error');
+        done();
+      });
+  });
+
   let upcomingMeetups;
   before((done) => {
     chai.request(app)
@@ -158,57 +175,17 @@ describe('GET /api/v1/meetups/upcoming', () => {
   });
   it('should return all meetups in ascending order by happeningOn property timestamp', () => {
     const [upcomingMeetupOne, upcomingMeetupTwo] = upcomingMeetups;
-    assert.isAbove(upcomingMeetupTwo.happeningOn, upcomingMeetupOne.happeningOn);
+    assert.isAbove(
+      new Date(upcomingMeetupTwo.happeningOn), new Date(upcomingMeetupOne.happeningOn),
+    );
   });
 });
 
 describe('POST /api/v1/meetups/:id/rsvp', () => {
   describe('request', () => {
-    let meetupRecordResponse;
-    // Sample valid meetup request data
-    const meetupRecord = {
-      location: 'Radison Blue',
-      topic: 'Chess nation',
-      description: 'We hold mini chess tournaments with amazing rewards.',
-      happeningOn: new Date().getTime(),
-    };
-    // Create meetup record
-    before((done) => {
-      chai.request(app)
-        .post('/api/v1/meetups')
-        .send(meetupRecord)
-        .end((err, res) => {
-          [meetupRecordResponse] = res.body.data;
-          done();
-        });
-    });
-
-    let rsvpResponse;
     const rsvpRecord = {
-      user: 9,
       response: 'yes',
     };
-
-    // Make initial rsvp request
-    before((done) => {
-      chai.request(app)
-        .post(`/api/v1/meetups/${meetupRecordResponse.id}/rsvp`)
-        .send(rsvpRecord)
-        .end((err, res) => {
-          [rsvpResponse] = res.body.data;
-          done();
-        });
-    });
-    it('should return error message if user has already RSVPed to a meetup', (done) => {
-      chai.request(app)
-        .post(`/api/v1/meetups/${rsvpResponse.meetup}/rsvp`)
-        .send(rsvpRecord)
-        .end((err, res) => {
-          res.should.have.status(statusCodes.forbidden);
-          res.body.should.have.property('error').eql('You have already responded to this meetup');
-          done();
-        });
-    });
     it('should return error message if meetup does not exist', (done) => {
       const fakeMeetupID = 737;
       chai.request(app)
@@ -216,7 +193,6 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         .send(rsvpRecord)
         .end((err, res) => {
           res.should.have.status(statusCodes.forbidden);
-          res.body.should.have.property('error').eql('Cannot respond to a meetup that does not exist');
           done();
         });
     });
@@ -242,12 +218,10 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         });
     });
     const validRsvpRecord = {
-      user: 10,
       response: 'yes',
     };
 
     const invalidRsvpRecord = {
-      user: 11,
       response: '',
     };
     it('should return newly created rsvp record if input is valid', (done) => {
@@ -268,7 +242,6 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         .send(invalidRsvpRecord)
         .end((err, res) => {
           res.should.have.status(statusCodes.badRequest);
-          res.body.should.have.property('error').eql('Required fields are empty');
           done();
         });
     });

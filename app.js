@@ -1,6 +1,6 @@
 import express from 'express';
-import meetups from './src/routes/meetups';
-import questions from './src/routes/questions';
+import meetups from './server/routes/meetups';
+import questions from './server/routes/questions';
 
 const app = express();
 

@@ -14,6 +14,12 @@
         font-size: 150%;
         color: #fff;
     }
+
+    /* Create meetup Section */
+    #createBtn {left: 50%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 85%;}
 }
 
 /* Media queries for small tablets to big tablets from 768px to 1024px */
@@ -35,6 +41,8 @@
     * Meet Up Details Section
     */ 
     #meetUpDetailsSection {height: 100vh;}
+
+    #postQuestionBox a {left: 88%;}
 
     /*
     * My meetups Section
@@ -87,6 +95,12 @@
         height: 50%;
     }
 
+    /* Create meetup Section */
+    #createBtn {left: 45%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 81%;}
+
 }
 
 /* Media queries for medium sized devices from 481px to 855px */
@@ -120,6 +134,8 @@
         margin-left: 10%;
         width: 90%;
     }
+
+    #postQuestionBox a {left: 88%;}
 
     .meetUpDetailsInfoDesc {
         margin-left: 0;
@@ -186,6 +202,9 @@
         width: 100%;
         height: 70%;
     }
+
+    /* Meetup comments */
+    #postCommentBox button{left: 75%;}
 }
 
 /* Media queries for medium sized devices from 481px to 650px */
@@ -217,6 +236,15 @@
     }
 
     #feedBox {width: 100%;}
+
+    /*
+    *   Meetup Details page
+    */
+
+    #postQuestionBox a {left: 81%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 85%;}
 }
 
 /* Media queries for small phones from 0 to 480px */
@@ -327,6 +355,12 @@
         width: 100%;
         height: 100%;
     }
+
+    /* Create meetup Section */
+    #createBtn {left: 6%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 52%;}
 }
 
 /* Media queries for small phones from 0 to 375px */
@@ -375,7 +409,7 @@
     * My meetups Section
     */
 
-    #myMeetupSection {height: 100vh;}
+    #myMeetupSection {height: 100%;}
 
     #meetupListingSection {
         width: 90%;
@@ -437,6 +471,12 @@
         width: 100%;
         height: 100%;
     }
+
+    /* Create meetup Section */
+    #createBtn {left: -3%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 44%;}
 }
 
 /* Media queries for small phones from 0 to 320px */
@@ -540,4 +580,7 @@
         width: 100%;
         height: 100%;
     }
+
+    /* Meetup comments */
+    #postCommentBox button{left: 40%;}
 }

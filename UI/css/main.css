@@ -10,7 +10,7 @@
 /* Body */
 
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Josefin Slab', serif;
     font-size: 22px;
     box-sizing: border-box;
     margin: 0;
@@ -30,18 +30,11 @@ li {list-style-type:none;}
 
 /* Buttons */
 .darkBtn {
-    padding: 15px;
+    padding: 10px;
     background-color: #305b8c;
     border-radius: 5px;
     -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    transition: background-color 0.3s;
-    -webkit-transition: background-color 0.3s;
-    -moz-transition: background-color 0.3s;
-}
-
-.darkBtn:hover {
-    background-color: #0376f9
+    font-size: 100%;
 }
 
 /* Background images */
@@ -51,19 +44,28 @@ li {list-style-type:none;}
     background-repeat: no-repeat;
 }
 
+/* Image headers */
+.imageHeading {
+    height: 180px;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../img/uploads/sm-hero.jpg");
+    margin-bottom: 20px;
+}
+
+.imageHeading h3 {
+    color: #fff !important;
+}
+
 /* Forms */
 .form {
-    width: 50%; 
-    height: 80%;
+    width: 40%; 
     display: block;
-    margin-top: 40px;
+    margin-top: 5%;
     margin-left: 25%;
     border: 1px solid #4c4a4a;
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .form p:first-child {
@@ -89,6 +91,10 @@ li {list-style-type:none;}
 /* Icons */
 i {color: #305b8c;}
 
+.thumbs-down-red {color: red;}
+
+.thumbs-up-green {color: green !important;}
+
 /* Inputs */
 input:focus {
     outline-color: #f39e3e;
@@ -109,7 +115,7 @@ footer {
     font-size: 120%;
     text-align: center;
     font-family: 'Tangerine', cursive !important;
-    color: #0376f9;
+    color: #305b8c;
     height: 50px;
 }
 
@@ -253,8 +259,9 @@ footer p {
     text-align: center;
     padding: 20px 0 25px 0;
     color: #305b8c;
-    font-size: 170%;
+    font-size: 130%;
     font-weight: 300;
+    text-transform: uppercase;
 }
 
 .meetupBox {
@@ -279,7 +286,7 @@ footer p {
 }
 
 .meetupBoxInfo p {
-    padding-left: 2%;
+    text-align: center;
     color: #305b8c;
     font-size: 90%;
     font-weight: 700;
@@ -292,8 +299,18 @@ footer p {
 }
 
 .attendeesLogo {
-    margin-left: 20%;
+    margin-left: 10%;
+    cursor: pointer;
 }
+
+.questionsLogo {
+    margin-left: 20%;
+    cursor: pointer;
+}
+
+.adminMeetupEdit i {color: #4c4a4a;}
+
+.adminMeetupDelete i {color: red;}
 
 
 /*
@@ -311,6 +328,68 @@ footer p {
     height: 100%;
 }
 
+#meetupEventDetails {
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+#meetupEventDetails i {margin-left: 15px;}
+
+#meetupDescription {
+    margin-bottom: 100px;
+    padding: 10px;
+    /* border: 1px solid #f39e3e; */
+    border-radius: 5px;
+}
+
+#meetupDescTitle {
+    border-bottom: 1px solid #4c4a4a;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+#rsvpBox {
+    position: relative;
+}
+
+.rsvpBadge {
+    display: inline-block;
+    padding-right: 10px;
+    height: 40px;
+    font-size: 70%;
+}
+
+.rsvpBadge p {
+    padding: 10px;
+    margin-top: 0;
+    border-radius: 5px;
+}
+
+.badgeRight {
+    float: right;
+    cursor: pointer;
+    color: #fff;
+}
+
+#rsvp p {
+    background-color: #fff;
+}
+
+#yesBadge p {background-color: green;}
+
+#noBadge p {background-color: red;}
+
+#maybeBadge p {background-color: #305b8c;}
+
+#rsvp span {
+    border-left: 1px solid #f39e3e;
+    padding-left: 5px;
+}
+
+
 #meetUpDetailsImage img {
     padding: 0 10%;
     width: 60%;
@@ -324,6 +403,7 @@ footer p {
 }
 
 .meetUpDetailsInfoDesc {
+    width: 81%;
     text-align: left;
     margin-left: -60px;
     margin-bottom: 30px;
@@ -336,6 +416,7 @@ footer p {
     width: 80%;
     background-color: #fff;
     border-radius: 5px;
+    padding: 0 0 14px 14px;
 }
 
 .meetUpDetailsQuestion p {
@@ -352,18 +433,23 @@ footer p {
 #postQuestionBox {
     background-color: transparent !important;
     position: relative;
+    margin-bottom: 90px;
 }
 
 #postQuestionBox textarea{
-    width: 70%;
-    background-color: cornsilk;
+    width: 100%;
+    background-color: #fff;
     height: 100%;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: -15px;
 }
 
-#postQuestionBox button {
+#postQuestionBox a {
     color: #fff;
     position: absolute;
-    left: 72%;
+    left: 90%;
 }
 
 
@@ -382,8 +468,10 @@ footer p {
 
 #meetUpCommentSection {
     margin: 15% auto;
-    width: 80%;
-    background-color: cornsilk;
+    width: 50%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px 0;
 }
 
 .meetupDetailsCommentBtn:hover {
@@ -391,7 +479,7 @@ footer p {
 }
 
 .close {
-    color: rgba(211, 73, 73, 0.5);
+    color: rgba(243, 158, 62, 0.5);
     float: right;
     font-size: 300%;
     font-weight: bold;
@@ -400,7 +488,7 @@ footer p {
 
 .close:hover,
 .close:focus {
-  color: rgb(211, 73, 73);
+  color: rgb(243, 158, 62);
   text-decoration: none;
   cursor: pointer;
 }
@@ -412,14 +500,13 @@ footer p {
 
 #commentContainer {
     display: block;
-    width: 70%;
     height: 100%;
     margin: auto;
 }
 
 #postCommentBox { 
     position: relative;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }
 
 .commentBox {
@@ -427,19 +514,32 @@ footer p {
     display: block;
     margin-left: 10%;
     padding-bottom: 5px;
+    font-size: 60%;
+    margin-bottom: 15px;
 }
 
-.meetUpComment:not(:last-child) {border-bottom: 1px solid #4c4a4a;}
+.commentBox p {margin:0;}
 
+.commentAuthor {
+    background-color: #d0caca;
+    text-align: right;
+    margin-bottom: 2px;
+}
+
+.commentAuthor span {
+    color: #305b8c;
+    font-weight: bold;
+}
 
 #postCommentBox textarea {
-    width: 100%;
+    width: 96%;
     padding: 2%;
 }
 
 #postCommentBox button{
     color: #fff;
     position: absolute;
+    left: 85%;
 }
 
 
@@ -490,34 +590,32 @@ footer p {
     height: 100%;
 }
 
-#createMeetupSectionImage, #dashboardSectionImage, #myMeetupSectionImage {
-    height: 180px;
-    width: 100%;
-    background-image: url("../img/uploads/create-img.jpg");
-}
-
-#createMeetupSectionImage h3, #dashboardSectionImage h3, #myMeetupSectionImage h3 {
-    color: #fff !important;
-}
-
 .createMeetupEntryBox {
     width: 40%;
     display: block;
     margin: auto;
     text-align: left;
     padding-bottom: 30px;
+    position: relative;
 }
 
 .createMeetupEntryBoxForm p {
     font-weight: 700;
-    font-size: 140%;
+    font-size: 80%;
 }
 
 .createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
-    padding: 20px;
-    width: 100%;
-    border-radius: 10px;
-    font-size: 100%;
+    padding: 8px;
+    width: 90%;
+    font-size: 50%;
+}
+
+.createMeetupEntryBoxForm input[type="file"] {margin-bottom: 25px;}
+
+#createBtn {
+    position: absolute;
+    left: 65%;
+    bottom: 1%;
 }
 
 
@@ -544,7 +642,7 @@ footer p {
 .dashboardStatBoxIcon {font-size: 200%;}
 
 #summaryBoxMeetupLink {
-    color: #0376f9 !important;
+    color: #305b8c !important;
 }
 
 #summaryBox {
@@ -565,7 +663,13 @@ footer p {
 
 #feedBoxQuestions h4 {
     padding: 30px;
-    border-bottom: 1px solid #0376f9;
+    border-bottom: 1px solid #d0caca;
+}
+
+#feedBoxQuestions a {color: #000;}
+
+#feedBoxQuestions a:hover {
+    text-decoration: underline;
 }
 
 .feedQuestion {
@@ -595,21 +699,46 @@ footer p {
     padding-top: 50px;
     text-align: center;
     font-size: 150%;
+    
 }
 
 .meetupListingQuestion {
-    width: 80%;
+    border-radius: 5px;
+    width: 70%;
     /* padding: 40px; */
     display: block;
-    margin-left: 10%;
+    margin-left: 15%;
     background-color: #fff;
     box-shadow: 2px 2px #4c4a4a;
     margin-bottom: 20px;
 }
 
+.meetupListingQuestionWrapper {color: #000 !important;}
+
 .meetupListingQuestion p {display: inline-block;}
 
 .meetupListingQuestion i {margin-left: 5%;}
 
-#deleteMeetupButton:hover {cursor: pointer;}
+.meetupListingQuestion div {display: inline-block;}
+
+.meetupListItem {float: left;}
+
+.meetupListQuestion {
+    width: 70%;
+}
+
+.meetupListDelete {
+    width: 30%;
+    padding-top: 25px;
+}
+
+.meetupListDelete i {
+    font-size: 80%;
+}
+
+#deleteMeetupButton {color: #4c4a4a;}
+
+#editMeetupButton {color: red;}
+
+.editDeleteMeetupButton:hover {cursor: pointer;}
 

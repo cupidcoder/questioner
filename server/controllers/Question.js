@@ -1,5 +1,6 @@
 import uuid from 'uuid/v4';
-import QuestionModel from '../models/Question';
+import joi from 'joi';
+import QuestionModels from '../models/Question';
 import statusCodes from '../helpers/status';
 import APIResponse from '../helpers/Response';
 
@@ -11,12 +12,27 @@ import APIResponse from '../helpers/Response';
 const Question = {
 
   /**
+   * Validate question object
+   * @param {object} newQuestionObject
+   * @returns {object} joiErrorObject
+   */
+  validateQuestion(newQuestionObject) {
+    const questionObjectRules = {
+      createdBy: joi.string().trim().required(),
+      meetup: joi.string().trim().required(),
+      title: joi.string().trim().min(3).required(),
+      body: joi.string().trim().min(5).required(),
+    };
+    return joi.validate(newQuestionObject, questionObjectRules);
+  },
+
+  /**
      * Find one question record from the questions array
      * @param {*} id
      * @returns {Array} question object array
      */
   findOne(id) {
-    const questionRecord = QuestionModel.filter(el => el.id === id);
+    const questionRecord = QuestionModels.filter(QuestionModel => QuestionModel.id === id);
     return questionRecord;
   },
 
@@ -29,13 +45,14 @@ const Question = {
   create(req, res) {
     const response = new APIResponse();
     const question = req.body;
-    if (!question.createdBy || !question.meetup || !question.title || !question.body) {
-      response.setFailure(statusCodes.badRequest, 'Required fields are empty');
+    const { error } = Question.validateQuestion(question);
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
       return response.send(res);
     }
     const newQuestionRecord = {
       id: uuid(),
-      createdOn: new Date().getTime(),
+      createdOn: new Date().toISOString(),
       createdBy: question.createdBy,
       meetup: question.meetup,
       title: question.title,
@@ -43,7 +60,7 @@ const Question = {
       votes: 0, // Starts at zero
     };
 
-    QuestionModel.push(newQuestionRecord);
+    QuestionModels.push(newQuestionRecord);
     response.setSuccess(statusCodes.created, newQuestionRecord);
     return response.send(res);
   },
@@ -63,8 +80,8 @@ const Question = {
     }
 
     // At this point, the question being upvoted, exists
-    const questionRecordIndex = QuestionModel.indexOf(questionRecord[0]);
-    QuestionModel[questionRecordIndex].votes += 1;
+    const questionRecordIndex = QuestionModels.indexOf(questionRecord[0]);
+    QuestionModels[questionRecordIndex].votes += 1;
     response.setSuccess(statusCodes.success, [{
       meetup: questionRecord[0].meetup,
       title: questionRecord[0].title,
@@ -89,11 +106,11 @@ const Question = {
     }
 
     // At this point, the question being upvoted, exists
-    const questionRecordIndex = QuestionModel.indexOf(questionRecord[0]);
-    if (QuestionModel[questionRecordIndex].votes === 0) {
-      QuestionModel[questionRecordIndex].votes = 0;
-    } else if (QuestionModel[questionRecordIndex].votes > 0) {
-      QuestionModel[questionRecordIndex].votes -= 1;
+    const questionRecordIndex = QuestionModels.indexOf(questionRecord[0]);
+    if (QuestionModels[questionRecordIndex].votes === 0) {
+      QuestionModels[questionRecordIndex].votes = 0;
+    } else if (QuestionModels[questionRecordIndex].votes > 0) {
+      QuestionModels[questionRecordIndex].votes -= 1;
     }
     response.setSuccess(statusCodes.success, [{
       meetup: questionRecord[0].meetup,

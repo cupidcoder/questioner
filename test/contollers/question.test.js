@@ -1,10 +1,11 @@
 import uuid from 'uuid/v4';
 import chai, { assert } from 'chai';
 import app from '../../app';
-import statusCodes from '../../src/helpers/status';
+import statusCodes from '../../server/helpers/status';
 
 chai.use(require('chai-http'));
 
+// eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 describe('POST /api/v1/questions', () => {
@@ -50,7 +51,6 @@ describe('POST /api/v1/questions', () => {
         .end((err, res) => {
           res.should.have.status(statusCodes.badRequest);
           res.body.should.have.property('error');
-          res.body.error.should.eql('Required fields are empty');
           done();
         });
     });
@@ -65,7 +65,6 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.forbidden);
         res.body.should.have.property('error');
-        res.body.error.should.eql('Cannot upvote question that does not exist');
         done();
       });
   });
@@ -111,7 +110,6 @@ describe('PATCH /api/v1/questions/:id/downvote', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.forbidden);
         res.body.should.have.property('error');
-        res.body.error.should.eql('Cannot downvote question that does not exist');
         done();
       });
   });

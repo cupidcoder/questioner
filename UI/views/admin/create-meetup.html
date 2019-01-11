@@ -1,12 +1,12 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf8">
-        <link rel="icon" type="image" href="../css/img/favicon.ico">
+        <link rel="icon" type="image" href="../../css/img/favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,700|Tangerine:700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,400i,700i|Tangerine:700" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="../css/main.css">
-        <link rel="stylesheet" type="text/css" href="../css/queries.css">
+        <link rel="stylesheet" type="text/css" href="../../css/main.css">
+        <link rel="stylesheet" type="text/css" href="../../css/queries.css">
         <title>Questioner | Create meetup</title>
     </head>
     <body>
@@ -17,16 +17,16 @@
             </div>
             <div class="headerDiv" id="headerNav"> 
                 <p><a href="create-meetup.html">Create meetup</a></p>
-                <p><a href="dashboard.html">Dashboard</a></p>
-                <p><a href="../index.html">Log out</a></p>
+                <p><a href="profile.html">Profile</a></p>
+                <p><a href="../../index.html">Log out</a></p>
             </div>
             <div class="headerDiv" id="headerNavBurger">
                 <i class="fas fa-bars"></i>
             </div>
             <div id="burgerMenuNav">
                 <p><a href="create-meetup.html">Create meetup</a></p>
-                <p><a href="dashboard.html">Dashboard</a></p>
-                <p><a href="../index.html">Log out</a></p>
+                <p><a href="profile.html">Profile</a></p>
+                <p><a href="../../index.html">Log out</a></p>
             </div>
         </header>
         <!-- End of Application header -->
@@ -34,30 +34,38 @@
         <!-- Meetups section -->
         <section id="createMeetupSection" class="sectionBackground">
             <!-- Image heading -->
-            <div id="createMeetupSectionImage" class="bgImage">
+            <div class="bgImage imageHeading">
                 <h3 class="sectionHeading">CREATE MEETUP</h3>
             </div>
 
             <!-- Creaet meetup form -->
             <div class="createMeetupEntryBox">
                 <div class="createMeetupEntryBoxForm">
-                    <p>Name:</p>
+                    <p>Topic:</p>
+                    <input type="text" required>
+                </div>
+                <div class="createMeetupEntryBoxForm">
+                    <p>Location:</p>
                     <input type="text" required>
                 </div>
                 <div class="createMeetupEntryBoxForm">
                     <p>Description:</p>
-                    <textarea id="" cols="30" rows="5"></textarea>
+                    <textarea id="" cols="30" rows="2"></textarea>
+                </div>
+                <div class="createMeetupEntryBoxForm">
+                    <p>Happening on:</p>
+                    <input type="text" required placeholder="dd/mm/yyyy">
                 </div>
                 <div class="createMeetupEntryBoxForm">
                     <p>Tags (optional):</p>
-                    <textarea id="" cols="30" rows="3"></textarea>
+                    <textarea id="" cols="30" rows="2"></textarea>
                 </div>
                 <div class="createMeetupEntryBoxForm">
                     <p>Picture (optional):</p>
                     <input type="file">
                 </div>
                 <div class="createMeetupEntryBoxForm">
-                    <input type="button" class="darkBtn" value="Create">
+                    <a href="my-meetups.html" class="darkBtn" id="createBtn">Create meetup</a>
                 </div>
             </div>
         </section>
@@ -65,7 +73,7 @@
         <footer>
             <p>Questioner</p>
         </footer>
-        <script src="../js/main.js"></script>
+        <script src="../../js/main.js"></script>
     </body>
 
 </html>
