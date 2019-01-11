@@ -163,50 +163,9 @@ describe('GET /api/v1/meetups/upcoming', () => {
 
 describe('POST /api/v1/meetups/:id/rsvp', () => {
   describe('request', () => {
-    let meetupRecordResponse;
-    // Sample valid meetup request data
-    const meetupRecord = {
-      location: 'Radison Blue',
-      topic: 'Chess nation',
-      description: 'We hold mini chess tournaments with amazing rewards.',
-      happeningOn: new Date().getTime(),
-    };
-    // Create meetup record
-    before((done) => {
-      chai.request(app)
-        .post('/api/v1/meetups')
-        .send(meetupRecord)
-        .end((err, res) => {
-          [meetupRecordResponse] = res.body.data;
-          done();
-        });
-    });
-
-    let rsvpResponse;
     const rsvpRecord = {
-      user: '9703c362-b608-434e-99cb-f808bd40af8',
       response: 'yes',
     };
-
-    // Make initial rsvp request
-    before((done) => {
-      chai.request(app)
-        .post(`/api/v1/meetups/${meetupRecordResponse.id}/rsvp`)
-        .send(rsvpRecord)
-        .end((err, res) => {
-          [rsvpResponse] = res.body.data;
-          done();
-        });
-    });
-    it('should return error message if user has already RSVPed to a meetup', (done) => {
-      chai.request(app)
-        .post(`/api/v1/meetups/${rsvpResponse.meetup}/rsvp`)
-        .send(rsvpRecord)
-        .end((err, res) => {
-          res.should.have.status(statusCodes.forbidden);
-          done();
-        });
-    });
     it('should return error message if meetup does not exist', (done) => {
       const fakeMeetupID = 737;
       chai.request(app)
@@ -239,12 +198,10 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
         });
     });
     const validRsvpRecord = {
-      user: '9703c362-b608-434e-99cb-f808bd40af8',
       response: 'yes',
     };
 
     const invalidRsvpRecord = {
-      user: '9703c362-b608-434e-99cb-f808bd40af8',
       response: '',
     };
     it('should return newly created rsvp record if input is valid', (done) => {

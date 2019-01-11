@@ -34,7 +34,6 @@ const Meetup = {
    */
   validateRSVP(newRSVPObject) {
     const rsvpObjectRules = joi.object().keys({
-      user: joi.string().required(),
       response: joi.string().valid(['yes', 'no', 'maybe']).required(),
     });
     return joi.validate(newRSVPObject, rsvpObjectRules);
@@ -159,32 +158,9 @@ const Meetup = {
     const newRsvpRecord = {
       id: uuid(),
       meetup: req.params.id,
-      user: rsvp.user,
       response: rsvp.response,
     };
-    // Let's check if rsvp data is empty
-    const rsvpRecords = RsvpModel;
-    if (rsvpRecords.length > 0) {
-      // Here records already exist in the RsvpModel, Let's check if this user has responded already
-      const duplicates = rsvpRecords.filter(
-        el => el.meetup === req.params.id && el.user === rsvp.user,
-      );
 
-      if (duplicates.length > 0) {
-        response.setFailure(statusCodes.forbidden, 'You have already responded to this meetup');
-        return response.send(res);
-      }
-      // At this point, no duplicate entry exist
-      RsvpModel.push(newRsvpRecord);
-      const [meetup] = meetupRecord;
-      response.setSuccess(statusCodes.created, [{
-        meetup: meetup.id,
-        topic: meetup.topic,
-        status: rsvp.response,
-      }]);
-      return response.send(res);
-    }
-    // At this point, RsvpModel is emtpy
     RsvpModel.push(newRsvpRecord);
     const [meetup] = meetupRecord;
     response.setSuccess(statusCodes.created, [{
