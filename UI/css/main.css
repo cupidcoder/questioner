@@ -290,6 +290,11 @@ footer p {
     overflow: hidden;
 }
 
+.meetupBoxAdmin {
+    height: 114px;
+    background-color: #a59898;
+}
+
 .meetupBoxInfo p {
     text-align: center;
     color: #305b8c;
@@ -313,7 +318,7 @@ footer p {
     cursor: pointer;
 }
 
-.adminMeetupEdit i {color: #4c4a4a;}
+.adminMeetupEdit i {color: #222a33;}
 
 .adminMeetupDelete i {color: red;}
 
