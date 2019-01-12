@@ -11,6 +11,11 @@
     src: url(fonts/Boing_SemiboldWEB.woff);
 }
 
+/* HTML */
+html {
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
 /* Body */
 
@@ -459,7 +464,7 @@ footer p {
 #postQuestionBox a {
     color: #fff;
     position: absolute;
-    left: 90%;
+    left: 89%;
 }
 
 
@@ -491,9 +496,9 @@ footer p {
 .close {
     color: rgba(243, 158, 62, 0.5);
     float: right;
-    font-size: 300%;
+    font-size: 273%;
     font-weight: bold;
-    margin-top: -20px;
+    margin-top: -9px;
 }
 
 .close:hover,
@@ -605,7 +610,7 @@ footer p {
     display: block;
     margin: auto;
     text-align: left;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     position: relative;
 }
 
@@ -624,7 +629,7 @@ footer p {
 
 #createBtn {
     position: absolute;
-    left: 65%;
+    left: 60%;
     bottom: 1%;
 }
 
