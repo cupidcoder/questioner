@@ -7,7 +7,7 @@ const { createQueries, dropQueries } = require('./queries');
 
 dotenv.config();
 
-const dbString = process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : process.env.TEST_DATABASE_URL;
+const dbString = process.env.NODE_ENV === 'development' ? process.env.DATABASE_URL : process.env.TEST_DATABASE_URL;
 
 const pool = new Pool({
   connectionString: dbString,
