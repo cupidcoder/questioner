@@ -6,8 +6,8 @@
   "scripts": {
     "local-test-migrate": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://chuks:postgres@127.0.0.1:5432/questioner_test_db >> .env && node db/migration createTables",
     "local-test-drop": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://chuks:postgres@127.0.0.1:5432/questioner_test_db >> .env && node db/migration dropTables",
-    "heroku-test-migrate": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres:@127.0.0.1:5432/questioner_test_db >> .env && node db/migration createTables",
-    "heroku-test-drop": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres:@127.0.0.1:5432/questioner_test_db >> .env && node db/migration dropTables",
+    "heroku-test-migrate": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres:@127.0.0.1:5433/questioner_test_db >> .env && node db/migration createTables",
+    "heroku-test-drop": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres:@127.0.0.1:5433/questioner_test_db >> .env && node db/migration dropTables",
     "dev-migrate": "rimraf .env && touch .env && echo DATABASE_URL=postgres://chuks:postgres@127.0.0.1:5432/questioner_db >> .env && node db/migration createTables",
     "dev-drop": "rimraf .env && touch .env && echo DATABASE_URL=postgres://chuks:postgres@127.0.0.1:5432/questioner_db >> .env && node db/migration dropTables",
     "test": "nyc ---reporter=html --reporter=text mocha build/test/**/*.test.js --timeout 10000 --exit",
