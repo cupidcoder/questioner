@@ -16,3 +16,6 @@ coverage/
 
 # npm
 npm-debug.log
+
+# .env file
+.env
