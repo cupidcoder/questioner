@@ -60,6 +60,26 @@ const createTables = () => {
       console.log(err);
       pool.end();
     });
+
+  pool.query(createQueries.commentsTable)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+
+  pool.query(createQueries.votesTable)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
 };
 
 
@@ -98,6 +118,26 @@ const dropTables = () => {
     });
 
   pool.query(dropQueries.rsvpTable)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+
+  pool.query(dropQueries.commentsTable)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+
+  pool.query(dropQueries.votesTable)
     .then((res) => {
       console.log(res);
       pool.end();
