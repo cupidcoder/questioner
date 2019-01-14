@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { Pool } = require('pg');
 
 const dotenv = require('dotenv');
@@ -18,9 +19,9 @@ pool.on('connect', () => {
 });
 
 /**
- * Creates the necessary tables in the database
+ * Functions to create necessary tables
  */
-const createTables = () => {
+const createUserTables = () => {
   pool.query(createQueries.usersTable)
     .then((res) => {
       console.log(res);
@@ -30,7 +31,9 @@ const createTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const createMeetupTables = () => {
   pool.query(createQueries.meetupsTable)
     .then((res) => {
       console.log(res);
@@ -40,7 +43,9 @@ const createTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const createQuestionsTable = () => {
   pool.query(createQueries.questionsTable)
     .then((res) => {
       console.log(res);
@@ -50,17 +55,9 @@ const createTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
-  pool.query(createQueries.rsvpTable)
-    .then((res) => {
-      console.log(res);
-      pool.end();
-    })
-    .catch((err) => {
-      console.log(err);
-      pool.end();
-    });
-
+const createRSVPTable = () => {
   pool.query(createQueries.commentsTable)
     .then((res) => {
       console.log(res);
@@ -70,7 +67,21 @@ const createTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const createCommentsTable = () => {
+  pool.query(createQueries.commentsTable)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
+
+const createVotesTable = () => {
   pool.query(createQueries.votesTable)
     .then((res) => {
       console.log(res);
@@ -82,11 +93,11 @@ const createTables = () => {
     });
 };
 
-
 /**
- * Drops the necessary tables in the database
+ * Functions for dropping Tables
  */
-const dropTables = () => {
+
+const dropUserTable = () => {
   pool.query(dropQueries.usersTable)
     .then((res) => {
       console.log(res);
@@ -96,7 +107,9 @@ const dropTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const dropMeetupsTable = () => {
   pool.query(dropQueries.meetupsTable)
     .then((res) => {
       console.log(res);
@@ -106,7 +119,9 @@ const dropTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const dropQuestionsTable = () => {
   pool.query(dropQueries.questionsTable)
     .then((res) => {
       console.log(res);
@@ -116,7 +131,9 @@ const dropTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const dropRSVPTable = () => {
   pool.query(dropQueries.rsvpTable)
     .then((res) => {
       console.log(res);
@@ -126,7 +143,9 @@ const dropTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const dropCommentsTable = () => {
   pool.query(dropQueries.commentsTable)
     .then((res) => {
       console.log(res);
@@ -136,7 +155,9 @@ const dropTables = () => {
       console.log(err);
       pool.end();
     });
+};
 
+const dropVotesTable = () => {
   pool.query(dropQueries.votesTable)
     .then((res) => {
       console.log(res);
@@ -148,8 +169,32 @@ const dropTables = () => {
     });
 };
 
+/**
+ * Creates the necessary tables in the database
+ */
+const createTables = () => {
+  createUserTables();
+  createMeetupTables();
+  createQuestionsTable();
+  createRSVPTable();
+  createCommentsTable();
+  createVotesTable();
+};
+
+
+/**
+ * Drops the necessary tables in the database
+ */
+const dropTables = () => {
+  dropUserTable();
+  dropMeetupsTable();
+  dropQuestionsTable();
+  dropRSVPTable();
+  dropCommentsTable();
+  dropVotesTable();
+};
+
 pool.on('remove', () => {
-  console.log('client removed');
   process.exit(0);
 });
 
