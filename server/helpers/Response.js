@@ -53,13 +53,13 @@ class APIReponse {
    */
   send(res) {
     if (this.type === 'success') {
-      return res.status(this.statusCode).send({
+      return res.status(this.statusCode).json({
         status: this.statusCode,
         data: this.data,
       });
     }
     // Here this.type === 'failure'
-    return res.status(this.statusCode).send({
+    return res.status(this.statusCode).json({
       status: this.statusCode,
       error: this.error,
     });

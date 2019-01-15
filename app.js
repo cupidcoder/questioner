@@ -21,8 +21,6 @@ app.use('/api/v1/meetups', meetups);
 app.use('/api/v1/questions', questions);
 app.use('/api/v1/auth', auth);
 
-
-
 const port = process.env.PORT || 7000;
 
 app.listen(port);
