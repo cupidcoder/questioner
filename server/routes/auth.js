@@ -4,6 +4,6 @@ import UserController from '../controllers/User';
 
 const router = express.Router();
 
-router.post('/signup', validation.validateUser, UserController.signup);
+router.post('/signup', validation.validateNewUser, UserController.signup);
 
 module.exports = router;

@@ -30,7 +30,7 @@ describe('POST /api/v1/auth/signup', () => {
       firstname: 'Chukwudi',
       lastname: 'ume',
       password: '98josdnlsn',
-      email: 'chukwudi.ume@gmail.com',
+      email: 'chukwudi.ume2@gmail.com',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -40,6 +40,22 @@ describe('POST /api/v1/auth/signup', () => {
         res.body.should.have.property('data');
         res.body.data[0].should.have.property('token');
         res.body.data[0].should.have.property('user');
+        done();
+      });
+  });
+
+  it('should respond error if email has already been used', (done) => {
+    const userObject = {
+      firstname: 'Chukwudi',
+      lastname: 'ume',
+      password: '98josdnlsn',
+      email: 'chukwudi.ume2@gmail.com',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(userObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
         done();
       });
   });
