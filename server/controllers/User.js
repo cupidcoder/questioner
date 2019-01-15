@@ -39,6 +39,41 @@ const User = {
       }
     });
   },
+
+  /**
+   * User Login method
+   * @param {object} res
+   * @param {object} req
+   * @param {object} userObject
+   */
+  async login(req, res) {
+    const response = new APIResponse();
+    const loginInput = req.body;
+    try {
+      const { rows } = await db.query(UserModel.checkEmailQuery, [loginInput.email]);
+      const user = rows[0];
+      if (!user) {
+        response.setFailure(StatusCodes.forbidden, 'Incorrect email/password');
+        return response.send(res);
+      }
+      // check for password here
+      if (!Utility.comparePassword(user.password, loginInput.password)) {
+        response.setFailure(StatusCodes.forbidden, 'Incorrect email/password');
+        return response.send(res);
+      }
+      // User has been authenticated
+      const token = Utility.generateToken(user.id, user.is_admin);
+      const loggedInUser = {
+        token,
+        user,
+      };
+      response.setSuccess(StatusCodes.success, loggedInUser);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(StatusCodes.unavailable, 'Unable to proceed with your request. Please try again');
+      return response.send(res);
+    }
+  },
 };
 
 export default User;
