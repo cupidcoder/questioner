@@ -58,7 +58,7 @@ const createQuestionsTable = () => {
 };
 
 const createRSVPTable = () => {
-  pool.query(createQueries.commentsTable)
+  pool.query(createQueries.rsvpTable)
     .then((res) => {
       console.log(res);
       pool.end();

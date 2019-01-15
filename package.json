@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/cupidcoder/questioner#readme",
   "dependencies": {
+    "bcrypt": "^3.0.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "joi": "^14.3.1",
