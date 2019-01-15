@@ -13,8 +13,9 @@ const Utility = {
    * @param {string} password
    * @returns {string} hashed password
    */
-  hashPassword(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+  async hashPassword(password) {
+    const hashedPassword = await bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+    return hashedPassword;
   },
   /**
    * comparePassword
@@ -44,7 +45,7 @@ const Utility = {
       userId,
       isAdmin,
     },
-    JWT_SECRET, { expiresIn: '7d' });
+    JWT_SECRET, { expiresIn: '30d' });
     return token;
   },
 };
