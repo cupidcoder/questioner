@@ -4,8 +4,15 @@
   "description": "A  questions crowd-sourcing application for meetup administrators",
   "main": "app.js",
   "scripts": {
+    "local-test-migrate": "export NODE_ENV=test && babel-node db/migration createTables",
+    "local-test-drop": "export NODE_ENV=test && babel-node db/migration dropTables",
+    "heroku-test-migrate": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5433/questioner_test_db >> .env && babel-node db/migration createTables",
+    "heroku-test-drop": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5433/questioner_test_db >> .env && babel-node db/migration dropTables",
+    "dev-migrate": "export NODE_ENV=development && babel-node db/migration createTables",
+    "dev-drop": "export NODE_ENV=development && babel-node db/migration dropTables",
+    "dev-seed": "export NODE_ENV=development && babel-node db/migration seedTables",
     "test": "nyc ---reporter=html --reporter=text mocha build/test/**/*.test.js --timeout 10000 --exit",
-    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md --copy-files",
+    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md,./db --copy-files",
     "start": "npm run build && node build/app.js",
     "dev": "nodemon app.js --exec babel-node --",
     "coverage": "nyc report ---reporter=text-lcov | coveralls"
@@ -22,12 +29,17 @@
   },
   "homepage": "https://github.com/cupidcoder/questioner#readme",
   "dependencies": {
+    "bcrypt": "^3.0.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "joi": "^14.3.1",
+    "make-runnable": "^1.3.6",
+    "pg": "^7.8.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
