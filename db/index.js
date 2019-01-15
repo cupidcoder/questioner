@@ -12,12 +12,13 @@ const pool = new Pool({
 export default {
   /**
    * DB Query
-   * @param {string} SQL query
+   * @param {string} query
+   * @param {Array} placeholder values
    * @returns {object} object
    */
-  query(sqlQuery) {
+  query(sqlQuery, values) {
     return new Promise((resolve, reject) => {
-      pool.query(sqlQuery)
+      pool.query(sqlQuery, values)
         .then((res) => {
           resolve(res);
         }, (err) => {
