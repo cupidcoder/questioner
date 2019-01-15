@@ -12,7 +12,7 @@
     "dev-drop": "export NODE_ENV=development && babel-node db/migration dropTables",
     "dev-seed": "export NODE_ENV=development && babel-node db/migration seedTables",
     "test": "nyc ---reporter=html --reporter=text mocha build/test/**/*.test.js --timeout 10000 --exit",
-    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md,./db --copy-files",
+    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md,./db/migration.js,./db/queries.js,./db/seeder.js --copy-files",
     "start": "npm run build && node build/app.js",
     "dev": "nodemon app.js --exec babel-node --",
     "coverage": "nyc report ---reporter=text-lcov | coveralls"

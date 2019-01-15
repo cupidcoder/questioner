@@ -1,6 +1,7 @@
 import express from 'express';
 import meetups from './server/routes/meetups';
 import questions from './server/routes/questions';
+import auth from './server/routes/auth';
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.get('/api/v1', (req, res) => {
 // Routes middleware
 app.use('/api/v1/meetups', meetups);
 app.use('/api/v1/questions', questions);
+app.use('/api/v1/auth', auth);
+
 
 
 const port = process.env.PORT || 7000;
