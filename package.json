@@ -6,8 +6,10 @@
   "scripts": {
     "local-test-migrate": "export NODE_ENV=test && babel-node db/migration createTables",
     "local-test-drop": "export NODE_ENV=test && babel-node db/migration dropTables",
-    "heroku-test-migrate": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5433/questioner_test_db >> .env && babel-node db/migration createTables",
-    "heroku-test-drop": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5433/questioner_test_db >> .env && babel-node db/migration dropTables",
+    "local-test-seed": "export NODE_ENV=test && babel-node db/seeder seedTables",
+    "travis-test-migrate": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5433/questioner_test_db >> .env && babel-node db/migration createTables",
+    "travis-test-drop": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5433/questioner_test_db >> .env && babel-node db/migration dropTables",
+    "travis-test-seed": "rimraf .env && touch .env && echo TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5433/questioner_test_db >> .env && babel-node db/seeder seedTables",
     "dev-migrate": "export NODE_ENV=development && babel-node db/migration createTables",
     "dev-drop": "export NODE_ENV=development && babel-node db/migration dropTables",
     "dev-seed": "export NODE_ENV=development && babel-node db/migration seedTables",

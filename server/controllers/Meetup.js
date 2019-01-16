@@ -1,4 +1,4 @@
-import uuid from 'uuid/v4';
+import db from '../../db/index';
 import MeetupModels from '../models/Meetup';
 import RsvpModel from '../models/Rsvp';
 import statusCodes from '../helpers/status';
@@ -26,23 +26,25 @@ const Meetup = {
    * @param {object} res
    * @returns {object} apiResponse
    */
-  create(req, res) {
+  async create(req, res) {
     const response = new APIResponse();
-    const meetup = req.body;
-    const newMeetupRecord = {
-      id: uuid(),
-      createdOn: new Date().toISOString(),
-      location: meetup.location,
-      images: '',
-      topic: meetup.topic,
-      description: meetup.description,
-      happeningOn: new Date(meetup.happeningOn).toISOString(),
-      tags: '',
-    };
-
-    MeetupModels.push(newMeetupRecord);
-    response.setSuccess(statusCodes.created, newMeetupRecord);
-    return response.send(res);
+    const meetupRequest = req.body;
+    if (!req.user.isAdmin) {
+      response.setFailure(statusCodes.unauthorized, 'You do not have permission to create meetup');
+      return response.send(res);
+    }
+    const createdOn = new Date().toLocaleString();
+    const happeningOn = new Date(meetupRequest.happeningOn).toLocaleString();
+    const newMeetup = [meetupRequest.location, createdOn, meetupRequest.topic, happeningOn];
+    try {
+      const { rows } = await db.query(MeetupModels.insertMeetupQuery, newMeetup);
+      const meetup = rows[0];
+      response.setSuccess(statusCodes.created, meetup);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Try again');
+      return response.send(res);
+    }
   },
 
   /**

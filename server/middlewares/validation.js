@@ -20,7 +20,6 @@ const validation = {
     const meetupObjectRules = {
       location: joi.string().trim().min(3).required(),
       topic: joi.string().trim().min(3).required(),
-      description: joi.string().trim().min(3).required(),
       happeningOn: joi.date().timestamp('javascript').required(),
     };
     const { error } = joi.validate(req.body, meetupObjectRules);

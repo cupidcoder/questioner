@@ -24,8 +24,9 @@ before_script:
   - npm run build
   - psql -c 'create database questioner_test_db;' -U postgres
   - export NODE_ENV=test
-  - npm run heroku-test-drop
-  - npm run heroku-test-migrate
+  - npm run travis-test-drop
+  - npm run travis-test-migrate
+  - npm run travis-test-seed
 script:
   - npm test
 after_success:
