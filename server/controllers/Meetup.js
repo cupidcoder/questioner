@@ -53,16 +53,17 @@ const Meetup = {
    * @param {object} req
    * @returns {Array} meetups
    */
-  getAll(req, res) {
+  async getAll(req, res) {
     const response = new APIResponse();
-    if (MeetupModels.length === 0) {
-      response.setSuccess(statusCodes.success);
+    try {
+      const { rows } = await db.query(MeetupModels.getAllQuery);
+      const meetups = rows;
+      response.setSuccess(statusCodes.success, meetups);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'An error occurred. Please try again');
       return response.send(res);
     }
-    // At this point, MeetupModel.length > 0
-    const meetups = MeetupModels;
-    response.setSuccess(statusCodes.success, meetups);
-    return response.send(res);
   },
 
   /**
