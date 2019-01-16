@@ -26,6 +26,7 @@ before_script:
   - export NODE_ENV=test
   - npm run heroku-test-drop
   - npm run heroku-test-migrate
+  - npm run heroku-test-seed
 script:
   - npm test
 after_success:
