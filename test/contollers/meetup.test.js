@@ -172,45 +172,60 @@ describe('POST /api/v1/meetups', () => {
 });
 
 
-// describe('GET /api/v1/meetups', () => {
-//   // Sample valid meetup request data
-//   const meetupRecord = {
-//     location: 'Radison Blue',
-//     topic: 'Chess nation',
-//     description: 'We hold mini chess tournaments with amazing rewards.',
-//     happeningOn: new Date().getTime(),
-//   };
-//   // Make POST request
-//   it('should create a meetup record', (done) => {
-//     chai.request(app)
-//       .post('/api/v1/meetups')
-//       .send(meetupRecord)
-//       .end((err, res) => {
-//         res.should.have.status(statusCodes.created);
-//         res.body.should.have.property('data');
-//         res.body.data[0].should.have.property('id');
-//         res.body.data[0].should.have.property('createdOn');
-//         res.body.data[0].should.have.property('location');
-//         res.body.data[0].should.have.property('images');
-//         res.body.data[0].should.have.property('topic');
-//         res.body.data[0].should.have.property('description');
-//         res.body.data[0].should.have.property('happeningOn');
-//         res.body.data[0].should.have.property('tags');
-//         done();
-//       });
-//   });
+describe('GET /api/v1/meetups', () => {
+  it('should return error if token was not provided', (done) => {
+    chai.request(app)
+      .get('/api/v1/meetups')
+      .set('x-access-token', '')
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
 
-//   it('should return data array with at least one element if meetups exist', (done) => {
-//     chai.request(app)
-//       .get('/api/v1/meetups')
-//       .end((err, res) => {
-//         res.should.have.status(statusCodes.success);
-//         res.body.should.have.property('data');
-//         res.body.data.length.should.be.above(1);
-//         done();
-//       });
-//   });
-// });
+  it('should return error if token provided is incorrect', (done) => {
+    const sampleFakeToken = 'xoiis80909403493jnlnfsa;dn';
+    chai.request(app)
+      .get('/api/v1/meetups')
+      .set('x-access-token', sampleFakeToken)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  // Get user token
+  const adminUser = {
+    email: 'c.ume@gmail.com',
+    password: 'questioner40',
+  };
+
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(adminUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should match meetup records already seeded in the db', (done) => {
+    chai.request(app)
+      .get('/api/v1/meetups')
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        res.body.should.have.property('data');
+        res.body.data.length.should.be.above(1);
+        res.body.data[0].should.have.property('topic').eql('NodeJS Gurus');
+        res.body.data[1].should.have.property('topic').eql('Food Lovers');
+        res.body.data[2].should.have.property('topic').eql('Movie Critics');
+        done();
+      });
+  });
+});
 
 // describe('GET /api/v1/meetups/:id', () => {
 //   // Sample valid meetup request data
