@@ -227,52 +227,103 @@ describe('GET /api/v1/meetups', () => {
   });
 });
 
-// describe('GET /api/v1/meetups/:id', () => {
-//   // Sample valid meetup request data
-//   const meetupRecord = {
-//     location: 'Ogba',
-//     topic: 'Book club',
-//     description: 'We believe through the lens of a good library, life is amazing',
-//     happeningOn: new Date().getTime(),
-//   };
+describe('GET /api/v1/meetups/:id', () => {
+  describe('Token error', () => {
+    it('should return error if token was not provided', (done) => {
+      chai.request(app)
+        .get('/api/v1/meetups/1')
+        .set('x-access-token', '')
+        .end((err, res) => {
+          res.should.have.status(statusCodes.forbidden);
+          done();
+        });
+    });
 
-//   // meetupRecord response
-//   let meetupRecordResponse;
+    it('should return error if token provided is incorrect', (done) => {
+      const sampleFakeToken = 'xoiis80909403493jnlnfsa;dn';
+      chai.request(app)
+        .get('/api/v1/meetups/1')
+        .set('x-access-token', sampleFakeToken)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.badRequest);
+          done();
+        });
+    });
+  });
 
-//   // Make POST request to save meetup
-//   before((done) => {
-//     chai.request(app)
-//       .post('/api/v1/meetups')
-//       .send(meetupRecord)
-//       .end((err, res) => {
-//         [meetupRecordResponse] = res.body.data;
-//         done();
-//       });
-//   });
-//   it('should return meetup with same id if meetup record exists', (done) => {
-//     // Make GET request to get saved meetup
-//     chai.request(app)
-//       .get(`/api/v1/meetups/${meetupRecordResponse.id}`)
-//       .end((err, res) => {
-//         res.should.have.status(statusCodes.success);
-//         res.body.should.have.property('data');
-//         res.body.data[0].should.have.property('id').eql(meetupRecordResponse.id);
-//         done();
-//       });
-//   });
+  // Get user token
+  const adminUser = {
+    email: 'c.ume@gmail.com',
+    password: 'questioner40',
+  };
 
-//   it('should return 404 if meetup record does not exist', (done) => {
-//     // Non-existing id
-//     const id = '10ba038e-48da-487b-96e8-8d3b99b6d18a';
-//     chai.request(app)
-//       .get(`/api/v1/meetups/${id}`)
-//       .end((err, res) => {
-//         res.should.have.status(statusCodes.notFound);
-//         res.body.should.have.property('error');
-//         done();
-//       });
-//   });
-// });
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(adminUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  // Sample valid meetup request data
+  const meetupRecord = {
+    location: 'Ogba',
+    topic: 'Book club',
+    happeningOn: new Date().getTime(),
+  };
+
+  // meetupRecord response
+  let meetupRecordResponse;
+
+  // Make POST request to save meetup
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .set('x-access-token', loginResponse.token)
+      .send(meetupRecord)
+      .end((err, res) => {
+        [meetupRecordResponse] = res.body.data;
+        done();
+      });
+  });
+  it('should return error parameter is not a valid number', (done) => {
+    chai.request(app)
+      .get('/api/v1/meetups/someText')
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+  it('should return meetup with same id if meetup record exists', (done) => {
+    // Make GET request to get saved meetup
+    chai.request(app)
+      .get(`/api/v1/meetups/${meetupRecordResponse.id}`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        res.body.should.have.property('data');
+        res.body.data[0].should.have.property('id').eql(meetupRecordResponse.id);
+        done();
+      });
+  });
+
+  it('should return 404 if meetup record does not exist', (done) => {
+    // Non-existing id
+    const id = 80;
+    chai.request(app)
+      .get(`/api/v1/meetups/${id}`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.notFound);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+});
 
 // describe('GET /api/v1/meetups/upcoming', () => {
 //   // Create meetup in the past
