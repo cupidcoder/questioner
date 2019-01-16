@@ -36,7 +36,7 @@ describe('POST /api/v1/auth/signup', () => {
       .post('/api/v1/auth/signup')
       .send(userObject)
       .end((err, res) => {
-        res.should.have.status(statusCodes.success);
+        res.should.have.status(statusCodes.created);
         res.body.should.have.property('data');
         res.body.data[0].should.have.property('token');
         res.body.data[0].should.have.property('user');
@@ -90,7 +90,7 @@ describe('POST /api/v1/auth/login', () => {
       .post('/api/v1/auth/signup')
       .send(userObject)
       .end((err, res) => {
-        res.should.have.status(statusCodes.success);
+        res.should.have.status(statusCodes.created);
         done();
       });
   });

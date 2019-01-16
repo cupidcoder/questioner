@@ -31,7 +31,7 @@ const User = {
           token,
           user,
         };
-        response.setSuccess(StatusCodes.success, newUserObj);
+        response.setSuccess(StatusCodes.created, newUserObj);
         return response.send(res);
       } catch (error) {
         response.setFailure(StatusCodes.unavailable, 'Unable to proceed with your request. Please try again');
