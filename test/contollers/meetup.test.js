@@ -194,19 +194,6 @@ describe('GET /api/v1/meetups', () => {
       });
   });
 
-  // first sample meetup request data
-  const meetupRecordOne = {
-    location: 'Radison Blue',
-    topic: 'Chess nation',
-    happeningOn: new Date().getTime(),
-  };
-  // second sample meetup request data
-  const meetupRecordTwo = {
-    location: 'Radison Blue',
-    topic: 'Chess nation',
-    happeningOn: new Date().getTime(),
-  };
-
   // Get user token
   const adminUser = {
     email: 'c.ume@gmail.com',
@@ -224,30 +211,7 @@ describe('GET /api/v1/meetups', () => {
       });
   });
 
-  // populate meetups table with 2 records
-  before((done) => {
-    chai.request(app)
-      .post('/api/v1/meetups')
-      .set('x-access-token', loginResponse.token)
-      .send(meetupRecordOne)
-      .end((err, res) => {
-        res.should.have.status(statusCodes.created);
-        done();
-      });
-  });
-
-  before((done) => {
-    chai.request(app)
-      .post('/api/v1/meetups')
-      .set('x-access-token', loginResponse.token)
-      .send(meetupRecordTwo)
-      .end((err, res) => {
-        res.should.have.status(statusCodes.created);
-        done();
-      });
-  });
-
-  it('should return data array with at least 2 elements', (done) => {
+  it('should match meetup records already seeded in the db', (done) => {
     chai.request(app)
       .get('/api/v1/meetups')
       .set('x-access-token', loginResponse.token)
@@ -255,6 +219,9 @@ describe('GET /api/v1/meetups', () => {
         res.should.have.status(statusCodes.success);
         res.body.should.have.property('data');
         res.body.data.length.should.be.above(1);
+        res.body.data[0].should.have.property('topic').eql('NodeJS Gurus');
+        res.body.data[1].should.have.property('topic').eql('Food Lovers');
+        res.body.data[2].should.have.property('topic').eql('Movie Critics');
         done();
       });
   });
