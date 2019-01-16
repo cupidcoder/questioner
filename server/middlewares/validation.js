@@ -10,6 +10,21 @@ import db from '../../db/index';
 
 const validation = {
   /**
+   * Validate req.params.id object
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
+  validateParam(req, res, next) {
+    const response = new APIResponse();
+    const id = parseInt(req.params.id, 10);
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(id)) { next(); } else {
+      response.setFailure(statusCodes.badRequest, 'Invalid parameter supplied');
+      return response.send(res);
+    }
+  },
+  /**
    * Validate meetup object
    * @param {object} req
    * @param {object} res

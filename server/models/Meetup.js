@@ -9,6 +9,8 @@ const Meetup = {
     returning *`,
 
   getAllQuery: 'SELECT * FROM meetups',
+
+  getOneQuery: 'SELECT * FROM meetups where id = $1',
 };
 
 export default Meetup;

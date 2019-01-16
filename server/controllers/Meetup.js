@@ -12,12 +12,20 @@ import APIResponse from '../helpers/Response';
 const Meetup = {
   /**
    * Find one meetup record from the meetups array
-   * @param {*} id
+   * @param {int} id
+   * @param {object} res
    * @returns {Array} meetup object array
    */
-  findOne(id) {
-    const meetupRecord = MeetupModels.filter(MeetupModel => MeetupModel.id === id);
-    return meetupRecord;
+  async findOne(id, res) {
+    const response = new APIResponse();
+    try {
+      const { rows } = await db.query(MeetupModels.getOneQuery, [id]);
+      const meetupRecord = rows;
+      return meetupRecord;
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
+    }
   },
 
   /**
@@ -72,17 +80,22 @@ const Meetup = {
    * @param {object} res
    * @returns {object} meetup record
    */
-  getOne(req, res) {
+  async getOne(req, res) {
     const response = new APIResponse();
     const { id } = req.params;
-    const meetupRecord = Meetup.findOne(id);
-    if (meetupRecord.length === 0) {
-      response.setFailure(statusCodes.notFound, 'Meetup not found');
+    try {
+      const meetupRecord = await Meetup.findOne(id, res);
+      if (meetupRecord.length === 0) {
+        response.setFailure(statusCodes.notFound, 'Meetup not found');
+        return response.send(res);
+      }
+      // At this point, a meetup was found
+      response.setSuccess(statusCodes.success, meetupRecord);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
     }
-    // At this point, a meetup was found
-    response.setSuccess(statusCodes.success, meetupRecord);
-    return response.send(res);
   },
 
   /**

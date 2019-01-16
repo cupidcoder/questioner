@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', Auth.verifyToken, MeetupController.getAll);
 router.get('/upcoming/', MeetupController.getUpcoming);
 router.post('/', [Auth.verifyToken, validation.validateMeetup], MeetupController.create);
-router.get('/:id', MeetupController.getOne);
+router.get('/:id', [Auth.verifyToken,validation.validateParam], MeetupController.getOne);
 router.post('/:id/rsvp', validation.validateRSVP, MeetupController.respondToMeetup);
 
 module.exports = router;
