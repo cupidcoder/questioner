@@ -21,7 +21,7 @@ const Auth = {
     const response = new APIResponse();
     const token = req.headers['x-access-token'];
     if (!token) {
-      response.setFailure(statusCodes.badRequest, 'Token is not provided');
+      response.setFailure(statusCodes.forbidden, 'Token is not provided');
       return response.send(res);
     }
     try {
@@ -32,7 +32,7 @@ const Auth = {
         response.setFailure(statusCodes.badRequest, 'The token you provided is invalid');
         return response.send(res);
       }
-      req.user = { id: decoded.userId };
+      req.user = { id: decoded.userId, isAdmin: decoded.isAdmin };
       next();
     } catch (error) {
       response.setFailure(statusCodes.badRequest, error);
