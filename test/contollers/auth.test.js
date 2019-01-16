@@ -9,11 +9,75 @@ const should = chai.should();
 
 
 describe('POST /api/v1/auth/signup', () => {
-  it('should respond with error if required fields are not filled', (done) => {
+  it('should respond with error if firstname was not filled', (done) => {
+    const userObject = {
+      firstname: '',
+      lastname: 'ume',
+      password: 'questioner40',
+      email: 'chukwudi.ume@gmail.com',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(userObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should respond with error if email was not filled', (done) => {
+    const userObject = {
+      firstname: 'Chukwudi',
+      lastname: 'ume',
+      password: 'questioner40',
+      email: '',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(userObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should respond with error if password was not filled', (done) => {
     const userObject = {
       firstname: 'Chukwudi',
       lastname: 'ume',
       password: '',
+      email: 'c.ume@gmail.com',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(userObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should respond with error if email is invalid', (done) => {
+    const userObject = {
+      firstname: 'Chukwudi',
+      lastname: 'ume',
+      password: 'questioner40',
+      email: 'a.gmail.com',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(userObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should respond with error if lastname was not filled', (done) => {
+    const userObject = {
+      firstname: 'Chukwudi',
+      lastname: '',
+      password: 'questioner40',
       email: 'chukwudi.ume@gmail.com',
     };
     chai.request(app)
@@ -40,11 +104,14 @@ describe('POST /api/v1/auth/signup', () => {
         res.body.should.have.property('data');
         res.body.data[0].should.have.property('token');
         res.body.data[0].should.have.property('user');
+        res.body.data[0].user.should.have.property('firstname').eql(userObject.firstname);
+        res.body.data[0].user.should.have.property('lastname').eql(userObject.lastname);
+        res.body.data[0].user.should.have.property('email').eql(userObject.email);
         done();
       });
   });
 
-  it('should respond error if email has already been used', (done) => {
+  it('should respond with error if email has already been used', (done) => {
     const userObject = {
       firstname: 'Chukwudi',
       lastname: 'ume',
@@ -62,9 +129,24 @@ describe('POST /api/v1/auth/signup', () => {
 });
 
 describe('POST /api/v1/auth/login', () => {
-  it('should return error if invalid/empty values are filled', (done) => {
+  it('should return error if email is empty', (done) => {
     const userLoginBody = {
       email: '',
+      password: 'questioner40',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(userLoginBody)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('should return error if password is empty', (done) => {
+    const userLoginBody = {
+      email: 'c.ume@gmail.com',
       password: '',
     };
     chai.request(app)
@@ -123,6 +205,7 @@ describe('POST /api/v1/auth/login', () => {
         res.body.should.have.property('data');
         res.body.data[0].should.have.property('token');
         res.body.data[0].should.have.property('user');
+        res.body.data[0].user.should.have.property('email').eql(userLoginBody.email);
         done();
       });
   });
