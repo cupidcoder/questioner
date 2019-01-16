@@ -127,3 +127,86 @@ describe('POST /api/v1/auth/signup', () => {
       });
   });
 });
+
+describe('POST /api/v1/auth/login', () => {
+  it('should return error if email is empty', (done) => {
+    const userLoginBody = {
+      email: '',
+      password: 'questioner40',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(userLoginBody)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('should return error if password is empty', (done) => {
+    const userLoginBody = {
+      email: 'c.ume@gmail.com',
+      password: '',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(userLoginBody)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  before((done) => {
+    // Register a new user
+    const userObject = {
+      firstname: 'Nelson',
+      lastname: 'Mandela',
+      password: 'questioner40',
+      email: 'nmandela@gmail.com',
+    };
+
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(userObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.created);
+        done();
+      });
+  });
+
+  it('should return error if wrong credentials are supplied', (done) => {
+    const userLoginBody = {
+      email: 'nmandela@gmail.com',
+      password: 'questioner',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(userLoginBody)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('should return success, with token if correct credentials are supplied', (done) => {
+    const userLoginBody = {
+      email: 'nmandela@gmail.com',
+      password: 'questioner40',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(userLoginBody)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        res.body.should.have.property('data');
+        res.body.data[0].should.have.property('token');
+        res.body.data[0].should.have.property('user');
+        res.body.data[0].user.should.have.property('email').eql(userLoginBody.email);
+        done();
+      });
+  });
+});

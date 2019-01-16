@@ -82,6 +82,26 @@ const validation = {
     }
     next();
   },
+
+  /**
+   * Validate User login
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
+  validateUserLogin(req, res, next) {
+    const response = new APIResponse();
+    const userObjectRules = joi.object().keys({
+      email: joi.string().trim().email({ minDomainAtoms: 2 }).required(),
+      password: joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+    });
+    const { error } = joi.validate(req.body, userObjectRules);
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
+      return response.send(res);
+    }
+    next();
+  },
 };
 
 export default validation;
