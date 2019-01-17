@@ -150,9 +150,8 @@ const Meetup = {
         return response.send(res);
       }
     } catch (error) {
-      // response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
-      // return response.send(res);
-      console.log(error);
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
     }
   },
   /**
