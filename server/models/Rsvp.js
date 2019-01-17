@@ -1,13 +1,13 @@
 /**
- * RSVP model that holds the Schema for rsvp
- * @package Rsvp
+ * RSVP model that holds the queries for rsvp actions
  */
 
-class Rsvp {
-  constructor() {
-    this.rsvp = [];
-    return this.rsvp;
-  }
-}
+const Rsvp = {
+  insertRSVPQuery: `
+    INSERT INTO rsvp(user_id, meetup_id, response)
+    VALUES($1, $2, $3)
+  `,
+};
 
-export default new Rsvp();
+
+export default Rsvp;

@@ -465,69 +465,90 @@ describe('DELETE /api/v1/meetups/:meetupID', () => {
   });
 });
 
-// describe('POST /api/v1/meetups/:id/rsvp', () => {
-//   describe('request', () => {
-//     const rsvpRecord = {
-//       response: 'yes',
-//     };
-//     it('should return error message if meetup does not exist', (done) => {
-//       const fakeMeetupID = 737;
-//       chai.request(app)
-//         .post(`/api/v1/meetups/${fakeMeetupID}/rsvp`)
-//         .send(rsvpRecord)
-//         .end((err, res) => {
-//           res.should.have.status(statusCodes.forbidden);
-//           done();
-//         });
-//     });
-//   });
+describe('POST /api/v1/meetups/:id/rsvp', () => {
+  const meetupID = 2; // Created by DB seeder
+  const validRsvpRecord = {
+    response: 'yes',
+  };
 
-//   describe('response', () => {
-//     let meetupRecordResponse;
-//     // Sample valid meetup request data
-//     const meetupRecord = {
-//       location: 'Radison Blue',
-//       topic: 'Chess nation',
-//       description: 'We hold mini chess tournaments with amazing rewards.',
-//       happeningOn: new Date().getTime(),
-//     };
-//     // Create meetup record
-//     before((done) => {
-//       chai.request(app)
-//         .post('/api/v1/meetups')
-//         .send(meetupRecord)
-//         .end((err, res) => {
-//           [meetupRecordResponse] = res.body.data;
-//           done();
-//         });
-//     });
-//     const validRsvpRecord = {
-//       response: 'yes',
-//     };
+  const invalidRsvpRecord = {
+    response: '',
+  };
+  it('should return error if token is not provided', (done) => {
+    chai.request(app)
+      .post(`/api/v1/meetups/${meetupID}/rsvp`)
+      .set('x-access-token', '')
+      .send(validRsvpRecord)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
 
-//     const invalidRsvpRecord = {
-//       response: '',
-//     };
-//     it('should return newly created rsvp record if input is valid', (done) => {
-//       chai.request(app)
-//         .post(`/api/v1/meetups/${meetupRecordResponse.id}/rsvp`)
-//         .send(validRsvpRecord)
-//         .end((err, res) => {
-//           res.should.have.status(statusCodes.created);
-//           res.body.data[0].should.have.property('meetup');
-//           res.body.data[0].should.have.property('topic');
-//           res.body.data[0].should.have.property('status');
-//           done();
-//         });
-//     });
-//     it('should return error message if input is not valid', (done) => {
-//       chai.request(app)
-//         .post(`/api/v1/meetups/${meetupRecordResponse.id}/rsvp`)
-//         .send(invalidRsvpRecord)
-//         .end((err, res) => {
-//           res.should.have.status(statusCodes.badRequest);
-//           done();
-//         });
-//     });
-//   });
-// });
+  it('should return error if token is invalid', (done) => {
+    const sampleFakeToken = 'oioad980902.23klaewqwef';
+    chai.request(app)
+      .post(`/api/v1/meetups/${meetupID}/rsvp`)
+      .set('x-access-token', sampleFakeToken)
+      .send(validRsvpRecord)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  // user to obtain token - users created by DB Seeder
+  const regularUser = {
+    email: 'e.genius@gmail.com',
+    password: 'questioner40',
+  };
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(regularUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+  describe('request', () => {
+    it('should return error message if meetup does not exist', (done) => {
+      const fakeMeetupID = 737;
+      chai.request(app)
+        .post(`/api/v1/meetups/${fakeMeetupID}/rsvp`)
+        .set('x-access-token', loginResponse.token)
+        .send(validRsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.forbidden);
+          done();
+        });
+    });
+  });
+
+  describe('response', () => {
+    it('should return newly created rsvp record if input is valid', (done) => {
+      chai.request(app)
+        .post(`/api/v1/meetups/${meetupID}/rsvp`)
+        .set('x-access-token', loginResponse.token)
+        .send(validRsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.created);
+          res.body.data[0].should.have.property('meetup_id');
+          res.body.data[0].should.have.property('topic').eql('Food Lovers'); // from db seeder
+          res.body.data[0].should.have.property('status');
+          done();
+        });
+    });
+    it('should return error message if input is not valid', (done) => {
+      chai.request(app)
+        .post(`/api/v1/meetups/${meetupID}/rsvp`)
+        .set('x-access-token', loginResponse.token)
+        .send(invalidRsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.badRequest);
+          done();
+        });
+    });
+  });
+});
