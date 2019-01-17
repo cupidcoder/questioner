@@ -185,6 +185,10 @@ const Meetup = {
         return response.send(res);
       }
     } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        response.setFailure(statusCodes.forbidden, 'You have already responded to this meetup');
+        return response.send(res);
+      }
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
     }

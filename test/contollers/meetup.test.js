@@ -540,6 +540,16 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
           done();
         });
     });
+    it('should return error if same user attempts to rsvp to the same meetup', (done) => {
+      chai.request(app)
+        .post(`/api/v1/meetups/${meetupID}/rsvp`)
+        .set('x-access-token', loginResponse.token)
+        .send(validRsvpRecord)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.forbidden);
+          done();
+        });
+    });
     it('should return error message if input is not valid', (done) => {
       chai.request(app)
         .post(`/api/v1/meetups/${meetupID}/rsvp`)
