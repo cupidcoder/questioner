@@ -443,7 +443,7 @@ describe('DELETE /api/v1/meetups/:meetupID', () => {
           done();
         });
     });
-    it('should return success if user has right to create meetup', (done) => {
+    it('should return success if user has right to delete meetup', (done) => {
       chai.request(app)
         .delete(`/api/v1/meetups/${meetupID}`)
         .set('x-access-token', adminLoginResponse.token)
