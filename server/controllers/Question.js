@@ -1,5 +1,6 @@
 import db from '../../db/index';
 import QuestionModels from '../models/Question';
+import VoteModels from '../models/Vote';
 import statusCodes from '../helpers/status';
 import APIResponse from '../helpers/Response';
 import MeetupController from './Meetup';
@@ -10,17 +11,6 @@ import MeetupController from './Meetup';
  */
 
 const Question = {
-
-  /**
-     * Find one question record from the questions array
-     * @param {*} id
-     * @returns {Array} question object array
-     */
-  findOne(id) {
-    const questionRecord = QuestionModels.filter(QuestionModel => QuestionModel.id === id);
-    return questionRecord;
-  },
-
   /**
    * Creates a question record
    * @param {object} req
@@ -53,24 +43,41 @@ const Question = {
    * @param {object} res
    * @returns {object} questionRecord
    */
-  upvote(req, res) {
+  // eslint-disable-next-line consistent-return
+  async upvote(req, res) {
     const response = new APIResponse();
-    const questionRecord = Question.findOne(req.params.id);
-    if (questionRecord.length === 0) {
-      response.setFailure(statusCodes.forbidden, 'Cannot upvote question that does not exist');
+    try {
+      const { rows } = await db.query(QuestionModels.getOneQuery, [req.params.id]);
+      if (rows.length === 0) {
+        response.setFailure(statusCodes.forbidden, 'Cannot upvote a question that does not exist');
+        return response.send(res);
+      }
+      const question = rows[0];
+      // Insert vote into votes table
+      const { rowCount } = await db.query(VoteModels.insertQuestionVote,
+        [true, false, req.user.id, question.id]);
+      if (rowCount > 0) {
+        // Get number of votes
+        const ups = await db.query(VoteModels.getUPVotesQuery, [question.id]);
+        const downs = await db.query(VoteModels.getDOWNVotesQuery, [question.id]);
+        // eslint-disable-next-line max-len
+        const vote = ((ups.rows[0].votes - downs.rows[0].votes) < 0) ? 0 : ups.rows[0].votes - downs.rows[0].votes;
+        response.setSuccess(statusCodes.success, {
+          meetup_id: question.meetup_id,
+          title: question.title,
+          body: question.body,
+          votes: vote,
+        });
+        return response.send(res);
+      }
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        response.setFailure(statusCodes.forbidden, 'You have already voted to this question');
+        return response.send(res);
+      }
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
     }
-
-    // At this point, the question being upvoted, exists
-    const questionRecordIndex = QuestionModels.indexOf(questionRecord[0]);
-    QuestionModels[questionRecordIndex].votes += 1;
-    response.setSuccess(statusCodes.success, [{
-      meetup: questionRecord[0].meetup,
-      title: questionRecord[0].title,
-      body: questionRecord[0].body,
-      votes: questionRecord[0].votes,
-    }]);
-    return response.send(res);
   },
 
   /**
