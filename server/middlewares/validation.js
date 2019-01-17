@@ -47,6 +47,28 @@ const validation = {
   },
 
   /**
+   * Validate question object
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
+  validateQuestion(req, res, next) {
+    const response = new APIResponse();
+    const questionObjectRules = joi.object().keys({
+      userID: joi.number().required(),
+      meetupID: joi.number().required(),
+      title: joi.string().trim().min(3).required(),
+      body: joi.string().trim().min(3).required(),
+    });
+    const { error } = joi.validate(req.body, questionObjectRules);
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
+      return response.send(res);
+    }
+    next();
+  },
+
+  /**
    * Validate rsvp object
    * @param {object} req
    * @param {object} res
