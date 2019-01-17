@@ -1,5 +1,5 @@
-import uuid from 'uuid/v4';
 import chai, { assert } from 'chai';
+import db from '../../db/index';
 import app from '../../app';
 import statusCodes from '../../server/helpers/status';
 
@@ -109,50 +109,80 @@ describe('POST /api/v1/questions', () => {
   });
 });
 
-// describe('PATCH /api/v1/questions/:id/upvote', () => {
-//   it('should respond with error if question does not exist', (done) => {
-//     const fakeQuestionID = 982;
-//     chai.request(app)
-//       .patch(`/api/v1/questions/${fakeQuestionID}/upvote`)
-//       .end((err, res) => {
-//         res.should.have.status(statusCodes.forbidden);
-//         res.body.should.have.property('error');
-//         done();
-//       });
-//   });
+describe('PATCH /api/v1/questions/:id/upvote', () => {
+  it('should return error if token is not provided', (done) => {
+    chai.request(app)
+      .patch('/api/v1/questions/1/upvote')
+      .set('x-access-token', '')
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
 
-//   let questionRecordResponse;
-//   // Sample valid question request data
-//   const questionRecord = {
-//     createdBy: uuid(),
-//     meetup: uuid(),
-//     title: 'Item 7',
-//     body: 'We would really like to have an item 7',
-//   };
-//   // Create sample question record
-//   before((done) => {
-//     chai.request(app)
-//       .post('/api/v1/questions')
-//       .send(questionRecord)
-//       .end((err, res) => {
-//         [questionRecordResponse] = res.body.data;
-//         done();
-//       });
-//   });
-//   let questionUpvoteResponse;
-//   // Make upvote on newly created question
-//   before((done) => {
-//     chai.request(app)
-//       .patch(`/api/v1/questions/${questionRecordResponse.id}/upvote`)
-//       .end((err, res) => {
-//         [questionUpvoteResponse] = res.body.data;
-//         done();
-//       });
-//   });
-//   it('should increase votes by 1 after hitting upvote endpoint', () => {
-//     assert.equal(questionRecordResponse.votes + 1, questionUpvoteResponse.votes);
-//   });
-// });
+  it('should return error if token is invalid', (done) => {
+    const sampleFakeToken = 'oioad980902.23klaewqwef';
+    chai.request(app)
+      .patch('/api/v1/questions/1/upvote')
+      .set('x-access-token', sampleFakeToken)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  // user to obtain user with/without admin rights - users created by DB Seeder
+  const regularUser = {
+    email: 'e.genius@gmail.com',
+    password: 'questioner40',
+  };
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(regularUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should respond with error if param is invalid', (done) => {
+    const invalidParameter = 'string';
+    chai.request(app)
+      .patch(`/api/v1/questions/${invalidParameter}/upvote`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should respond with error if question does not exist', (done) => {
+    const fakeQuestionID = 982;
+    chai.request(app)
+      .patch(`/api/v1/questions/${fakeQuestionID}/upvote`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  // const questionID = 3; // Set by DB seeder
+  // let questionUpvoteResponse;
+  // before((done) => {
+  //   chai.request(app)
+  //     .patch(`/api/v1/questions/${questionID}/upvote`)
+  //     .end((err, res) => {
+  //       [questionUpvoteResponse] = res.body.data;
+  //       done();
+  //     });
+  // });
+  // it('should increase votes by 1 after hitting upvote endpoint', () => {
+  //   assert.equal(questionRecordResponse.votes + 1, questionUpvoteResponse.votes);
+  // });
+});
 
 // describe('PATCH /api/v1/questions/:id/downvote', () => {
 //   it('should respond with error if question does not exist', (done) => {
