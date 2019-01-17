@@ -41,8 +41,8 @@ const Meetup = {
       response.setFailure(statusCodes.unauthorized, 'You do not have permission to create meetup');
       return response.send(res);
     }
-    const createdOn = new Date().toLocaleString();
-    const happeningOn = new Date(meetupRequest.happeningOn).toLocaleString();
+    const createdOn = new Date().toUTCString();
+    const happeningOn = new Date(meetupRequest.happeningOn).toUTCString();
     const newMeetup = [meetupRequest.location, createdOn, meetupRequest.topic, happeningOn];
     try {
       const { rows } = await db.query(MeetupModels.insertMeetupQuery, newMeetup);
@@ -102,19 +102,26 @@ const Meetup = {
    * Return meetups in ascending order by happeningOn
    * @returns {Array} upcomingMeetups
    */
-  getUpcoming(req, res) {
+  async getUpcoming(req, res) {
     const response = new APIResponse();
-    if (MeetupModels.length > 0) {
-      const upcomingMeetups = MeetupModels;
-      upcomingMeetups.sort(
-        (previousMeetup, nextMeetup) => new Date(previousMeetup.happeningOn)
-        - new Date(nextMeetup.happeningOn),
-      );
-      response.setSuccess(statusCodes.success, upcomingMeetups);
+    try {
+      const { rows } = await db.query(MeetupModels.getAllQuery);
+      const meetups = rows;
+      if (meetups.length > 0) {
+        const upcomingMeetups = meetups;
+        upcomingMeetups.sort(
+          (previousMeetup, nextMeetup) => new Date(previousMeetup.happening_on).getTime()
+          - new Date(nextMeetup.happening_on).getTime(),
+        );
+        response.setSuccess(statusCodes.success, upcomingMeetups);
+        return response.send(res);
+      }
+      response.setSuccess(statusCodes.success);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
     }
-    response.setSuccess(statusCodes.success);
-    return response.send(res);
   },
   /**
    * Respond to attend meetup

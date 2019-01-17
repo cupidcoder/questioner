@@ -18,7 +18,7 @@ const User = {
   async signup(req, res) {
     const response = new APIResponse();
     const userObj = req.body;
-    const registeredOn = new Date().toLocaleString();
+    const registeredOn = new Date().toUTCString();
     bcrypt.hash(userObj.password, 8, async (err, hash) => {
       const valuesToInsert = [
         userObj.firstname, userObj.lastname, userObj.email, hash, registeredOn,
