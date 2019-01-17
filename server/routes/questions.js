@@ -1,9 +1,11 @@
 import express from 'express';
+import validation from '../middlewares/validation';
 import QuestionController from '../controllers/Question';
+import Auth from '../middlewares/Auth';
 
 const router = express.Router();
 
-router.post('/', QuestionController.create);
+router.post('/', [Auth.verifyToken, validation.validateQuestion], QuestionController.create);
 router.patch('/:id/upvote', QuestionController.upvote);
 router.patch('/:id/downvote', QuestionController.downvote);
 

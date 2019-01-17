@@ -1,46 +1,12 @@
-import uuid from 'uuid/v4';
 /**
- * Question model that holds the Schema for questions
- * @package Question
+ * Question model that holds the queries for question actions
  */
 
-class Question {
-  constructor() {
-    this.questions = [];
-    this.seeder();
-    return this.questions;
-  }
+const Question = {
+  insertQuestionQuery: ` INSERT INTO
+    questions(created_on, user_id, meetup_id, title, body)
+    VALUES($1, $2, $3, $4, $5)
+    returning *`,
+};
 
-  /**
-   * Seed dummy questions data into this.questions
-   */
-  seeder() {
-    // Dummy data
-    const ids = [uuid(), uuid(), uuid(), uuid()];
-    const date = new Date();
-    const createdOnValues = [date.toISOString(),
-      date.toISOString(),
-      date.toISOString(),
-      date.toISOString(),
-    ];
-    const createdByValues = [uuid(), uuid(), uuid(), uuid()];
-    const meetupIDs = [uuid(), uuid(), uuid(), uuid()];
-    const questionTitles = ['First title', 'Second title', 'Third title', 'Fourth title'];
-    const questionBodyValues = ['First body', 'Second body', 'Third body', 'Fourth body'];
-    // Seed dummy data
-    for (let i = 0; i < 4; i += 1) {
-      const questionRecord = {
-        id: ids[i],
-        createdOn: createdOnValues[i],
-        createdBy: createdByValues[i],
-        meetup: meetupIDs[i],
-        title: questionTitles[i],
-        body: questionBodyValues[i],
-        votes: 0,
-      };
-      this.questions.push(questionRecord);
-    }
-  }
-}
-
-export default new Question();
+export default Question;

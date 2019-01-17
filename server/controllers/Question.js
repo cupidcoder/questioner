@@ -1,8 +1,8 @@
-import uuid from 'uuid/v4';
-import joi from 'joi';
+import db from '../../db/index';
 import QuestionModels from '../models/Question';
 import statusCodes from '../helpers/status';
 import APIResponse from '../helpers/Response';
+import MeetupController from './Meetup';
 
 /**
  * Question controller performs different actions for the question entity
@@ -10,21 +10,6 @@ import APIResponse from '../helpers/Response';
  */
 
 const Question = {
-
-  /**
-   * Validate question object
-   * @param {object} newQuestionObject
-   * @returns {object} joiErrorObject
-   */
-  validateQuestion(newQuestionObject) {
-    const questionObjectRules = {
-      createdBy: joi.string().trim().required(),
-      meetup: joi.string().trim().required(),
-      title: joi.string().trim().min(3).required(),
-      body: joi.string().trim().min(5).required(),
-    };
-    return joi.validate(newQuestionObject, questionObjectRules);
-  },
 
   /**
      * Find one question record from the questions array
@@ -42,27 +27,24 @@ const Question = {
    * @param {object} res
    * @returns {object} question object
    */
-  create(req, res) {
+  async create(req, res) {
     const response = new APIResponse();
     const question = req.body;
-    const { error } = Question.validateQuestion(question);
-    if (error) {
-      response.setFailure(statusCodes.badRequest, error.details[0].message);
+    const meetupRecord = await MeetupController.findOne(question.meetupID);
+    if (meetupRecord.length === 0) {
+      response.setFailure(statusCodes.badRequest, 'Cannot post question to a meetup that does not exist');
       return response.send(res);
     }
-    const newQuestionRecord = {
-      id: uuid(),
-      createdOn: new Date().toISOString(),
-      createdBy: question.createdBy,
-      meetup: question.meetup,
-      title: question.title,
-      body: question.body,
-      votes: 0, // Starts at zero
-    };
-
-    QuestionModels.push(newQuestionRecord);
-    response.setSuccess(statusCodes.created, newQuestionRecord);
-    return response.send(res);
+    try {
+      const { rows } = await db.query(QuestionModels.insertQuestionQuery, [
+        new Date().toUTCString(), question.userID, question.meetupID, question.title, question.body,
+      ]);
+      response.setSuccess(statusCodes.created, rows[0]);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.badRequest, 'Non existent user ID was supplied');
+      return response.send(res);
+    }
   },
 
   /**
