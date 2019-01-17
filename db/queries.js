@@ -112,23 +112,23 @@ const seedQueries = {
   // Users table
   usersTable: `
     INSERT INTO users(firstname, lastname, email, password, registered_on, is_admin)
-      VALUES ('chukwudi', 'ume', 'c.ume@gmail.com', '$2b$08$RrrLQ6EgJyWqFRQ5zUhLyuDIMf7S/oEYGgc6qGoyL2dbThiAheSIm', '${new Date().toLocaleString()}', true),
-        ('Ernest', 'Genius', 'e.genius@gmail.com', '$2b$08$RrrLQ6EgJyWqFRQ5zUhLyuDIMf7S/oEYGgc6qGoyL2dbThiAheSIm', '${new Date().toLocaleString()}', false),
-        ('Chike', 'Bad guy', 'c.guy@gmail.com', '$2b$08$RrrLQ6EgJyWqFRQ5zUhLyuDIMf7S/oEYGgc6qGoyL2dbThiAheSIm', '${new Date().toLocaleString()}', false)
+      VALUES ('chukwudi', 'ume', 'c.ume@gmail.com', '$2b$08$RrrLQ6EgJyWqFRQ5zUhLyuDIMf7S/oEYGgc6qGoyL2dbThiAheSIm', '${new Date().toUTCString()}', true),
+        ('Ernest', 'Genius', 'e.genius@gmail.com', '$2b$08$RrrLQ6EgJyWqFRQ5zUhLyuDIMf7S/oEYGgc6qGoyL2dbThiAheSIm', '${new Date().toUTCString()}', false),
+        ('Chike', 'Bad guy', 'c.guy@gmail.com', '$2b$08$RrrLQ6EgJyWqFRQ5zUhLyuDIMf7S/oEYGgc6qGoyL2dbThiAheSIm', '${new Date().toUTCString()}', false)
   `,
 
   meetupsTable: `
     INSERT INTO meetups(location, created_on, topic, happening_on)
-      VALUES ('Gbagada', '${new Date().toLocaleString()}', 'NodeJS Gurus', '${new Date().toLocaleString()}'),
-              ('The zone', '${new Date().toLocaleString()}', 'Food Lovers', '${new Date().toLocaleString()}'),
-              ('Maryland Mall', '${new Date().toLocaleString()}', 'Movie Critics', '${new Date().toLocaleString()}')
+      VALUES ('Gbagada', '${new Date().toUTCString()}', 'NodeJS Gurus', '${new Date(1547682320018).toUTCString()}'),
+              ('The zone', '${new Date().toUTCString()}', 'Food Lovers', '${new Date(1547680245375).toUTCString()}'),
+              ('Maryland Mall', '${new Date().toUTCString()}', 'Movie Critics', '${new Date(1547680188209).toUTCString()}')
   `,
 
   questionsTable: `
     INSERT INTO questions(created_on, user_id, meetup_id, title, body)
-      VALUES ('${new Date().toLocaleString()}', 1, 2, 'What about', 'Okay. this is not so great. Is it?'),
-              ('${new Date().toLocaleString()}', 2, 1, 'Transportation', 'Will transport be provided?'),
-              ('${new Date().toLocaleString()}', 1, 3, 'Item 7', 'Will item 7 be provided?')
+      VALUES ('${new Date().toUTCString()}', 1, 2, 'What about', 'Okay. this is not so great. Is it?'),
+              ('${new Date().toUTCString()}', 2, 1, 'Transportation', 'Will transport be provided?'),
+              ('${new Date().toUTCString()}', 1, 3, 'Item 7', 'Will item 7 be provided?')
   `,
 
   rsvpTable: `

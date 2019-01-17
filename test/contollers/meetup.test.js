@@ -325,41 +325,61 @@ describe('GET /api/v1/meetups/:id', () => {
   });
 });
 
-// describe('GET /api/v1/meetups/upcoming', () => {
-//   // Create meetup in the past
-//   const pastMeetupRecord = {
-//     location: 'Ikeja',
-//     description: 'For the love of the game',
-//     topic: 'Chess masters',
-//     happeningOn: 1547078599932,
-//   };
-//   // create meetup in the past
-//   before((done) => {
-//     chai.request(app)
-//       .post('/api/v1/meetups')
-//       .send(pastMeetupRecord)
-//       .end((err, res) => {
-//         res.body.should.not.have.property('error');
-//         done();
-//       });
-//   });
+describe('GET /api/v1/meetups/upcoming', () => {
+  describe('Token error', () => {
+    it('should return error if token was not provided', (done) => {
+      chai.request(app)
+        .get('/api/v1/meetups/upcoming')
+        .set('x-access-token', '')
+        .end((err, res) => {
+          res.should.have.status(statusCodes.forbidden);
+          done();
+        });
+    });
 
-//   let upcomingMeetups;
-//   before((done) => {
-//     chai.request(app)
-//       .get('/api/v1/meetups/upcoming')
-//       .end((err, res) => {
-//         upcomingMeetups = res.body.data;
-//         done();
-//       });
-//   });
-//   it('should return all meetups in ascending order by happeningOn property timestamp', () => {
-//     const [upcomingMeetupOne, upcomingMeetupTwo] = upcomingMeetups;
-//     assert.isAbove(
-//       new Date(upcomingMeetupTwo.happeningOn), new Date(upcomingMeetupOne.happeningOn),
-//     );
-//   });
-// });
+    it('should return error if token provided is incorrect', (done) => {
+      const sampleFakeToken = 'xoiis80909403493jnlnfsa;dn';
+      chai.request(app)
+        .get('/api/v1/meetups/upcoming')
+        .set('x-access-token', sampleFakeToken)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.badRequest);
+          done();
+        });
+    });
+  });
+  // Get user token
+  const adminUser = {
+    email: 'c.ume@gmail.com',
+    password: 'questioner40',
+  };
+
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(adminUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+  let upcomingMeetups;
+  it('should return all meetups in ascending order by happeningOn property timestamp', (done) => {
+    // DB seeder for meetup is already created in descending order for some time last year
+    // so it always comes up first after sorting for this test
+    chai.request(app)
+      .get('/api/v1/meetups/upcoming')
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        res.body.data[0].should.have.property('topic').eql('Movie Critics');
+        res.body.data[1].should.have.property('topic').eql('Food Lovers');
+        res.body.data[2].should.have.property('topic').eql('NodeJS Gurus');
+        done();
+      });
+  });
+});
 
 // describe('POST /api/v1/meetups/:id/rsvp', () => {
 //   describe('request', () => {
