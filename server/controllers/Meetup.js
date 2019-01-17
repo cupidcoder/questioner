@@ -123,6 +123,37 @@ const Meetup = {
       return response.send(res);
     }
   },
+
+  /**
+   * Delete a meetup record
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} response
+   */
+  async delete(req, res) {
+    const response = new APIResponse();
+    const { id } = req.params;
+    if (!req.user.isAdmin) {
+      response.setFailure(statusCodes.unauthorized, 'You do not have permission to delete meetup');
+      return response.send(res);
+    }
+    try {
+      const meetupRecord = await Meetup.findOne(id, res);
+      if (meetupRecord.length === 0) {
+        response.setFailure(statusCodes.notFound, 'Meetup not found');
+        return response.send(res);
+      }
+      // At this point, a meetup was found
+      const { rowCount } = await db.query(MeetupModels.deleteMeetup, [meetupRecord[0].id]);
+      if (rowCount === 1) {
+        response.setSuccess(statusCodes.success, ['Meetup deleted successfully']);
+        return response.send(res);
+      }
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
+    }
+  },
   /**
    * Respond to attend meetup
    * @param {object} req
