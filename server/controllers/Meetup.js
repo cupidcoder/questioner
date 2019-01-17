@@ -130,6 +130,7 @@ const Meetup = {
    * @param {object} res
    * @returns {object} response
    */
+  // eslint-disable-next-line consistent-return
   async delete(req, res) {
     const response = new APIResponse();
     const { id } = req.params;
@@ -160,30 +161,33 @@ const Meetup = {
    * @param {object} res
    * @returns {object} rsvp
    */
-  respondToMeetup(req, res) {
+  // eslint-disable-next-line consistent-return
+  async respondToMeetup(req, res) {
     const response = new APIResponse();
     const rsvp = req.body;
-    const meetupRecord = Meetup.findOne(req.params.id);
-    if (meetupRecord.length === 0) {
-      response.setFailure(statusCodes.forbidden, 'Cannot respond to a meetup that does not exist');
+    const { user } = req;
+    try {
+      const meetupRecord = await Meetup.findOne(req.params.id);
+      if (meetupRecord.length === 0) {
+        response.setFailure(statusCodes.forbidden, 'Cannot respond to a meetup that does not exist');
+        return response.send(res);
+      }
+      // Here, the meetup exists
+      const { rowCount } = await db.query(RsvpModel.insertRSVPQuery, [
+        user.id, req.params.id, rsvp.response,
+      ]);
+      if (rowCount === 1) {
+        response.setSuccess(statusCodes.created, {
+          meetup_id: meetupRecord[0].id,
+          topic: meetupRecord[0].topic,
+          status: rsvp.response,
+        });
+        return response.send(res);
+      }
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
     }
-
-    // rsvp data to be saved
-    const newRsvpRecord = {
-      id: uuid(),
-      meetup: req.params.id,
-      response: rsvp.response,
-    };
-
-    RsvpModel.push(newRsvpRecord);
-    const [meetup] = meetupRecord;
-    response.setSuccess(statusCodes.created, [{
-      meetup: meetup.id,
-      topic: meetup.topic,
-      status: rsvp.response,
-    }]);
-    return response.send(res);
   },
 };
 
