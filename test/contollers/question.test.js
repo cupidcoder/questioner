@@ -1,5 +1,4 @@
-import chai, { assert } from 'chai';
-import db from '../../db/index';
+import chai from 'chai';
 import app from '../../app';
 import statusCodes from '../../server/helpers/status';
 
@@ -184,61 +183,63 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
   // });
 });
 
-// describe('PATCH /api/v1/questions/:id/downvote', () => {
-//   it('should respond with error if question does not exist', (done) => {
-//     const fakeQuestionID = 982;
-//     chai.request(app)
-//       .patch(`/api/v1/questions/${fakeQuestionID}/downvote`)
-//       .end((err, res) => {
-//         res.should.have.status(statusCodes.forbidden);
-//         res.body.should.have.property('error');
-//         done();
-//       });
-//   });
+describe('PATCH /api/v1/questions/:id/downvote', () => {
+  it('should return error if token is not provided', (done) => {
+    chai.request(app)
+      .patch('/api/v1/questions/1/downvote')
+      .set('x-access-token', '')
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
 
-//   let questionRecordResponse;
-//   // Sample valid question request data
-//   const questionRecord = {
-//     createdBy: uuid(),
-//     meetup: uuid(),
-//     title: 'Stickers',
-//     body: 'Kindly let us know if we would be getting awesome stickers',
-//   };
-//   // Create sample question record
-//   before((done) => {
-//     chai.request(app)
-//       .post('/api/v1/questions')
-//       .send(questionRecord)
-//       .end((err, res) => {
-//         [questionRecordResponse] = res.body.data;
-//         done();
-//       });
-//   });
-//   let questionDownvoteResponse;
-//   // Make upvote on newly created question
-//   before((done) => {
-//     chai.request(app)
-//       .patch(`/api/v1/questions/${questionRecordResponse.id}/upvote`)
-//       .end((err, res) => {
-//         res.should.have.status(statusCodes.success);
-//         done();
-//       });
-//   });
-//   // Make downvote to set question back to zero
-//   beforeEach((done) => {
-//     // beforeEach makes the call also for the next it('', () ... );
-//     chai.request(app)
-//       .patch(`/api/v1/questions/${questionRecordResponse.id}/downvote`)
-//       .end((err, res) => {
-//         [questionDownvoteResponse] = res.body.data;
-//         done();
-//       });
-//   });
-//   it('should set votes back to 0 after hitting downvote endpoint on the same question', () => {
-//     assert.equal(questionRecordResponse.votes, questionDownvoteResponse.votes);
-//   });
+  it('should return error if token is invalid', (done) => {
+    const sampleFakeToken = 'oioad980902.23klaewqwef';
+    chai.request(app)
+      .patch('/api/v1/questions/1/downvote')
+      .set('x-access-token', sampleFakeToken)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
 
-//   it('should never have a negative value', () => {
-//     assert.notEqual(questionDownvoteResponse, -1);
-//   });
-// });
+  // user to obtain user with/without admin rights - users created by DB Seeder
+  const regularUser = {
+    email: 'e.genius@gmail.com',
+    password: 'questioner40',
+  };
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(regularUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should respond with error if param is invalid', (done) => {
+    const invalidParameter = 'string';
+    chai.request(app)
+      .patch(`/api/v1/questions/${invalidParameter}/downvote`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should respond with error if question does not exist', (done) => {
+    const fakeQuestionID = 982;
+    chai.request(app)
+      .patch(`/api/v1/questions/${fakeQuestionID}/downvote`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+});
