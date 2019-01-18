@@ -13,7 +13,7 @@
 
 /* HTML */
 html {
-    max-width: 1400px;
+    /* max-width: 1400px; */
     margin: 0 auto;
 }
 
@@ -21,7 +21,7 @@ html {
 
 body {
     font-family: Boing, serif;
-    font-size: 22px;
+    font-size: 25px;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -68,7 +68,8 @@ li {list-style-type:none;}
 
 /* Forms */
 .form {
-    width: 40%; 
+    padding: 30px;
+    width: 37%; 
     display: block;
     margin-top: 5%;
     margin-left: 25%;
@@ -76,6 +77,7 @@ li {list-style-type:none;}
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
+    font-size: 120%
 }
 
 .form p:first-child {
@@ -101,7 +103,7 @@ li {list-style-type:none;}
 /* Icons */
 i {color: #305b8c;}
 
-.thumbs-down-red {color: red;}
+.thumbs-down-red {color: #352b35;}
 
 .thumbs-up-green {color: green !important;}
 
@@ -206,7 +208,7 @@ footer p {
 #landingPageHeroImage {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/bg-hero.jpg");
     width: 100%;
-    height: 70vh;
+    height: 80vh;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -235,7 +237,7 @@ footer p {
 */
 
 #signUpSection, #signInSection, #passwordResetSection {
-    height: 70vh;
+    height: 85vh;
 }
 
 #signUpSection div, #signInSection div {float: left;}
@@ -275,8 +277,8 @@ footer p {
 }
 
 .meetupBox {
-    margin-left: 50px;
-    height: 300px;
+    margin-left: 70px;
+    height: 370px;
     width: 20%;
     display: block;
     background-color: #fff;
@@ -297,13 +299,14 @@ footer p {
 
 .meetupBoxAdmin {
     height: 114px;
-    background-color: #a59898;
+    /* background-color: #a59898; */
+    border-top: 1px solid #f39e3e;
 }
 
 .meetupBoxInfo p {
     text-align: center;
     color: #305b8c;
-    font-size: 90%;
+    font-size: 120%;
     font-weight: 700;
     overflow-wrap: break-word;
 }
@@ -325,7 +328,7 @@ footer p {
 
 .adminMeetupEdit i {color: #222a33;}
 
-.adminMeetupDelete i {color: red;}
+.adminMeetupDelete i {color: #352b35;}
 
 
 /*
@@ -398,7 +401,7 @@ footer p {
 
 #yesBadge p {background-color: green;}
 
-#noBadge p {background-color: red;}
+#noBadge p {background-color: #352b35;}
 
 #maybeBadge p {background-color: #305b8c;}
 
@@ -612,6 +615,7 @@ footer p {
     width: 40%;
     display: block;
     margin: auto;
+    margin-top: 100px;
     text-align: left;
     padding-bottom: 50px;
     position: relative;
@@ -634,6 +638,7 @@ footer p {
     position: absolute;
     left: 60%;
     bottom: 1%;
+    margin-bottom: 30px;
 }
 
 
@@ -707,7 +712,7 @@ footer p {
 */
 
 #myMeetupSection {
-    height: 100%;
+    height: 80vh;
 }
 
 #meetupListingSection {
