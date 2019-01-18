@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.post('/', [Auth.verifyToken, validation.validateQuestion], QuestionController.create);
 router.patch('/:id/upvote', [Auth.verifyToken, validation.validateParam], QuestionController.upvote);
-router.patch('/:id/downvote', QuestionController.downvote);
+router.patch('/:id/downvote', [Auth.verifyToken, validation.validateParam], QuestionController.downvote);
 
 module.exports = router;
