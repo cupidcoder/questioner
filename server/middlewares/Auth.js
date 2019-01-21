@@ -35,7 +35,7 @@ const Auth = {
       req.user = { id: decoded.userId, isAdmin: decoded.isAdmin };
       next();
     } catch (error) {
-      response.setFailure(statusCodes.badRequest, error);
+      response.setFailure(statusCodes.badRequest, 'The token you provided is invalid');
       return response.send(res);
     }
   },
