@@ -3,6 +3,7 @@ import joi from 'joi';
 import APIResponse from '../helpers/Response';
 import statusCodes from '../helpers/status';
 import UserModel from '../models/User';
+import QuestionModels from '../models/Question';
 import db from '../../db/index';
 /**
  * Validation function for controllers
@@ -134,6 +135,31 @@ const validation = {
     const { error } = joi.validate(req.body, userObjectRules);
     if (error) {
       response.setFailure(statusCodes.badRequest, error.details[0].message);
+      return response.send(res);
+    }
+    next();
+  },
+
+  /**
+   * Validate comment
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
+  async validateComment(req, res, next) {
+    const response = new APIResponse();
+    const commentObjectRules = joi.object().keys({
+      comment: joi.string().trim().required(),
+      questionID: joi.number().required(),
+    });
+    const { error } = joi.validate(req.body, commentObjectRules);
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
+      return response.send(res);
+    }
+    const { rows } = await db.query(QuestionModels.getOneQuery, [req.body.questionID]);
+    if (rows.length === 0) {
+      response.setFailure(statusCodes.forbidden, 'Cannot comment on a question that does not exist');
       return response.send(res);
     }
     next();
