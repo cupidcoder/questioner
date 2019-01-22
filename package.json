@@ -8,6 +8,7 @@
     "travis-db:refresh": "babel-node server/db/migration dropTables && babel-node server/db/migration createTables && babel-node server/db/seeder seedTables",
     "dev-db:refresh": "export NODE_ENV=development && babel-node server/db/migration dropTables && babel-node server/db/migration createTables && babel-node server/db/seeder seedTables",
     "test": "nyc ---reporter=html --reporter=text mocha build/server/v1/test/**/*.test.js --timeout 10000 --exit",
+    "local-test": "npm run local-db:refresh && npm run build && nyc ---reporter=html --reporter=text mocha build/server/v1/test/**/*.test.js --timeout 10000 --exit",
     "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md,./server/db/migration.js,./server/db/queries.js,./server/db/seeder.js --copy-files",
     "start": "npm run build && node build/app.js",
     "dev": "nodemon app.js --exec babel-node --",
