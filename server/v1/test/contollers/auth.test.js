@@ -1,6 +1,6 @@
 import chai from 'chai';
-import app from '../../app';
-import statusCodes from '../../server/helpers/status';
+import app from '../../../../app';
+import statusCodes from '../../helpers/status';
 
 chai.use(require('chai-http'));
 

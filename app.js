@@ -1,8 +1,8 @@
 import express from 'express';
-import meetups from './server/routes/meetups';
-import questions from './server/routes/questions';
-import comments from './server/routes/comments';
-import auth from './server/routes/auth';
+import meetups from './server/v1/routes/meetups';
+import questions from './server/v1/routes/questions';
+import comments from './server/v1/routes/comments';
+import auth from './server/v1/routes/auth';
 
 const app = express();
 
