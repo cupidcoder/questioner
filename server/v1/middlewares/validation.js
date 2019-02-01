@@ -5,6 +5,7 @@ import statusCodes from '../helpers/status';
 import UserModel from '../models/User';
 import QuestionModels from '../models/Question';
 import db from '../../db/index';
+import utility from '../helpers/utility';
 /**
  * Validation function for controllers
  */
@@ -33,6 +34,8 @@ const validation = {
    */
   validateMeetup(req, res, next) {
     const response = new APIResponse();
+    // Trim req.body
+    req.body = utility.objectTrim(req.body);
     const meetupObjectRules = {
       location: joi.string().trim().min(3).required(),
       topic: joi.string().trim().min(3).required(),
@@ -55,6 +58,8 @@ const validation = {
    */
   validateQuestion(req, res, next) {
     const response = new APIResponse();
+    // Trim req.body
+    req.body = utility.objectTrim(req.body);
     const questionObjectRules = joi.object().keys({
       userID: joi.number().required(),
       meetupID: joi.number().required(),
@@ -77,6 +82,8 @@ const validation = {
    */
   validateRSVP(req, res, next) {
     const response = new APIResponse();
+    // Trim req.body
+    req.body = utility.objectTrim(req.body);
     const rsvpObjectRules = joi.object().keys({
       response: joi.string().trim().valid(['yes', 'no', 'maybe']).required(),
     });
@@ -95,6 +102,8 @@ const validation = {
    */
   async validateNewUser(req, res, next) {
     const response = new APIResponse();
+    // Trim req.body
+    req.body = utility.objectTrim(req.body);
     const userObjectRules = joi.object().keys({
       firstname: joi.string().trim().min(3).required(),
       lastname: joi.string().trim().min(3).required(),
@@ -128,6 +137,8 @@ const validation = {
    */
   validateUserLogin(req, res, next) {
     const response = new APIResponse();
+    // Trim req.body
+    req.body = utility.objectTrim(req.body);
     const userObjectRules = joi.object().keys({
       email: joi.string().trim().email({ minDomainAtoms: 2 }).required(),
       password: joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
@@ -148,6 +159,8 @@ const validation = {
    */
   async validateComment(req, res, next) {
     const response = new APIResponse();
+    // Trim req.body
+    req.body = utility.objectTrim(req.body);
     const commentObjectRules = joi.object().keys({
       comment: joi.string().trim().required(),
       questionID: joi.number().required(),

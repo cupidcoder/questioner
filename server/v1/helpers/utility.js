@@ -48,6 +48,22 @@ const Utility = {
     JWT_SECRET, { expiresIn: '30d' });
     return token;
   },
+  /**
+   * Trim values of an object
+   * @param {object} obj
+   * @returns {object} trimmedObject
+   */
+  objectTrim(obj) {
+    const objectCopy = {};
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in obj) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (obj.hasOwnProperty(key)) {
+        objectCopy[key] = obj[key].toString().trim();
+      }
+    }
+    return objectCopy;
+  },
 };
 
 export default Utility;
