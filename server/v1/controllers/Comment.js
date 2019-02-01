@@ -21,7 +21,7 @@ const Comment = {
       const result = await db.query(CommentModel.insertCommentQuery, [
         comment.comment, req.user.id, comment.questionID]);
       if (result.rowCount > 0) {
-        response.setSuccess(StatusCodes.created, result.rows[0]);
+        response.setSuccess(StatusCodes.created, 'Your comment has been submitted', result.rows[0]);
         return response.send(res);
       }
     } catch (error) {

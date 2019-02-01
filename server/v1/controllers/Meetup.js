@@ -47,7 +47,7 @@ const Meetup = {
     try {
       const { rows } = await db.query(MeetupModels.insertMeetupQuery, newMeetup);
       const meetup = rows[0];
-      response.setSuccess(statusCodes.created, meetup);
+      response.setSuccess(statusCodes.created, 'Meetup created successfully', meetup);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Try again');
@@ -66,7 +66,7 @@ const Meetup = {
     try {
       const { rows } = await db.query(MeetupModels.getAllQuery);
       const meetups = rows;
-      response.setSuccess(statusCodes.success, meetups);
+      response.setSuccess(statusCodes.success, 'Meetups retrieved successfully', meetups);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'An error occurred. Please try again');
@@ -90,7 +90,7 @@ const Meetup = {
         return response.send(res);
       }
       // At this point, a meetup was found
-      response.setSuccess(statusCodes.success, meetupRecord);
+      response.setSuccess(statusCodes.success, 'Meetup retrieved', meetupRecord);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
@@ -113,10 +113,10 @@ const Meetup = {
           (previousMeetup, nextMeetup) => new Date(previousMeetup.happening_on).getTime()
           - new Date(nextMeetup.happening_on).getTime(),
         );
-        response.setSuccess(statusCodes.success, upcomingMeetups);
+        response.setSuccess(statusCodes.success, 'Upcoming meetups retrieved successfully', upcomingMeetups);
         return response.send(res);
       }
-      response.setSuccess(statusCodes.success);
+      response.setSuccess(statusCodes.success, 'Upcoming meetups retrieved successfully', meetups);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
@@ -147,7 +147,7 @@ const Meetup = {
       // At this point, a meetup was found
       const { rowCount } = await db.query(MeetupModels.deleteMeetup, [meetupRecord[0].id]);
       if (rowCount === 1) {
-        response.setSuccess(statusCodes.success, ['Meetup deleted successfully']);
+        response.setSuccess(statusCodes.success, 'Meetup deleted successfully');
         return response.send(res);
       }
     } catch (error) {
@@ -177,7 +177,7 @@ const Meetup = {
         user.id, req.params.id, rsvp.response,
       ]);
       if (rowCount === 1) {
-        response.setSuccess(statusCodes.created, {
+        response.setSuccess(statusCodes.created, 'Response submitted successfully', {
           meetup_id: meetupRecord[0].id,
           topic: meetupRecord[0].topic,
           status: rsvp.response,

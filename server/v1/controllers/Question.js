@@ -29,7 +29,7 @@ const Question = {
       const { rows } = await db.query(QuestionModels.insertQuestionQuery, [
         new Date().toUTCString(), question.userID, question.meetupID, question.title, question.body,
       ]);
-      response.setSuccess(statusCodes.created, rows[0]);
+      response.setSuccess(statusCodes.created, 'Question submitted successfully', rows[0]);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.badRequest, 'Non existent user ID was supplied');
@@ -62,7 +62,7 @@ const Question = {
         const downs = await db.query(VoteModels.getDOWNVotesQuery, [question.id]);
         // eslint-disable-next-line max-len
         const vote = ((ups.rows[0].votes - downs.rows[0].votes) < 0) ? 0 : ups.rows[0].votes - downs.rows[0].votes;
-        response.setSuccess(statusCodes.success, {
+        response.setSuccess(statusCodes.success, 'Vote recorded successfully', {
           meetup_id: question.meetup_id,
           title: question.title,
           body: question.body,
@@ -72,7 +72,7 @@ const Question = {
       }
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        response.setFailure(statusCodes.forbidden, 'You have already voted to this question');
+        response.setFailure(statusCodes.forbidden, 'Your vote has already been recorded');
         return response.send(res);
       }
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
@@ -105,7 +105,7 @@ const Question = {
         const downs = await db.query(VoteModels.getDOWNVotesQuery, [question.id]);
         // eslint-disable-next-line max-len
         const vote = ((ups.rows[0].votes - downs.rows[0].votes) < 0) ? 0 : ups.rows[0].votes - downs.rows[0].votes;
-        response.setSuccess(statusCodes.success, {
+        response.setSuccess(statusCodes.success, 'Vote recorded successfully', {
           meetup_id: question.meetup_id,
           title: question.title,
           body: question.body,
@@ -115,7 +115,7 @@ const Question = {
       }
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        response.setFailure(statusCodes.forbidden, 'You have already voted to this question');
+        response.setFailure(statusCodes.forbidden, 'Your vote has already been recorded');
         return response.send(res);
       }
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
