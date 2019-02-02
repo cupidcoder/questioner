@@ -10,7 +10,6 @@ const should = chai.should();
 describe('POST /api/v1/questions', () => {
   // Sample valid question request data
   const questionRecord = {
-    userID: 1,
     meetupID: 2,
     title: 'Transportation',
     body: 'I would like to know if there would provisions for transportation',
@@ -18,7 +17,6 @@ describe('POST /api/v1/questions', () => {
 
   // sample invalid question request data
   const invalidQuestionRecord = {
-    userID: 3,
     meetupID: 2,
     title: '',
     body: 'I would like to know if there would provisions for transportation',
@@ -77,7 +75,6 @@ describe('POST /api/v1/questions', () => {
 
   it('should response with error if meetup does not exist', (done) => {
     const questionRecordWithInvalidMeetup = {
-      userID: 1,
       meetupID: 8,
       title: 'Transportation',
       body: 'I would like to know if there would provisions for transportation',
@@ -100,7 +97,7 @@ describe('POST /api/v1/questions', () => {
         .send(questionRecord)
         .end((err, res) => {
           res.should.have.status(statusCodes.created);
-          res.body.data[0].should.have.property('user_id').eql(1);
+          res.body.data[0].should.have.property('user_id').eql(2);
           res.body.data[0].should.have.property('title').eql('Transportation');
           done();
         });

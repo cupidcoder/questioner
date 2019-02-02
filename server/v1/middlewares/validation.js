@@ -61,7 +61,6 @@ const validation = {
     // Trim req.body
     req.body = utility.objectTrim(req.body);
     const questionObjectRules = joi.object().keys({
-      userID: joi.number().required(),
       meetupID: joi.number().required(),
       title: joi.string().trim().min(3).required(),
       body: joi.string().trim().min(3).required(),
