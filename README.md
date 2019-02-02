@@ -6,6 +6,8 @@
 
 ---
 ## Implemented Features
+- Users can register on the application
+- Users can log into the application
 - Users can create a meetup entry
 - Users can fetch all meetup entries created in the system
 - Users can fetch a specific meetup entry
@@ -14,6 +16,8 @@
 - Users can post question to a meetup
 - Users can upvote a question
 - Users can downvote a question
+- Users can comment on a question
+- Admin Users can delete meetup
 ---
 
 ## Templates
@@ -26,6 +30,8 @@ UI template for the application is hosted on [Github pages](https://cupidcoder.g
 - [Express.js](https://expressjs.com/) - Web application framework based on Node.js.
 - [ESLint](https://eslint.org/) - A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript.
 - [Airbnb](https://www.npmjs.com/package/eslint-config-airbnb) style guide was followed.
+- [PostgreSQL](https://www.postgresql.org/) - Relational Database System used in project.
+- [JWT](https://www.npmjs.com/package/jsonwebtoken) used to authorize and authenticate API routes.
 
 ---
 
@@ -41,12 +47,16 @@ The API endpoints are hosted on [Heroku](#https://heroku.com) - https://question
 
 METHOD | DESCRIPTION | ENDPOINTS
 -------|-------------|-----------
+POST   | User registration | `/api/v1/auth/signup`
+POST   | User log in | `/api/v1/auth/signin`
 POST   | Create a meetup record | `/api/v1/meetups`
 GET    | Get all meetup records | `/api/v1/meetups`
 GET    | Get specific meetup record | `/api/v1/meetups/:meetupID`
 GET    | Get all upcoming meetup records | `/api/v1/meetups/upcoming`
+DELETE    | Delete meetup record | `/api/v1/meetups/:meetupID`
 POST   | Respond to a meetup    | `/api/v1/meetups/:meetupID/rsvp`
 POST   | Post a question to a meetup     | `/api/v1/questions`
+POST   | Post a comment to a question     | `/api/v1/comments`
 PATCH  | Upvote a question | `/api/v1/questions/:questionID/upvote`
 PATCH  | Downvote a question | `/api/v1/questions/:questionID/downvote`
 
