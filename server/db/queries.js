@@ -120,9 +120,9 @@ const seedQueries = {
 
   meetupsTable: `
     INSERT INTO meetups(location, created_on, topic, happening_on)
-      VALUES ('Gbagada', '${moment().format('YYYY-MM-DD HH:mm')}', 'NodeJS Gurus', '${moment('2019-01-10 14:00').format('YYYY-MM-DD HH:mm')}'),
-              ('The zone', '${moment().format('YYYY-MM-DD HH:mm')}', 'Food Lovers', '${moment('2019-01-05 13:30').format('YYYY-MM-DD HH:mm')}'),
-              ('Maryland Mall', '${moment().format('YYYY-MM-DD HH:mm')}', 'Movie Critics', '${moment('2019-01-03 17:30').format('YYYY-MM-DD HH:mm')}')
+      VALUES ('Gbagada', '${moment().format('YYYY-MM-DD HH:mm')}', 'NodeJS Gurus', '${moment('2019-05-10 14:00').format('YYYY-MM-DD HH:mm')}'),
+              ('The zone', '${moment().format('YYYY-MM-DD HH:mm')}', 'Food Lovers', '${moment('2019-05-05 13:30').format('YYYY-MM-DD HH:mm')}'),
+              ('Maryland Mall', '${moment().format('YYYY-MM-DD HH:mm')}', 'Movie Critics', '${moment('2019-05-03 17:30').format('YYYY-MM-DD HH:mm')}')
   `,
 
   questionsTable: `

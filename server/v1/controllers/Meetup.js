@@ -106,18 +106,8 @@ const Meetup = {
   async getUpcoming(req, res) {
     const response = new APIResponse();
     try {
-      const { rows } = await db.query(MeetupModels.getAllQuery);
-      const meetups = rows;
-      if (meetups.length > 0) {
-        const upcomingMeetups = meetups;
-        upcomingMeetups.sort(
-          (previousMeetup, nextMeetup) => new Date(previousMeetup.happening_on).getTime()
-          - new Date(nextMeetup.happening_on).getTime(),
-        );
-        response.setSuccess(statusCodes.success, 'Upcoming meetups retrieved successfully', upcomingMeetups);
-        return response.send(res);
-      }
-      response.setSuccess(statusCodes.success, 'Upcoming meetups retrieved successfully', meetups);
+      const { rows } = await db.query(MeetupModels.getUpcomingQuery);
+      response.setSuccess(statusCodes.success, 'Upcoming meetups retrieved successfully', rows);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');

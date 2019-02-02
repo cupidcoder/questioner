@@ -10,6 +10,8 @@ const Meetup = {
 
   getAllQuery: 'SELECT * FROM meetups',
 
+  getUpcomingQuery: 'SELECT * FROM meetups WHERE happening_on >= current_timestamp ORDER BY happening_on ASC',
+
   getOneQuery: 'SELECT * FROM meetups where id = $1',
 
   deleteMeetup: 'DELETE FROM meetups where id = $1',
