@@ -63,10 +63,15 @@ const User = {
         return response.send(res);
       }
       // User has been authenticated
+      const userObj = {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+      };
       const token = Utility.generateToken(user.id, user.is_admin);
       const loggedInUser = {
         token,
-        user,
+        user: userObj,
       };
       response.setSuccess(StatusCodes.success, 'Login successful', loggedInUser);
       return response.send(res);
