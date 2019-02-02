@@ -27,4 +27,4 @@ const port = process.env.PORT || 7000;
 
 app.listen(port);
 
-module.exports = app;
+export default app;

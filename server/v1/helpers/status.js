@@ -15,4 +15,4 @@ const statusCodes = {
   unavailable: 503,
 };
 
-module.exports = statusCodes;
+export default statusCodes;

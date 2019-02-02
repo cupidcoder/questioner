@@ -7,4 +7,4 @@ const router = express.Router();
 
 router.post('/', [Auth.verifyToken, validation.validateComment], CommentController.create);
 
-module.exports = router;
+export default router;

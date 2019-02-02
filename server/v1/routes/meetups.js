@@ -12,4 +12,4 @@ router.get('/:id', [Auth.verifyToken, validation.validateParam], MeetupControlle
 router.post('/:id/rsvp', [Auth.verifyToken, validation.validateParam, validation.validateRSVP], MeetupController.respondToMeetup);
 router.delete('/:id', [Auth.verifyToken, validation.validateParam], MeetupController.delete);
 
-module.exports = router;
+export default router;

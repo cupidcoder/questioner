@@ -9,4 +9,4 @@ router.post('/', [Auth.verifyToken, validation.validateQuestion], QuestionContro
 router.patch('/:id/upvote', [Auth.verifyToken, validation.validateParam], QuestionController.upvote);
 router.patch('/:id/downvote', [Auth.verifyToken, validation.validateParam], QuestionController.downvote);
 
-module.exports = router;
+export default router;
