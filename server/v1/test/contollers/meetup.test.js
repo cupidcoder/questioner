@@ -13,21 +13,21 @@ describe('POST /api/v1/meetups', () => {
   const meetupRecord = {
     location: 'Ikeja',
     topic: 'nodejs ninja',
-    happeningOn: new Date().getTime(),
+    happeningOn: '2019-03-24 01:00',
   };
 
   // sample invalid meetup request data
   const invalidMeetupRecordOne = {
     location: '',
     topic: 'Node js Nigeria',
-    happeningOn: new Date().getTime(),
+    happeningOn: '2019-03-24 01:00',
   };
 
   // sample invalid meetup request data - Two
   const invalidMeetupRecordTwo = {
     location: 'Gbagada',
     topic: '',
-    happeningOn: new Date().getTime(),
+    happeningOn: '2019-03-24 01:00',
   };
 
   // sample invalid meetup request data - Three
@@ -272,7 +272,7 @@ describe('GET /api/v1/meetups/:id', () => {
   const meetupRecord = {
     location: 'Ogba',
     topic: 'Book club',
-    happeningOn: new Date().getTime(),
+    happeningOn: '2019-03-24 01:00',
   };
 
   // meetupRecord response

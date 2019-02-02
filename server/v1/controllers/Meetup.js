@@ -1,3 +1,4 @@
+import moment from 'moment';
 import db from '../../db/index';
 import MeetupModels from '../models/Meetup';
 import RsvpModel from '../models/Rsvp';
@@ -41,8 +42,8 @@ const Meetup = {
       response.setFailure(statusCodes.unauthorized, 'You do not have permission to create meetup');
       return response.send(res);
     }
-    const createdOn = new Date().toUTCString();
-    const happeningOn = new Date(meetupRequest.happeningOn).toUTCString();
+    const createdOn = moment().format('YYYY-MM-DD HH:mm');
+    const happeningOn = moment(meetupRequest.happeningOn).format('YYYY-MM-DD HH:mm');
     const newMeetup = [meetupRequest.location, createdOn, meetupRequest.topic, happeningOn];
     try {
       const { rows } = await db.query(MeetupModels.insertMeetupQuery, newMeetup);

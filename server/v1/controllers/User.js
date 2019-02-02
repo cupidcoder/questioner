@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import moment from 'moment';
 import UserModel from '../models/User';
 import APIResponse from '../helpers/Response';
 import StatusCodes from '../helpers/status';
@@ -18,7 +19,7 @@ const User = {
   async signup(req, res) {
     const response = new APIResponse();
     const userObj = req.body;
-    const registeredOn = new Date().toUTCString();
+    const registeredOn = moment().format('YYYY-MM-DD HH:mm');
     bcrypt.hash(userObj.password, 8, async (err, hash) => {
       const valuesToInsert = [
         userObj.firstname, userObj.lastname, userObj.email, hash, registeredOn,
