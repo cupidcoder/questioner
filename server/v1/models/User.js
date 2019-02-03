@@ -6,7 +6,7 @@ const User = {
   insertUserQuery: ` INSERT INTO
     users(firstname, lastname, email, password, registered_on)
     VALUES($1, $2, $3, $4, $5)
-    returning firstname, lastname, email`,
+    returning *`,
   checkEmailQuery: 'SELECT * FROM users WHERE email = $1',
 };
 

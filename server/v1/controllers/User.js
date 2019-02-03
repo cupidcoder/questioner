@@ -28,9 +28,14 @@ const User = {
         const { rows } = await db.query(UserModel.insertUserQuery, valuesToInsert);
         const user = rows[0];
         const token = Utility.generateToken(user.id, user.is_admin);
+        const userInfo = {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+        };
         const newUserObj = {
           token,
-          user,
+          user: userInfo,
         };
         response.setSuccess(StatusCodes.created, 'Account created successfully', newUserObj);
         return response.send(res);
