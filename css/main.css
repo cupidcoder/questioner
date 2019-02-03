@@ -130,7 +130,7 @@ input:focus {
 }
 
 textarea:focus {
-    outline-color: #f39e3e;
+    outline: none;
 }
 
 .iconText {float: right;}
@@ -498,14 +498,14 @@ footer p {
     height: 100%;
     margin-bottom: 5px;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
     margin-left: -15px;
 }
 
 #postQuestionBox a {
     color: #fff;
     position: absolute;
-    left: 89%;
+    right: 0;
 }
 
 
