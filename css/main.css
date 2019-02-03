@@ -71,7 +71,7 @@ li {list-style-type:none;}
 
 /* Forms */
 .form {
-    padding: 30px;
+    padding: 0 40px;
     display: block;
     border-radius: 5px;
     background-color: #fff;
@@ -103,6 +103,13 @@ li {list-style-type:none;}
 }
 
 .signinForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.signUpForm {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -252,13 +259,15 @@ footer p {
 * Sign Up section / Sign In section
 */
 
-#signUpSection, #signInSection, #passwordResetSection {
+#signInSection, #passwordResetSection {
     height: 75vh;
 }
 
+#signUpSection {height: 80vh;}
+
 /* Sign Up / Sign In Form */
 #signUpFormSection, #signInFormSection {
-    height: 75vh;
+    height: 80vh;
     position: relative;
 }
 
