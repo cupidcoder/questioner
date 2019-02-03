@@ -416,6 +416,11 @@ footer p {
     padding-right: 10px;
     height: 40px;
     font-size: 70%;
+    transition: all .2s;
+}
+
+.rsvpBadge:hover {
+    transform: translateY(-2px);
 }
 
 .rsvpBadge p {
