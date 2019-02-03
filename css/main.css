@@ -39,12 +39,15 @@ a:link, a:visited {
 li {list-style-type:none;}
 
 /* Buttons */
-.darkBtn {
-    padding: 10px;
+.darkBtn,
+.darkBtn:link,
+.darkBtn:visited {
+    padding: 3% 15%;
     background-color: #305b8c;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
     font-size: 100%;
+    transition: all .4s;
 }
 
 /* Background images */
@@ -69,34 +72,41 @@ li {list-style-type:none;}
 /* Forms */
 .form {
     padding: 30px;
-    width: 37%; 
     display: block;
-    margin-top: 5%;
-    margin-left: 25%;
-    border: 1px solid #4c4a4a;
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
-    font-size: 120%
+    font-size: 100%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
 }
 
 .form p:first-child {
     font-size: 80%;
     color: #305b8c;
-    border-bottom: 1px solid #d0caca;
+    border-bottom: 1px solid #e6e6e6;
     padding-bottom: 15px;
 }
 
-#formSubHeading {font-size: 70%;}
+.formSmallText {font-size: 45%;}
 
-#formSubHeading a {
+.formSmallText a {
     color: #305b8c !important;
     text-decoration: underline;
 }
 
 .form input {
-    padding: 2%;
-    margin-bottom: 5px;
+    padding: 4%;
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    display: block;
+}
+
+.signinForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
@@ -120,7 +130,7 @@ textarea:focus {
 
 .clear {clear: both;}
 
-.sectionBackground {background-color: #d0caca;}
+.sectionBackground {background-color: #e6e6e6;}
 
 
 footer {
@@ -134,6 +144,12 @@ footer {
 footer p { 
     margin: 0;
     padding-top: 10px;
+}
+
+/* Container */
+.row {
+    width: 1140px;
+    margin: 0 auto;
 }
 
 /*
@@ -237,22 +253,13 @@ footer p {
 */
 
 #signUpSection, #signInSection, #passwordResetSection {
-    height: 85vh;
-}
-
-#signUpSection div, #signInSection div {float: left;}
-
-/* Sign Up / In image */
-#signUpImage, #signInImage {
-    width: 50%;
-    height: 100%;
-    background-image: url('../img/bg-signup.jpg');
+    height: 75vh;
 }
 
 /* Sign Up / Sign In Form */
 #signUpFormSection, #signInFormSection {
-    width: 50%;
-    height: 100%;
+    height: 75vh;
+    position: relative;
 }
 
 
@@ -542,7 +549,7 @@ footer p {
 .commentBox p {margin:0;}
 
 .commentAuthor {
-    background-color: #d0caca;
+    background-color: #e6e6e6;
     text-align: right;
     margin-bottom: 2px;
 }
@@ -686,7 +693,7 @@ footer p {
 
 #feedBoxQuestions h4 {
     padding: 30px;
-    border-bottom: 1px solid #d0caca;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 #feedBoxQuestions a {color: #000;}
