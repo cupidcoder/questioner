@@ -590,12 +590,13 @@ footer p {
 #postCommentBox textarea {
     width: 96%;
     padding: 2%;
+    border-radius: 5px;
 }
 
 #postCommentBox button{
     color: #fff;
     position: absolute;
-    left: 85%;
+    right: 0;
 }
 
 
