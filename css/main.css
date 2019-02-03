@@ -46,7 +46,7 @@ li {list-style-type:none;}
     background-color: #305b8c;
     border-radius: 50px;
     -webkit-border-radius: 50px;
-    font-size: 100%;
+    font-size: 70%;
     transition: all .4s;
 }
 
