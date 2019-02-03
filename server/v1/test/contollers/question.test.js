@@ -1,4 +1,4 @@
-import chai from 'chai';
+import chai, { assert } from 'chai';
 import app from '../../../../app';
 import statusCodes from '../../helpers/status';
 
@@ -165,19 +165,49 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
       });
   });
 
-  // const questionID = 3; // Set by DB seeder
-  // let questionUpvoteResponse;
-  // before((done) => {
-  //   chai.request(app)
-  //     .patch(`/api/v1/questions/${questionID}/upvote`)
-  //     .end((err, res) => {
-  //       [questionUpvoteResponse] = res.body.data;
-  //       done();
-  //     });
-  // });
-  // it('should increase votes by 1 after hitting upvote endpoint', () => {
-  //   assert.equal(questionRecordResponse.votes + 1, questionUpvoteResponse.votes);
-  // });
+  // Make a upvote request using another user
+  // user to obtain user with/without admin rights - users created by DB Seeder
+  const anotherRegularUser = {
+    email: 'c.guy@gmail.com',
+    password: 'questioner40',
+  };
+  let secondLoginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(anotherRegularUser)
+      .end((err, res) => {
+        [secondLoginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  const questionID = 3; // Set by DB seeder
+  let firstQuestionUpvoteResponse;
+
+  before((done) => {
+    chai.request(app)
+      .patch(`/api/v1/questions/${questionID}/upvote`)
+      .set('x-access-token', secondLoginResponse.token)
+      .end((err, res) => {
+        [firstQuestionUpvoteResponse] = res.body.data;
+        done();
+      });
+  });
+
+  let secondQuestionUpvoteResponse;
+  before((done) => {
+    chai.request(app)
+      .patch(`/api/v1/questions/${questionID}/upvote`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        [secondQuestionUpvoteResponse] = res.body.data;
+        done();
+      });
+  });
+  it('should increase votes by 1 after hitting upvote endpoint', () => {
+    assert.equal(firstQuestionUpvoteResponse.votes + 1, secondQuestionUpvoteResponse.votes);
+  });
 });
 
 describe('PATCH /api/v1/questions/:id/downvote', () => {
@@ -238,5 +268,51 @@ describe('PATCH /api/v1/questions/:id/downvote', () => {
         res.should.have.status(statusCodes.forbidden);
         done();
       });
+  });
+
+  // Make a downvote request using another user
+  const anotherRegularUser = {
+    email: 'c.guy@gmail.com',
+    password: 'questioner40',
+  };
+  let secondLoginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(anotherRegularUser)
+      .end((err, res) => {
+        [secondLoginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  const questionID = 4; // As already created by the database seeder
+
+  // Make upvote request
+  let upvoteResponse;
+  before((done) => {
+    chai.request(app)
+      .patch(`/api/v1/questions/${questionID}/upvote`)
+      .set('x-access-token', secondLoginResponse.token)
+      .end((err, res) => {
+        [upvoteResponse] = res.body.data;
+        done();
+      });
+  });
+
+  // Now make downvote request
+  let downvoteResponse;
+  before((done) => {
+    chai.request(app)
+      .patch(`/api/v1/questions/${questionID}/downvote`)
+      .set('x-access-token', secondLoginResponse.token)
+      .end((err, res) => {
+        [downvoteResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should return votes reduced by 1 after hitting the downvote endpoint', () => {
+    assert.equal(upvoteResponse.votes - 1, downvoteResponse.votes);
   });
 });
