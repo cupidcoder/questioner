@@ -42,7 +42,7 @@ li {list-style-type:none;}
 .darkBtn,
 .darkBtn:link,
 .darkBtn:visited {
-    padding: 3% 15%;
+    padding: 10px 25px;
     background-color: #305b8c;
     border-radius: 50px;
     -webkit-border-radius: 50px;
@@ -251,14 +251,17 @@ footer p {
 }
 
 #landingPageHeroImage h1 {
-    font-size: 250%;
+    font-size: 180%;
     font-weight: lighter;
     margin: auto;
     padding-top: 250px;
     color: #fff;
 }
 
-#landingPageHeroImage p {margin-top:35px;}
+#landingPageHeroImage p {
+    margin-top:35px;
+    font-size: 100%;
+}
 
 /*
 * End of Landing Page
