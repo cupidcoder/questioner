@@ -290,8 +290,8 @@ footer p {
 */
 
 #meetUpsSection {
-    height: 100%;
-    /* overflow: scroll; */
+    height: 95vh;
+    overflow-y: auto;
 }
 
 
