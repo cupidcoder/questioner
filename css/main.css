@@ -157,7 +157,17 @@ footer p {
 .row {
     width: 1140px;
     margin: 0 auto;
+    overflow: hidden;
 }
+
+.row:not(:last-child) {margin-bottom: 50px;}
+
+.col-1-of-4 {
+    float: left;
+    width: calc((100% - 18px) / 4);
+}
+
+.col-1-of-4:not(:last-child) {margin-right: 6px;}
 
 /*
 * End of General CSS
@@ -293,19 +303,28 @@ footer p {
 }
 
 .meetupBox {
-    margin-left: 70px;
-    height: 370px;
-    width: 20%;
-    display: block;
+    height: 320px;
+    width: 90%;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
-    float: left;
-    margin-bottom: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3.5px #4c4a4a;
+}
+
+.meetupImage {
+    transition: all .2s;
+    height: 60%;
+}
+
+.meetupImage:hover {
+    transform: scale(.97);
 }
 
 .meetupBox img {
     width: 100%;
-    height: 60%;
+    height: 100%;
 }
 
 .meetupBoxInfo {
@@ -315,22 +334,19 @@ footer p {
 
 .meetupBoxAdmin {
     height: 114px;
-    /* background-color: #a59898; */
-    border-top: 1px solid #f39e3e;
+    border-top: 4px solid #e6e6e6;
 }
 
 .meetupBoxInfo p {
     text-align: center;
     color: #305b8c;
-    font-size: 120%;
+    font-size: 60%;
     font-weight: 700;
     overflow-wrap: break-word;
 }
 
-.meetupBoxInfo div {
-    float: left;
-    padding-left: 2%;
-}
+.meetupBoxInfo div { display: inline-block; }
+.meetupBoxInfo div:not(:last-child) {margin-right: 15%;}
 
 .attendeesLogo {
     margin-left: 10%;
