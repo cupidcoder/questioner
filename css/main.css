@@ -590,7 +590,7 @@ footer p {
 .close {
     color: rgba(243, 158, 62, 0.5);
     float: right;
-    font-size: 273%;
+    font-size: 200%;
     font-weight: bold;
     margin-top: -9px;
 }
@@ -630,7 +630,9 @@ footer p {
 .commentBox p {margin:0;}
 
 .commentAuthor {
-    background-color: #e6e6e6;
+    /* background-color: #e6e6e6; */
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 3px;
     text-align: right;
     margin-bottom: 2px;
 }
@@ -639,6 +641,8 @@ footer p {
     color: #305b8c;
     font-weight: bold;
 }
+
+.commentAuthor + p {padding-top: 5px;}
 
 #postCommentBox textarea {
     width: 96%;
@@ -667,10 +671,6 @@ footer p {
     width: 70%;
     margin: auto;
     padding-bottom: 20px;
-}
-
-#passwordResetForm {
-
 }
 
 #passwordResetFormBox {
