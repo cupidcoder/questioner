@@ -526,6 +526,7 @@ footer p {
     background-color: #fff;
     border-radius: 5px;
     padding: 0 0 14px 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.4);
 }
 
 .meetUpDetailsQuestion p {
