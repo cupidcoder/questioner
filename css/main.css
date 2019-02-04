@@ -111,6 +111,29 @@ li {list-style-type:none;}
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
 }
 
+.resetForm {
+    padding: 0 30px;
+    padding-top: 25px;
+    display: block;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 80%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.resetForm p:first-child {
+    color: #305b8c;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 15px;
+}
+
+.resetForm input {
+    width: 80%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .signinForm {
     position: absolute;
     top: 50%;
@@ -128,6 +151,14 @@ li {list-style-type:none;}
 .createMeetupForm {
     position: absolute;
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 30px;
+}
+
+.passwordResetForm {
+    position: absolute;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding-bottom: 30px;
@@ -638,28 +669,15 @@ footer p {
     padding-bottom: 20px;
 }
 
+#passwordResetForm {
+
+}
+
 #passwordResetFormBox {
-    height: 50%;
-    width: 20%;
+    height: 60vh;
     display: block;
-    margin: auto;
+    position: relative;
 }
-
-#passwordResetFormBox p {
-    text-align: left;
-}
-
-#passwordResetFormBox input {
-    background-color: #fff;
-    padding: 10%;
-    font-size: 120%;
-    margin-bottom: 10px;
-}
-
-#passwordResetFormBox .darkBtn {
-    width: 100%;
-}
-
 
 /*
 * Create Meetup Section
