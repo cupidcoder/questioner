@@ -102,6 +102,15 @@ li {list-style-type:none;}
     display: block;
 }
 
+.createForm {
+    padding: 0 40px;
+    display: block;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
 .signinForm {
     position: absolute;
     top: 50%;
@@ -114,6 +123,14 @@ li {list-style-type:none;}
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.createMeetupForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 30px;
 }
 
 
@@ -653,33 +670,25 @@ footer p {
 }
 
 .createMeetupEntryBox {
-    width: 40%;
+    height: 90vh;
     display: block;
-    margin: auto;
-    margin-top: 100px;
-    text-align: left;
+    text-align: center;
     padding-bottom: 50px;
     position: relative;
 }
 
-.createMeetupEntryBoxForm p {
-    font-weight: 700;
-    font-size: 80%;
-}
+.createMeetupEntryBoxForm {font-size: 60%;}
 
 .createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
-    padding: 8px;
-    width: 90%;
-    font-size: 50%;
+    border: 2px solid #e6e6e6;
+    padding: 10px;
+    width: 97%;
 }
 
-.createMeetupEntryBoxForm input[type="file"] {margin-bottom: 25px;}
+.createMeetupEntryBoxForm input[type="file"] {margin-bottom: 15px;}
 
 #createBtn {
-    position: absolute;
-    left: 60%;
-    bottom: 1%;
-    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 
