@@ -400,11 +400,20 @@ footer p {
 .meetupBoxInfo div:not(:last-child) {margin-right: 15%;}
 
 .attendeesLogo {
-    margin-left: 10%;
     cursor: pointer;
 }
 
 .questionsLogo {
+    margin-left: 20%;
+    cursor: pointer;
+}
+
+.deleteLogo {
+    margin-left: 10%;
+    cursor: pointer;
+}
+
+.editLogo {
     margin-left: 20%;
     cursor: pointer;
 }
