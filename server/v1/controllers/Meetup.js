@@ -44,7 +44,10 @@ const Meetup = {
     }
     const createdOn = moment().format('YYYY-MM-DD HH:mm');
     const happeningOn = moment(meetupRequest.happeningOn).format('YYYY-MM-DD HH:mm');
-    const newMeetup = [meetupRequest.location, createdOn, meetupRequest.topic, happeningOn];
+    const newMeetup = [
+      meetupRequest.location, createdOn, meetupRequest.topic, meetupRequest.description,
+      happeningOn,
+    ];
     try {
       const { rows } = await db.query(MeetupModels.insertMeetupQuery, newMeetup);
       const meetup = rows[0];

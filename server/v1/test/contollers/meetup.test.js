@@ -13,6 +13,7 @@ describe('POST /api/v1/meetups', () => {
   const meetupRecord = {
     location: 'Ikeja',
     topic: 'nodejs ninja',
+    description: 'We discuss on issues bothering building for the next billion users',
     happeningOn: '2019-05-24 01:00',
   };
 
@@ -20,6 +21,7 @@ describe('POST /api/v1/meetups', () => {
   const invalidMeetupRecordOne = {
     location: '',
     topic: 'Node js Nigeria',
+    description: 'We discuss on issues bothering building for the next billion users',
     happeningOn: '2019-05-24 01:00',
   };
 
@@ -27,6 +29,7 @@ describe('POST /api/v1/meetups', () => {
   const invalidMeetupRecordTwo = {
     location: 'Gbagada',
     topic: '',
+    description: 'We discuss on issues bothering building for the next billion users',
     happeningOn: '2019-05-24 01:00',
   };
 
@@ -34,7 +37,16 @@ describe('POST /api/v1/meetups', () => {
   const invalidMeetupRecordThree = {
     location: 'Gbagada',
     topic: 'Building for tomorrow',
+    description: 'We discuss on issues bothering building for the next billion users',
     happeningOn: '',
+  };
+
+  // sample invalid meetup request data - Four
+  const invalidMeetupRecordFour = {
+    location: 'Gbagada',
+    topic: 'Building for tomorrow',
+    description: '',
+    happeningOn: '2019-05-24 01:00',
   };
 
   it('should return error if token is not provided', (done) => {
@@ -127,6 +139,7 @@ describe('POST /api/v1/meetups', () => {
           res.body.data[0].should.have.property('created_on');
           res.body.data[0].should.have.property('location');
           res.body.data[0].should.have.property('topic').eql(meetupRecord.topic);
+          res.body.data[0].should.have.property('description');
           res.body.data[0].should.have.property('happening_on');
           res.body.data[0].should.have.property('tags');
           done();
@@ -161,7 +174,19 @@ describe('POST /api/v1/meetups', () => {
       chai.request(app)
         .post('/api/v1/meetups')
         .set('x-access-token', adminLoginResponse.token)
-        .send(invalidMeetupRecordTwo)
+        .send(invalidMeetupRecordThree)
+        .end((err, res) => {
+          res.should.have.status(statusCodes.badRequest);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
+
+    it('should respond with error if description is not filled', (done) => {
+      chai.request(app)
+        .post('/api/v1/meetups')
+        .set('x-access-token', adminLoginResponse.token)
+        .send(invalidMeetupRecordFour)
         .end((err, res) => {
           res.should.have.status(statusCodes.badRequest);
           res.body.should.have.property('error');
@@ -272,6 +297,7 @@ describe('GET /api/v1/meetups/:id', () => {
   const meetupRecord = {
     location: 'Ogba',
     topic: 'Book club',
+    description: 'We discuss on issues bothering building for the next billion users',
     happeningOn: '2019-05-24 01:00',
   };
 

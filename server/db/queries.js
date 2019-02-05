@@ -28,6 +28,7 @@ const createQueries = {
     created_on TIMESTAMP NOT NULL DEFAULT NOW(),
     location VARCHAR(255) NOT NULL,
     topic VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
     happening_on TIMESTAMP NOT NULL,
     tags VARCHAR[]
   )`,
@@ -119,10 +120,10 @@ const seedQueries = {
   `,
 
   meetupsTable: `
-    INSERT INTO meetups(location, created_on, topic, happening_on)
-      VALUES ('Gbagada', '${moment().format('YYYY-MM-DD HH:mm')}', 'NodeJS Gurus', '${moment('2019-05-10 14:00').format('YYYY-MM-DD HH:mm')}'),
-              ('The zone', '${moment().format('YYYY-MM-DD HH:mm')}', 'Food Lovers', '${moment('2019-05-05 13:30').format('YYYY-MM-DD HH:mm')}'),
-              ('Maryland Mall', '${moment().format('YYYY-MM-DD HH:mm')}', 'Movie Critics', '${moment('2019-05-03 17:30').format('YYYY-MM-DD HH:mm')}')
+    INSERT INTO meetups(location, created_on, topic, description, happening_on)
+      VALUES ('Gbagada', '${moment().format('YYYY-MM-DD HH:mm')}', 'NodeJS Gurus', 'Nodejs meetup description', '${moment('2019-05-10 14:00').format('YYYY-MM-DD HH:mm')}'),
+              ('The zone', '${moment().format('YYYY-MM-DD HH:mm')}', 'Food Lovers', 'Food lovers meetup description', '${moment('2019-05-05 13:30').format('YYYY-MM-DD HH:mm')}'),
+              ('Maryland Mall', '${moment().format('YYYY-MM-DD HH:mm')}', 'Movie Critics', 'Movie critics meetup description', '${moment('2019-05-03 17:30').format('YYYY-MM-DD HH:mm')}')
   `,
 
   questionsTable: `
