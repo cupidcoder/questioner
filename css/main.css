@@ -795,16 +795,6 @@ footer p {
     height: 80vh;
 }
 
-#meetupListingSection {
-    width: 60%;
-    display: block;
-    margin: auto;
-    padding-top: 50px;
-    text-align: center;
-    font-size: 150%;
-    
-}
-
 .meetupListingQuestion {
     border-radius: 5px;
     width: 70%;
