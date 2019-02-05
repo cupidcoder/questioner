@@ -11,9 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/api/v1', (req, res) => {
-  res.send({
+  res.status(200).json({
     status: 200,
-    message: 'Welcome to Questioner!',
+    message: 'Welcome to Questioner v1',
   });
 });
 
@@ -23,8 +23,16 @@ app.use('/api/v1/questions', questions);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/comments', comments);
 
+// 404 wildcard
+app.get('*', (req, res) => {
+  res.status(400).json({
+    status: 400,
+    message: 'URL not found',
+  });
+});
+
 const port = process.env.PORT || 7000;
 
 app.listen(port);
 
-module.exports = app;
+export default app;

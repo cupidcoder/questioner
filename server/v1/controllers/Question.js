@@ -12,6 +12,86 @@ import MeetupController from './Meetup';
 
 const Question = {
   /**
+   * Change user question vote (upvote to downvote and vice-versa)
+   * @param {*} values
+   * @param {*} res
+   * @param {*} type
+   */
+  async changeVote(values, res, type) {
+    const response = new APIResponse();
+    const { rows } = await db.query(VoteModels.getUserVoteQuery, [values[2], values[3]]);
+    if (type === 'upvote') {
+      if (rows[0].up === true) {
+        // User is trying to upvote again
+        response.setFailure(statusCodes.forbidden, 'Your vote has already been recorded');
+        return response.send(res);
+      }
+      // At this point, User is trying to change downvote to upvote
+      const { rowCount } = await db.query(VoteModels.updateUserVoteQuery,
+        [true, false, values[2], values[3]]);
+      return rowCount;
+    }
+    // Here, this is a downvote request
+    if (rows[0].down === true) {
+      // User is trying to downvote again
+      response.setFailure(statusCodes.forbidden, 'Your vote has already been recorded');
+      return response.send(res);
+    }
+    // At this point, User is trying to change upvote to downvote
+    const { rowCount } = await db.query(VoteModels.updateUserVoteQuery,
+      [false, true, values[2], values[3]]);
+    return rowCount;
+  },
+
+  /**
+   * Upvote or downvote a question
+   * @param {string} type
+   * @param {array} values
+   * @param {object} res
+   * @returns {int} rowCount
+   */
+  async castVote(values, res, type = 'upvote') {
+    const response = new APIResponse();
+    try {
+      const { rowCount } = await db.query(VoteModels.insertQuestionVote, values);
+      return rowCount;
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        // At this point, user wants to change vote
+        try {
+          const rowCount = Question.changeVote(values, res, type);
+          return rowCount;
+        } catch (InnerError) {
+          response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+          return response.send(res);
+        }
+      }
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
+    }
+  },
+
+  /**
+   * Get vote count for a particular question
+   * @param {int} questionID
+   * @param {object} res
+   * @returns {int} voteCount
+   */
+  async getVoteCount(questionID, res) {
+    const response = new APIResponse();
+    try {
+      const totalVotes = await db.query(VoteModels.getTotalVotesQuery, [questionID]);
+      const downs = await db.query(VoteModels.getDOWNVotesQuery, [questionID]);
+      const voteCount = ((totalVotes.rows[0].votes - downs.rows[0].votes) < 0)
+        ? 0 : totalVotes.rows[0].votes - downs.rows[0].votes;
+      return voteCount;
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'An error occurred. Please try again.');
+      return response.send(res);
+    }
+  },
+
+  /**
    * Creates a question record
    * @param {object} req
    * @param {object} res
@@ -27,9 +107,9 @@ const Question = {
     }
     try {
       const { rows } = await db.query(QuestionModels.insertQuestionQuery, [
-        new Date().toUTCString(), question.userID, question.meetupID, question.title, question.body,
+        new Date().toUTCString(), req.user.id, question.meetupID, question.title, question.body,
       ]);
-      response.setSuccess(statusCodes.created, rows[0]);
+      response.setSuccess(statusCodes.created, 'Question submitted successfully', rows[0]);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.badRequest, 'Non existent user ID was supplied');
@@ -53,28 +133,20 @@ const Question = {
         return response.send(res);
       }
       const question = rows[0];
-      // Insert vote into votes table
-      const { rowCount } = await db.query(VoteModels.insertQuestionVote,
-        [true, false, req.user.id, question.id]);
+      // Cast upvote
+      const rowCount = await Question.castVote([true, false, req.user.id, question.id], res);
       if (rowCount > 0) {
-        // Get number of votes
-        const ups = await db.query(VoteModels.getUPVotesQuery, [question.id]);
-        const downs = await db.query(VoteModels.getDOWNVotesQuery, [question.id]);
-        // eslint-disable-next-line max-len
-        const vote = ((ups.rows[0].votes - downs.rows[0].votes) < 0) ? 0 : ups.rows[0].votes - downs.rows[0].votes;
-        response.setSuccess(statusCodes.success, {
+        // Get vote count
+        const voteCount = await Question.getVoteCount(question.id, res);
+        response.setSuccess(statusCodes.success, 'Vote recorded successfully', {
           meetup_id: question.meetup_id,
           title: question.title,
           body: question.body,
-          votes: vote,
+          votes: voteCount,
         });
         return response.send(res);
       }
     } catch (error) {
-      if (error.routine === '_bt_check_unique') {
-        response.setFailure(statusCodes.forbidden, 'You have already voted to this question');
-        return response.send(res);
-      }
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
     }
@@ -96,28 +168,20 @@ const Question = {
         return response.send(res);
       }
       const question = rows[0];
-      // Insert vote into votes table
-      const { rowCount } = await db.query(VoteModels.insertQuestionVote,
-        [false, true, req.user.id, question.id]);
+      // Cast downvote
+      const rowCount = await Question.castVote([false, true, req.user.id, question.id], res, 'downvote');
       if (rowCount > 0) {
-        // Get number of votes
-        const ups = await db.query(VoteModels.getUPVotesQuery, [question.id]);
-        const downs = await db.query(VoteModels.getDOWNVotesQuery, [question.id]);
-        // eslint-disable-next-line max-len
-        const vote = ((ups.rows[0].votes - downs.rows[0].votes) < 0) ? 0 : ups.rows[0].votes - downs.rows[0].votes;
-        response.setSuccess(statusCodes.success, {
+        // Get vote count
+        const voteCount = await Question.getVoteCount(question.id, res);
+        response.setSuccess(statusCodes.success, 'Vote recorded successfully', {
           meetup_id: question.meetup_id,
           title: question.title,
           body: question.body,
-          votes: vote,
+          votes: voteCount,
         });
         return response.send(res);
       }
     } catch (error) {
-      if (error.routine === '_bt_check_unique') {
-        response.setFailure(statusCodes.forbidden, 'You have already voted to this question');
-        return response.send(res);
-      }
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
     }

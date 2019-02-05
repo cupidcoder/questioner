@@ -7,8 +7,10 @@ const Vote = {
     votes(up , down, user_id, question_id)
     VALUES($1, $2, $3, $4)
     `,
-  getUPVotesQuery: 'SELECT COUNT(up) AS votes from votes WHERE up=true AND question_id=$1',
-  getDOWNVotesQuery: 'SELECT COUNT(down) AS votes from votes WHERE down=true AND question_id=$1',
+  getTotalVotesQuery: 'SELECT COUNT(*) AS votes from votes WHERE question_id=$1',
+  getDOWNVotesQuery: 'SELECT COUNT(*) AS votes from votes WHERE down=true AND question_id=$1',
+  getUserVoteQuery: 'SELECT * FROM votes WHERE user_id=$1 AND question_id=$2',
+  updateUserVoteQuery: 'UPDATE votes SET up=$1, down=$2 WHERE user_id=$3 AND question_id=$4',
 };
 
 export default Vote;

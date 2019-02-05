@@ -8,6 +8,7 @@ class APIReponse {
     this.statusCode = '';
     this.data = [];
     this.error = '';
+    this.message = '';
   }
 
   /**
@@ -25,8 +26,9 @@ class APIReponse {
    * @param {int} statusCode
    * @param {object} data
    */
-  setSuccess(statusCode, data = []) {
+  setSuccess(statusCode, message = 'success', data = []) {
     this.statusCode = statusCode;
+    this.message = message;
     if (Array.isArray(data)) {
       this.data = data;
     } else if (APIReponse.isObject(data)) {
@@ -55,6 +57,7 @@ class APIReponse {
     if (this.type === 'success') {
       return res.status(this.statusCode).json({
         status: this.statusCode,
+        message: this.message,
         data: this.data,
       });
     }

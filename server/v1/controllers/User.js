@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import moment from 'moment';
 import UserModel from '../models/User';
 import APIResponse from '../helpers/Response';
 import StatusCodes from '../helpers/status';
@@ -18,7 +19,7 @@ const User = {
   async signup(req, res) {
     const response = new APIResponse();
     const userObj = req.body;
-    const registeredOn = new Date().toUTCString();
+    const registeredOn = moment().format('YYYY-MM-DD HH:mm');
     bcrypt.hash(userObj.password, 8, async (err, hash) => {
       const valuesToInsert = [
         userObj.firstname, userObj.lastname, userObj.email, hash, registeredOn,
@@ -27,11 +28,16 @@ const User = {
         const { rows } = await db.query(UserModel.insertUserQuery, valuesToInsert);
         const user = rows[0];
         const token = Utility.generateToken(user.id, user.is_admin);
+        const userInfo = {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+        };
         const newUserObj = {
           token,
-          user,
+          user: userInfo,
         };
-        response.setSuccess(StatusCodes.created, newUserObj);
+        response.setSuccess(StatusCodes.created, 'Account created successfully', newUserObj);
         return response.send(res);
       } catch (error) {
         response.setFailure(StatusCodes.unavailable, 'Unable to proceed with your request. Please try again');
@@ -62,12 +68,17 @@ const User = {
         return response.send(res);
       }
       // User has been authenticated
+      const userObj = {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+      };
       const token = Utility.generateToken(user.id, user.is_admin);
       const loggedInUser = {
         token,
-        user,
+        user: userObj,
       };
-      response.setSuccess(StatusCodes.success, loggedInUser);
+      response.setSuccess(StatusCodes.success, 'Login successful', loggedInUser);
       return response.send(res);
     } catch (error) {
       response.setFailure(StatusCodes.unavailable, 'Unable to proceed with your request. Please try again');
