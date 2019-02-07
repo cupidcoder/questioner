@@ -186,6 +186,31 @@ const Meetup = {
       return response.send(res);
     }
   },
+  /**
+   * Add tags to meetup record
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} meetup
+   */
+  // eslint-disable-next-line consistent-return
+  async addTags(req, res) {
+    const response = new APIResponse();
+    if (!req.user.isAdmin) {
+      response.setFailure(statusCodes.unauthorized, 'You do not have permission to add tags');
+      return response.send(res);
+    }
+    try {
+      const { rows, rowCount } = await db.query(MeetupModels.updateTags,
+        [req.params.id, req.body.tags]);
+      if (rowCount > 0) {
+        response.setSuccess(statusCodes.success, 'Tags have been added successfully', rows[0]);
+        return response.send(res);
+      }
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
+    }
+  },
 };
 
 export default Meetup;
