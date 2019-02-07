@@ -588,3 +588,102 @@ describe('POST /api/v1/meetups/:id/rsvp', () => {
     });
   });
 });
+
+describe('PATCH /api/v1/meetups/:id/tags', () => {
+  const tagsObject = {
+    tags: ['Programming', 'Software development'],
+  };
+  const invalidTagsObj = {
+    tags: [],
+  };
+  const fakeToken = 'liojlklaodoie123DSDD.laodiw!!lljad';
+  const meetupID = 3; // As created by the DB seeder
+
+  it('should return error if token is not provided', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/meetups/${meetupID}/tags`)
+      .set('x-access-token', '')
+      .send(tagsObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  it('should return error if token is invalid', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/meetups/${meetupID}/tags`)
+      .set('x-access-token', fakeToken)
+      .send(tagsObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  // user to obtain user with/without admin rights - users created by DB Seeder
+  const regularUser = {
+    email: 'e.genius@gmail.com',
+    password: 'questioner40',
+  };
+  const adminUser = {
+    email: 'c.ume@gmail.com',
+    password: 'questioner40',
+  };
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(regularUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+  it('should return error if user does not have right to add tags', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/meetups/${meetupID}/tags`)
+      .set('x-access-token', loginResponse.token)
+      .send(tagsObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.unauthorized);
+        done();
+      });
+  });
+  let adminLoginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(adminUser)
+      .end((err, res) => {
+        [adminLoginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should return error if tags is empty', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/meetups/${meetupID}/tags`)
+      .set('x-access-token', adminLoginResponse.token)
+      .send(invalidTagsObj)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should return meetup with newly posted tags', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/meetups/${meetupID}/tags`)
+      .set('x-access-token', adminLoginResponse.token)
+      .send(tagsObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        res.body.should.have.property('data');
+        res.body.data[0].should.have.property('tags');
+        res.body.data[0].tags[0].should.eql('Programming');
+        res.body.data[0].tags[1].should.eql('Software development');
+        done();
+      });
+  });
+});

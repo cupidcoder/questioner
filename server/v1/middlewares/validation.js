@@ -177,6 +177,25 @@ const validation = {
     }
     next();
   },
+  /**
+   * Validates meetup tags
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
+  async validateTags(req, res, next) {
+    const response = new APIResponse();
+    const tagsObjectRules = {
+      tags: joi.array().items(joi.string().required()).required(),
+    };
+    const { error } = joi.validate(req.body, tagsObjectRules);
+
+    if (error) {
+      response.setFailure(statusCodes.badRequest, error.details[0].message);
+      return response.send(res);
+    }
+    next();
+  },
 };
 
 export default validation;
