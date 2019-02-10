@@ -244,6 +244,29 @@ const Meetup = {
       return response.send(res);
     }
   },
+
+  /**
+   * Get all questions under a meetup
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} meetup questions
+   */
+  async getQuestions(req, res) {
+    const response = new APIResponse();
+    const meetupRecord = await Meetup.findOne(req.params.id);
+    if (meetupRecord.length === 0) {
+      response.setFailure(statusCodes.forbidden, 'Meetup does not exist');
+      return response.send(res);
+    }
+    try {
+      const { rows } = await db.query(MeetupModels.getQuestionsQuery, [req.params.id]);
+      response.setSuccess(statusCodes.success, 'Quetions retrieved successfully', rows);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
+    }
+  },
 };
 
 export default Meetup;

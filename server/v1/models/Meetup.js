@@ -19,6 +19,8 @@ const Meetup = {
   updateTags: 'UPDATE meetups set tags = $2 where id = $1 returning *',
 
   updateImagesQuery: 'UPDATE meetups set images = $2 where id = $1 returning *',
+
+  getQuestionsQuery: 'SELECT * FROM questions WHERE meetup_id = $1',
 };
 
 export default Meetup;
