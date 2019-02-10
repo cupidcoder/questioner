@@ -316,3 +316,118 @@ describe('PATCH /api/v1/questions/:id/downvote', () => {
     assert.equal(upvoteResponse.votes - 1, downvoteResponse.votes);
   });
 });
+
+describe('DELETE /api/v1/questions/:questionID', () => {
+  const questionID = 5;
+  const secondQuestionID = 6;
+  const invalidQuestionID = 99;
+  const invalidToken = 'ljakjd09094234pksDAdkad?/adjJJ#$3j.jljoadiws';
+
+  const adminUser = { // Created by DB seeder
+    email: 'c.ume@gmail.com',
+    password: 'questioner40',
+  };
+
+  const regularUser = {
+    email: 'c.guy@gmail.com',
+    password: 'questioner40',
+  };
+
+  const questionOwner = {
+    email: 'e.genius@gmail.com',
+    password: 'questioner40',
+  };
+
+  it('should return error if token was not provided', (done) => {
+    chai.request(app)
+      .delete(`/api/v1/questions/${questionID}`)
+      .set('x-access-token', '')
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  it('should return error if token is invalid', (done) => {
+    chai.request(app)
+      .delete(`/api/v1/questions/${questionID}`)
+      .set('x-access-token', invalidToken)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(regularUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should return error if question does not exist', (done) => {
+    chai.request(app)
+      .delete(`/api/v1/questions/${invalidQuestionID}`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  it('should return error if user is not question owner', (done) => {
+    chai.request(app)
+      .delete(`/api/v1/questions/${questionID}`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.unauthorized);
+        done();
+      });
+  });
+
+  let ownerLoginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(questionOwner)
+      .end((err, res) => {
+        [ownerLoginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should return success if user is question owner', (done) => {
+    chai.request(app)
+      .delete(`/api/v1/questions/${questionID}`)
+      .set('x-access-token', ownerLoginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        done();
+      });
+  });
+
+  let adminLoginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(adminUser)
+      .end((err, res) => {
+        [adminLoginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should return success if user is admin', (done) => {
+    chai.request(app)
+      .delete(`/api/v1/questions/${secondQuestionID}`)
+      .set('x-access-token', adminLoginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        done();
+      });
+  });
+});
