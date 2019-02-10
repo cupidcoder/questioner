@@ -187,6 +187,30 @@ const Question = {
   },
 
   /**
+   * Get comments
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} comments
+   */
+  async getComments(req, res) {
+    const response = new APIResponse();
+    try {
+      const { rows } = await db.query(QuestionModels.getOneQuery, [req.params.id]);
+      if (rows.length === 0) {
+        response.setFailure(statusCodes.forbidden, 'Question does not exist');
+        return response.send(res);
+      }
+
+      const comments = await db.query(QuestionModels.getCommentsQuery, [req.params.id]);
+      response.setSuccess(statusCodes.success, 'Comments retrieved successfully', comments.rows);
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred. Try again');
+      return response.send(res);
+    }
+  },
+
+  /**
    * Delete a question
    * @param {object} req
    * @param {object} res

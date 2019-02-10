@@ -9,5 +9,6 @@ router.post('/', [Auth.verifyToken, validation.validateQuestion], QuestionContro
 router.patch('/:id/upvote', [Auth.verifyToken, validation.validateParam], QuestionController.upvote);
 router.patch('/:id/downvote', [Auth.verifyToken, validation.validateParam], QuestionController.downvote);
 router.delete('/:id', [Auth.verifyToken, validation.validateParam], QuestionController.delete);
+router.get('/:id/comments', [Auth.verifyToken, validation.validateParam], QuestionController.getComments);
 
 export default router;
