@@ -30,7 +30,8 @@ const createQueries = {
     topic VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     happening_on TIMESTAMP NOT NULL,
-    tags VARCHAR[]
+    tags VARCHAR[],
+    images VARCHAR[]
   )`,
 
   // Questions table

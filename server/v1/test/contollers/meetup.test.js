@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import chai, { assert } from 'chai';
+import path from 'path';
+import { readFileSync, existsSync } from 'fs';
 import app from '../../../../app';
 import statusCodes from '../../helpers/status';
 
@@ -687,3 +689,107 @@ describe('PATCH /api/v1/meetups/:id/tags', () => {
       });
   });
 });
+
+// describe('PATCH /api/v1/meetups/:meetupID/images', () => {
+//   const testFilePath = '../stubs/images/test.jpg';
+//   const imageName = 'test.jpg';
+//   const fakeToken = 'liojlklaodoie123DSDD.laodiw!!lljad';
+//   const meetupID = 3; // As created by the DB seeder
+//   const invalidMeetupID = 99;
+
+//   it('should return error if token is not provided', (done) => {
+//     chai.request(app)
+//       .patch(`/api/v1/meetups/${meetupID}/images`)
+//       .set('x-access-token', '')
+//       .attach('images', readFileSync(path.resolve(__dirname, testFilePath)), imageName)
+//       .end((err, res) => {
+//         res.should.have.status(statusCodes.forbidden);
+//         done();
+//       });
+//   });
+
+//   it('should return error if token is invalid', (done) => {
+//     chai.request(app)
+//       .patch(`/api/v1/meetups/${meetupID}/images`)
+//       .set('x-access-token', fakeToken)
+//       .attach('images', readFileSync(path.resolve(__dirname, testFilePath)), imageName)
+//       .end((err, res) => {
+//         res.should.have.status(statusCodes.badRequest);
+//         done();
+//       });
+//   });
+
+//   // user to obtain user with/without admin rights - users created by DB Seeder
+//   const regularUser = {
+//     email: 'e.genius@gmail.com',
+//     password: 'questioner40',
+//   };
+//   const adminUser = {
+//     email: 'c.ume@gmail.com',
+//     password: 'questioner40',
+//   };
+//   let loginResponse;
+//   before((done) => {
+//     chai.request(app)
+//       .post('/api/v1/auth/login')
+//       .send(regularUser)
+//       .end((err, res) => {
+//         [loginResponse] = res.body.data;
+//         done();
+//       });
+//   });
+
+//   it('should return error if user does not have right to add images', (done) => {
+//     chai.request(app)
+//       .patch(`/api/v1/meetups/${meetupID}/images`)
+//       .set('x-access-token', loginResponse.token)
+//       .attach('images', readFileSync(path.resolve(__dirname, testFilePath)), imageName)
+//       .end((err, res) => {
+//         res.should.have.status(statusCodes.unauthorized);
+//         done();
+//       });
+//   });
+//   let adminLoginResponse;
+//   before((done) => {
+//     chai.request(app)
+//       .post('/api/v1/auth/login')
+//       .send(adminUser)
+//       .end((err, res) => {
+//         [adminLoginResponse] = res.body.data;
+//         done();
+//       });
+//   });
+
+//   it('should return error if no image was selected', (done) => {
+//     chai.request(app)
+//       .patch(`/api/v1/meetups/${meetupID}/images`)
+//       .set('x-access-token', adminLoginResponse.token)
+//       .attach('images', '', '')
+//       .end((err, res) => {
+//         res.should.have.status(statusCodes.badRequest);
+//         done();
+//       });
+//   });
+
+//   it('should return error if meetup does not exist', (done) => {
+//     chai.request(app)
+//       .patch(`/api/v1/meetups/${invalidMeetupID}/images`)
+//       .set('x-access-token', adminLoginResponse.token)
+//       .attach('images', readFileSync(path.resolve(__dirname, testFilePath)), imageName)
+//       .end((err, res) => {
+//         res.should.have.status(statusCodes.forbidden);
+//         done();
+//       });
+//   });
+
+//   it('should return success if user has the right to add images', (done) => {
+//     chai.request(app)
+//       .patch(`/api/v1/meetups/${meetupID}/images`)
+//       .set('x-access-token', adminLoginResponse.token)
+//       .attach('images', readFileSync(path.resolve(__dirname, testFilePath)), imageName)
+//       .end((err, res) => {
+//         res.should.have.status(statusCodes.success);
+//         done();
+//       });
+//   });
+// });
