@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import moment from 'moment';
 import db from '../../db/index';
 import MeetupModels from '../models/Meetup';
@@ -21,8 +22,7 @@ const Meetup = {
     const response = new APIResponse();
     try {
       const { rows } = await db.query(MeetupModels.getOneQuery, [id]);
-      const meetupRecord = rows;
-      return meetupRecord;
+      return rows;
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
       return response.send(res);
@@ -123,7 +123,6 @@ const Meetup = {
    * @param {object} res
    * @returns {object} response
    */
-  // eslint-disable-next-line consistent-return
   async delete(req, res) {
     const response = new APIResponse();
     const { id } = req.params;
@@ -154,7 +153,6 @@ const Meetup = {
    * @param {object} res
    * @returns {object} rsvp
    */
-  // eslint-disable-next-line consistent-return
   async respondToMeetup(req, res) {
     const response = new APIResponse();
     const rsvp = req.body;
@@ -192,7 +190,6 @@ const Meetup = {
    * @param {object} res
    * @returns {object} meetup
    */
-  // eslint-disable-next-line consistent-return
   async addTags(req, res) {
     const response = new APIResponse();
     if (!req.user.isAdmin) {
@@ -208,6 +205,42 @@ const Meetup = {
       }
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
+    }
+  },
+  /**
+   * Add images to meetup record
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} meetup with images
+   */
+  async addImages(req, res) {
+    const response = new APIResponse();
+    if (!req.user.isAdmin) {
+      response.setFailure(statusCodes.unauthorized, 'You do not have permission to add tags');
+      return response.send(res);
+    }
+    if (!req.files) {
+      response.setFailure(statusCodes.badRequest, 'No image selected');
+      return response.send(res);
+    }
+    const meetupRecord = await Meetup.findOne(req.params.id);
+    if (meetupRecord.length === 0) {
+      response.setFailure(statusCodes.forbidden, 'Cannot respond to a meetup that does not exist');
+      return response.send(res);
+    }
+    const imagesArray = [];
+    try {
+      req.files.forEach(file => imagesArray.push(`http://${req.hostname}:7000/upload/images/${req.params.id}/${file.filename}`));
+
+      const { rows, rowCount } = await db.query(MeetupModels.updateImagesQuery,
+        [req.params.id, imagesArray]);
+      if (rowCount > 0) {
+        response.setSuccess(statusCodes.success, 'Image(s) uploaded successfully', rows[0]);
+        return response.send(res);
+      }
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Error occurred. Try again.');
       return response.send(res);
     }
   },

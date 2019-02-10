@@ -17,6 +17,8 @@ const Meetup = {
   deleteMeetup: 'DELETE FROM meetups where id = $1',
 
   updateTags: 'UPDATE meetups set tags = $2 where id = $1 returning *',
+
+  updateImagesQuery: 'UPDATE meetups set images = $2 where id = $1 returning *',
 };
 
 export default Meetup;
