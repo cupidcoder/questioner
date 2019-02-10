@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import multer from 'multer';
-import { existsSync, mkdirSunc, mkdirSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
 import path from 'path';
 import APIResponse from './Response';
 import statusCodes from './status';
