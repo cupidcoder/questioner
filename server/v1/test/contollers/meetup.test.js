@@ -793,3 +793,71 @@ describe('PATCH /api/v1/meetups/:id/tags', () => {
 //       });
 //   });
 // });
+
+describe('GET /api/v1/meetups/:meetupID/questions', () => {
+  const meetupID = 3;
+  const fakeMeetupID = 99;
+  const invalidToken = 'lisjd009223klkj.josidjd002ja//ljalekq123';
+
+  it('should return error if no token was provided', (done) => {
+    chai.request(app)
+      .get(`/api/v1/meetups/${meetupID}/questions`)
+      .set('x-access-token', '')
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  it('should return error if provided token is invalid', (done) => {
+    chai.request(app)
+      .get(`/api/v1/meetups/${meetupID}/questions`)
+      .set('x-access-token', invalidToken)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  // user to obtain user with/without admin rights - users created by DB Seeder
+  const regularUser = {
+    email: 'e.genius@gmail.com',
+    password: 'questioner40',
+  };
+
+  // obtain token
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(regularUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should error if meetup does not exist', (done) => {
+    chai.request(app)
+      .get(`/api/v1/meetups/${fakeMeetupID}/questions`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  it('should return all available questions in the database', (done) => {
+    chai.request(app)
+      .get(`/api/v1/meetups/${meetupID}/questions`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        res.body.should.have.property('data');
+        res.body.data[0].should.have.property('title').eql('Item 7');
+        res.body.data[1].should.have.property('title').eql('Item 7 again');
+        res.body.data[2].should.have.property('title').eql('Stickers');
+        done();
+      });
+  });
+});

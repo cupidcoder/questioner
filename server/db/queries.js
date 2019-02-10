@@ -131,7 +131,9 @@ const seedQueries = {
     INSERT INTO questions(created_on, user_id, meetup_id, title, body)
       VALUES ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 2, 'What about', 'Okay. this is not so great. Is it?'),
               ('${moment().format('YYYY-MM-DD HH:mm')}', 2, 1, 'Transportation', 'Will transport be provided?'),
-              ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 3, 'Item 7', 'Will item 7 be provided?')
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 3, 'Item 7', 'Will item 7 be provided?'),
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 3, 'Item 7 again', 'Will item 7 be provided again?'),
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 2, 3, 'Stickers', 'Would we be getting stickers?')
   `,
 
   rsvpTable: `
