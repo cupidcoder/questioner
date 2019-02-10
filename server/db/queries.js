@@ -149,7 +149,8 @@ const seedQueries = {
       VALUES ('Beautiful question', 2, 1),
               ('Very thoughful', 1, 2),
               ('This question is a question', 1, 1),
-              ('This really helped me. Thank you', 3, 1)
+              ('God bless you for this question', 2, 1),
+              ('This question made me understand. Thank you', 1, 1)
   `,
 
   votesTable: `

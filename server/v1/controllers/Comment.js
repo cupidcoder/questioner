@@ -29,6 +29,37 @@ const Comment = {
       return response.send(res);
     }
   },
+
+  /**
+   * Delete a comment
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} API response
+   */
+  async delete(req, res) {
+    const response = new APIResponse();
+    try {
+      const { rows } = await db.query(CommentModel.getOneQuery, [req.params.id]);
+      if (rows.length === 0) {
+        response.setFailure(StatusCodes.forbidden, 'Comment does not exist');
+        return response.send(res);
+      }
+      // User has to be comment owner or admin
+      if ((req.user.id === rows[0].user_id) || req.user.isAdmin) {
+        const { rowCount } = await db.query(CommentModel.deleteOneQuery, [req.params.id]);
+        if (rowCount > 0) {
+          response.setSuccess(StatusCodes.success, 'Comment deleted successfully');
+          return response.send(res);
+        }
+      }
+
+      response.setFailure(StatusCodes.unauthorized, 'Only admin and comment owner can delete comment');
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(StatusCodes.unavailable, 'Some error occurred');
+      return response.send(res);
+    }
+  },
 };
 
 export default Comment;

@@ -494,7 +494,6 @@ describe('GET /api/v1/questions/:questionID/comments', () => {
         res.body.should.have.property('data');
         res.body.data[0].should.have.property('comment').eql('Beautiful question');
         res.body.data[1].should.have.property('comment').eql('This question is a question');
-        res.body.data[2].should.have.property('comment').eql('This really helped me. Thank you');
         done();
       });
   });
