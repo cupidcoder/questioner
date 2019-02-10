@@ -8,6 +8,7 @@ const Question = {
     VALUES($1, $2, $3, $4, $5)
     returning *`,
   getOneQuery: 'SELECT * FROM questions WHERE id = $1',
+  deleteOneQuery: 'DELETE FROM questions WHERE id = $1',
 };
 
 export default Question;

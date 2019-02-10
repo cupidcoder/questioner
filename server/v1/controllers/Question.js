@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import db from '../../db/index';
 import QuestionModels from '../models/Question';
 import VoteModels from '../models/Vote';
@@ -123,7 +124,6 @@ const Question = {
    * @param {object} res
    * @returns {object} questionRecord
    */
-  // eslint-disable-next-line consistent-return
   async upvote(req, res) {
     const response = new APIResponse();
     try {
@@ -158,7 +158,6 @@ const Question = {
    * @param {object} res
    * @returns {object} questionRecord
    */
-  // eslint-disable-next-line consistent-return
   async downvote(req, res) {
     const response = new APIResponse();
     try {
@@ -183,6 +182,37 @@ const Question = {
       }
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
+      return response.send(res);
+    }
+  },
+
+  /**
+   * Delete a question
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} API response
+   */
+  async delete(req, res) {
+    const response = new APIResponse();
+    try {
+      const { rows } = await db.query(QuestionModels.getOneQuery, [req.params.id]);
+      if (rows.length === 0) {
+        response.setFailure(statusCodes.forbidden, 'Question does not exist');
+        return response.send(res);
+      }
+      // User has to be question owner or admin
+      if ((req.user.id === rows[0].user_id) || req.user.isAdmin) {
+        const { rowCount } = await db.query(QuestionModels.deleteOneQuery, [req.params.id]);
+        if (rowCount > 0) {
+          response.setSuccess(statusCodes.success, 'Question deleted successfully');
+          return response.send(res);
+        }
+      }
+
+      response.setFailure(statusCodes.unauthorized, 'Only admin and question owner can delete question');
+      return response.send(res);
+    } catch (error) {
+      response.setFailure(statusCodes.unavailable, 'Some error occurred');
       return response.send(res);
     }
   },
