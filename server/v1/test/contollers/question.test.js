@@ -431,3 +431,71 @@ describe('DELETE /api/v1/questions/:questionID', () => {
       });
   });
 });
+
+describe('GET /api/v1/questions/:questionID/comments', () => {
+  const questionID = 1;
+  const fakeQuestionID = 99;
+  const invalidToken = 'lisjd009223klkj.josidjd002ja//ljalekq123';
+
+  it('should return error if no token was provided', (done) => {
+    chai.request(app)
+      .get(`/api/v1/questions/${questionID}/comments`)
+      .set('x-access-token', '')
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  it('should return error if provided token is invalid', (done) => {
+    chai.request(app)
+      .get(`/api/v1/questions/${questionID}/comments`)
+      .set('x-access-token', invalidToken)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  // user to obtain user with/without admin rights - users created by DB Seeder
+  const regularUser = {
+    email: 'e.genius@gmail.com',
+    password: 'questioner40',
+  };
+
+  // obtain token
+  let loginResponse;
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(regularUser)
+      .end((err, res) => {
+        [loginResponse] = res.body.data;
+        done();
+      });
+  });
+
+  it('should error if question does not exist', (done) => {
+    chai.request(app)
+      .get(`/api/v1/questions/${fakeQuestionID}/comments`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
+        done();
+      });
+  });
+
+  it('should return all available question comments in the database', (done) => {
+    chai.request(app)
+      .get(`/api/v1/questions/${questionID}/comments`)
+      .set('x-access-token', loginResponse.token)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.success);
+        res.body.should.have.property('data');
+        res.body.data[0].should.have.property('comment').eql('Beautiful question');
+        res.body.data[1].should.have.property('comment').eql('This question is a question');
+        res.body.data[2].should.have.property('comment').eql('This really helped me. Thank you');
+        done();
+      });
+  });
+});

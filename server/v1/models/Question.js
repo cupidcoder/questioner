@@ -9,6 +9,7 @@ const Question = {
     returning *`,
   getOneQuery: 'SELECT * FROM questions WHERE id = $1',
   deleteOneQuery: 'DELETE FROM questions WHERE id = $1',
+  getCommentsQuery: 'SELECT * FROM comments WHERE question_id = $1',
 };
 
 export default Question;

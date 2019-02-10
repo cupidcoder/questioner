@@ -148,7 +148,8 @@ const seedQueries = {
     INSERT INTO comments(comment, user_id, question_id)
       VALUES ('Beautiful question', 2, 1),
               ('Very thoughful', 1, 2),
-              ('This question is a question', 1, 1)
+              ('This question is a question', 1, 1),
+              ('This really helped me. Thank you', 3, 1)
   `,
 
   votesTable: `
