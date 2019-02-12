@@ -1,0 +1,924 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the documentation for the questioner app backend api. The api is located at https://questioner40.herokuapp.com",
+    "version": "1",
+    "title": "Questioner API",
+    "contact": {
+      "email": "chukwudi_ume@hotmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/swagger-api/swagger-ui/blob/master/LICENSE"
+    }
+  },
+  "host": "questioner40.herokuapp.com",
+  "basePath": "/api/v1",
+  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/auth/singup": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Registers a new User on the application",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "firstname",
+            "in": "body",
+            "description": "First name of the new user",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "lastname",
+            "in": "body",
+            "description": "Last name of the new user",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "email",
+            "in": "body",
+            "description": "Email of the new user",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "password",
+            "in": "body",
+            "description": "Password of the new user",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Account created successfully",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "email has already been used / Field is not allowed to be empty"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Logs in a User on the application",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "email",
+            "in": "body",
+            "description": "Email of the user",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "password",
+            "in": "body",
+            "description": "Password of the user",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "403": {
+            "description": "Incorrect email/password"
+          }
+        }
+      }
+    },
+    "/meetups": {
+      "post": {
+        "tags": ["Meetup"],
+        "summary": "Creates a meetup record",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "location",
+            "in": "body",
+            "description": "Where the meetup would be taking place",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "topic",
+            "in": "body",
+            "description": "Topic of discussion",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "in": "body",
+            "description": "What the meetup is about",
+            "required": true
+          },
+          {
+            "type": "string",
+            "format": "date-time",
+            "name": "happeningOn",
+            "in": "body",
+            "description": "When the meetup is taking place",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Meetup created successfully",
+            "schema": {
+              "$ref": "#/definitions/Meetup"
+            }
+          },
+          "401": {
+            "description": "You do not have permission to create meetup"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      },
+      "get": {
+        "tags": ["Meetup"],
+        "summary": "Gets all meetup records",
+        "description": "",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Meetups retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Meetup"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/meetups/upcoming": {
+      "get": {
+        "tags": ["Meetup"],
+        "summary": "Gets all upcoming meetup records",
+        "description": "",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Meetups retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Meetup"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/meetups/{meetupID}": {
+      "get": {
+        "tags": ["Meetup"],
+        "summary": "Retrieve a specific meetup record",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "meetupID",
+            "in": "path",
+            "description": "ID of the meetup to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meetup retrieved",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Meetup"
+              }
+            }
+          },
+          "404": {
+            "description": "Meetup not found"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Meetup"],
+        "summary": "Delete a meetup",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "meetupID",
+            "in": "path",
+            "description": "ID of the meetup to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meetup deleted successfully",
+            "schema": {
+              "type": "array",
+              "items": null
+            }
+          },
+          "401": {
+            "description": "You do not have permission to delete meetup"
+          },
+          "404": {
+            "description": "Meetup not found"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/meetups/{meetupID}/questions": {
+      "get": {
+        "tags": ["Meetup"],
+        "summary": "Retrieve questions under a meetup",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "meetupID",
+            "in": "path",
+            "description": "ID of the meetup to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Question"
+              }
+            }
+          },
+          "403": {
+            "description": "Meetup does not exist"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/meetups/{meetupID}/rsvp": {
+      "post": {
+        "tags": ["Meetup"],
+        "summary": "RSVP to a meetup",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "meetupID",
+            "in": "path",
+            "description": "ID of the meetup to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "response",
+            "in": "body",
+            "description": "User's response",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "yes",
+                "no",
+                "maybe"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Response submitted successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/rsvp"
+              }
+            }
+          },
+          "403": {
+            "description": "Cannot respond to a meetup that does not exist | You have already responded to this meetup"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/meetups/{meetupID}/tags": {
+      "patch": {
+        "tags": ["Meetup"],
+        "summary": "Add tags to a meetup",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "meetupID",
+            "in": "path",
+            "description": "ID of the meetup to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "tags",
+            "in": "body",
+            "description": "Tags to be added to meetup",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tags have been added successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Meetup"
+              }
+            }
+          },
+          "401": {
+            "description": "You do not have permission to add tags"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/meetups/{meetupID}/images": {
+      "patch": {
+        "tags": ["Meetup"],
+        "summary": "Add images to a meetup",
+        "description": "",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "meetupID",
+            "in": "path",
+            "description": "ID of the meetup to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "images",
+            "in": "formData",
+            "description": "Images to be added to meetup",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image(s) uploaded successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Meetup"
+              }
+            }
+          },
+          "401": {
+            "description": "You do not have permission to add images"
+          },
+          "403": {
+            "description": "Cannot add images to a meetup that does not exist"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/questions": {
+      "post": {
+        "tags": ["Question"],
+        "summary": "Creates a question record",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "meetupID",
+            "in": "body",
+            "description": "The id of the meetup the question is being posted to",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "title",
+            "in": "body",
+            "description": "Title of question",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "body",
+            "in": "body",
+            "description": "Question body",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Question submitted successfully",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "400": {
+            "description": "Cannot post question to a meetup that does not exist"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/questions/{questionID}/upvote": {
+      "patch": {
+        "tags": ["Question"],
+        "summary": "Upvotes a question",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "questionID",
+            "in": "path",
+            "description": "The id of the question",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vote recorded successfully",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "400": {
+            "description": "Cannot upvote a question that does not exist"
+          },
+          "403": {
+            "description": "Your vote has already been recorded"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/questions/{questionID}/downvote": {
+      "patch": {
+        "tags": ["Question"],
+        "summary": "Downvote a question",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "questionID",
+            "in": "path",
+            "description": "The id of the question",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vote recorded successfully",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "400": {
+            "description": "Cannot downvote a question that does not exist"
+          },
+          "403": {
+            "description": "Your vote has already been recorded"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/questions/{questionID}": {
+      "delete": {
+        "tags": ["Question"],
+        "summary": "Delete a question",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "questionID",
+            "in": "path",
+            "description": "The id of the question",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Question deleted successfully",
+            "type": "array",
+            "schema": {
+              "type": "array",
+              "items": null
+            }
+          },
+          "403": {
+            "description": "Question does not exist"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/questions/{questionID}/comments": {
+      "get": {
+        "tags": ["Question"],
+        "summary": "Get all question comments",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "questionID",
+            "in": "path",
+            "description": "The id of the question",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comments retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          },
+          "403": {
+            "description": "Question does not exist"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/comments": {
+      "post": {
+        "tags": ["Comment"],
+        "summary": "Creates a comment record",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "questionID",
+            "in": "body",
+            "description": "The id of the question the comment is being posted to",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "comment",
+            "in": "body",
+            "description": "The comment to be posted",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Your comment has been submitted",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "403": {
+            "description": "Cannot post comment to a question that does not exist"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    },
+    "/comments/{commentID}": {
+      "delete": {
+        "tags": ["Comment"],
+        "summary": "Delete a comment record",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "commentID",
+            "in": "path",
+            "description": "The id of the question the comment is being posted to",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment deleted successfully",
+            "type": "array",
+            "schema": {
+              "type": "array",
+              "items": null
+            }
+          },
+          "403": {
+            "description": "Comment does not exist"
+          },
+          "401": {
+            "description": "Only admin and comment owner can delete comment"
+          }
+        },
+        "security": [
+          {
+            "x-access-token": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "x-access-token": {
+      "type": "apiKey",
+      "name": "x-access-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "registered_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "is_admin": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Meetup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "location": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "happening_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "images": {
+          "type": "array",
+          "xml": {
+            "name": "imageUrl",
+            "wrapped": true
+            },
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "xml": {
+        "name": "Meetup"
+      }
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "meetup_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Question"
+      }
+    },
+    "rsvp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "meetup_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "response": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "rsvp"
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "question_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "xml": {
+        "name": "Comment"
+      }
+    },
+    "Vote": {
+      "type": "object",
+      "properties": {
+        "up": {
+          "type": "boolean"
+        },
+        "down": {
+          "type": "boolean"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "question_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "xml": {
+        "name": "Vote"
+      }
+    }
+  }
+}
