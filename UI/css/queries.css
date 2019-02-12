@@ -1,0 +1,602 @@
+@media screen and (min-width: 1400px) {
+    .body {
+      width: 1370px;
+    }
+  }
+  @media screen and (min-width: 1600px) {
+    .body {
+      width: 1570px;
+    }
+  }
+  @media screen and (min-width: 1900px) {
+    .body {
+      width: 1870px;
+    }
+  }
+
+/* Media queries for big tablets to 1200px (Widths smaller than the 1140px row) */
+@media only screen and (max-width: 1200px) {
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavCopy {display: inline-block;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 75%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    /* Create meetup Section */
+    #createBtn {left: 50%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 85%;}
+}
+
+/* Media queries for small tablets to big tablets from 768px to 1024px */
+@media only screen and (max-width: 1024px) {
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 75%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    /*
+    * Meet Up Details Section
+    */ 
+    #meetUpDetailsSection {height: 100vh;}
+
+    #postQuestionBox a {left: 88%;}
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 90vh;}
+
+    /*
+    * Meetups Section
+    */
+
+    #meetUpsSection {height: 90vh;}
+
+    .meetupBox {
+        margin-left: 40px;
+        height: 300px;
+        width: 20%;
+        background-color: #fff;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 30%; }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 30%;
+        margin-left: 35%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 80vh;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 50%;
+    }
+
+    /* Create meetup Section */
+    #createBtn {left: 52%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 81%;}
+
+}
+
+/* Media queries for medium sized devices from 481px to 855px */
+@media only screen and (max-width: 855px) {
+
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 70%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    #landingPageHeroImage h1 {
+        font-size: 200%;
+    }
+
+    /*
+    *   Meetup Details page
+    */
+
+    #meetUpDetailsImage {display: none;}
+
+    #meetUpDetailsInfo {
+        display: block;
+        margin-left: 10%;
+        width: 90%;
+    }
+
+    #postQuestionBox a {left: 88%;}
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
+    }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100vh;}
+
+    #meetupListingSection {
+        width: 80%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 120%;
+    }
+
+    /*
+    * Meetups Section
+    */
+
+    #meetUpsSection {height: 100%;}
+
+    .meetupBox {
+        margin-left: 50px;
+        height: 300px;
+        width: 40%;
+        display: block;
+        background-color: #fff;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 40%; }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 40%;
+        margin-left: 30%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 80vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 70%;
+    }
+
+    /* Meetup comments */
+    #postCommentBox button{left: 75%;}
+}
+
+/* Media queries for medium sized devices from 481px to 650px */
+@media only screen and (max-width: 650px) {
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 60%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    #dashboardSectionSummary {padding-bottom: 15px;}
+    
+    /*
+    * Dashboard Section
+    */
+
+    .dashboardStat {float: none;}
+
+    #summaryBox {
+        width: 100%;
+        margin-top: 65px;
+    }
+
+    #feedBox {width: 100%;}
+
+    /*
+    *   Meetup Details page
+    */
+
+    #postQuestionBox a {left: 81%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 85%;}
+}
+
+/* Media queries for small phones from 0 to 480px */
+@media only screen and (max-width: 480px) {
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 40%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    #dashboardSectionSummary {padding-bottom: 15px;}
+    
+    /*
+    * Dashboard Section
+    */
+
+    .dashboardStat {float: none;}
+
+    #summaryBox {
+        width: 100%;
+        margin-top: 65px;
+    }
+
+    #feedBox {width: 100%;}
+
+    /*
+    *   Meetup Details page
+    */
+
+    .sectionHeading {font-size: 100%;}
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
+        font-size: 80%;
+    }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100vh;}
+
+    #meetupListingSection {
+        width: 90%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 80%;
+    }
+
+    /*
+    * Meetups Section
+    */
+
+    #meetUpsSection {height: 100%;}
+
+    .meetupBox {
+        margin-left: 40px;
+        height: 300px;
+        width: 80%;
+        display: block;
+        background-color: #fff;
+        border-radius: 10px;
+        margin-bottom: 40px;
+    }
+
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 100%; }
+
+    #passwordResetFormBox input {
+        padding: 10%;
+        font-size: 120%;
+        margin-bottom: 10px;
+    }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 70vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Create meetup Section */
+    #createBtn {left: 6%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 52%;}
+}
+
+/* Media queries for small phones from 0 to 375px */
+@media only screen and (max-width: 375px) {
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 40%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+
+    #dashboardSectionSummary {padding-bottom: 15px;}
+    
+    /*
+    * Dashboard Section
+    */
+
+    .dashboardStat {float: none;}
+
+    #summaryBox {
+        width: 100%;
+        margin-top: 65px;
+    }
+
+    #feedBox {width: 100%;}
+
+    /*
+    *   Meetup Details page
+    */
+
+    .sectionHeading {font-size: 100%;}
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
+        font-size: 80%;
+    }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100%;}
+
+    #meetupListingSection {
+        width: 90%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 80%;
+    }
+
+    /*
+    * Meetups Section
+    */
+
+    #meetUpsSection {height: 100%;}
+
+    .meetupBox {
+        margin-left: 40px;
+        height: 300px;
+        width: 80%;
+        display: block;
+        background-color: #fff;
+        border-radius: 10px;
+        margin-bottom: 40px;
+    }
+
+    /*
+    * Password reset Section
+    */
+
+    #passwordResetFormBox { width: 100%; }
+
+    #passwordResetFormBox input {
+        padding: 5%;
+        font-size: 120%;
+        margin-bottom: 10px;
+    }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 70vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Create meetup Section */
+    #createBtn {left: -3%;}
+
+    /* Meetup comments */
+    #postCommentBox button{left: 44%;}
+}
+
+/* Media queries for small phones from 0 to 320px */
+@media only screen and (max-width: 320px) {
+
+    /* Header */
+    #headerNav {display: none;}
+
+    #headerNavBurger {
+        display: inline-block;
+        margin-left: 40%;
+    }
+
+    #headerNavBurger i {
+        font-size: 150%;
+        color: #fff;
+    }
+    
+    /* Landing page headerNav */
+    #headerNav {
+        font-size: 90%;
+    }
+
+    /* Hero image text */
+    #landingPageHeroImage h1 { font-size: 100%; }
+
+    #landingPageHeroImage p { font-size: 70%; }
+
+    /*
+    *   Meetup Details page
+    */
+
+    .sectionHeading {font-size: 100%;}
+
+    .meetUpDetailsInfoDesc {
+        margin-left: 0;
+        overflow-wrap: break-word;
+        font-size: 70%;
+    }
+
+    /*
+    * My meetups Section
+    */
+
+    #myMeetupSection {height: 100vh;}
+
+    #meetupListingSection {
+        width: 90%;
+        display: block;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        font-size: 70%;
+    }
+
+    /*
+    * Password reset Section
+    */
+
+    #headerNavCopy p {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 7px;
+    }
+
+    .passwordResetSubHeading {
+        font-size: 90%;
+        width: 70%;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    #passwordResetFormBox { width: 100%; }
+
+    #passwordResetFormBox input {
+        padding: 1%;
+        font-size: 113%;
+        margin-bottom: 10px;
+    }
+
+    /*
+    * Sign in / Sign up Section
+    */
+
+    .form {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    #signUpSection, #signInSection, #passwordResetSection {
+        height: 70vh;
+        width: 100%;
+    }
+
+    #signUpImage, #signInImage {
+        display: none;
+    }
+
+    /* Sign Up / Sign In Form */
+    #signUpFormSection, #signInFormSection {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Meetup comments */
+    #postCommentBox button{left: 40%;}
+}

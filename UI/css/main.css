@@ -1,0 +1,837 @@
+/*==== Main CSS for application ===*/
+
+
+/*
+* General CSS
+*/
+
+/* Fonts */
+@font-face {
+    font-family: Boing;
+    src: url(fonts/Boing_SemiboldWEB.woff);
+}
+
+/* HTML */
+html {
+    /* max-width: 1400px; */
+    margin: 0 auto;
+}
+
+/* Body */
+
+body {
+    font-family: Boing, serif;
+    font-size: 25px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* links */
+
+a { text-decoration: none; }
+
+a:link, a:visited {
+    color: #fff;
+}
+
+/* Lists */
+li {list-style-type:none;}
+
+/* Buttons */
+.darkBtn,
+.darkBtn:link,
+.darkBtn:visited {
+    padding: 10px 25px;
+    background-color: #305b8c;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    font-size: 70%;
+    transition: all .4s;
+}
+
+/* Background images */
+.bgImage {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* Image headers */
+.imageHeading {
+    height: 180px;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../img/uploads/sm-hero.jpg");
+    margin-bottom: 20px;
+}
+
+.imageHeading h3 {
+    color: #fff !important;
+}
+
+/* Forms */
+.form {
+    padding: 0 40px;
+    display: block;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 100%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.form p:first-child {
+    font-size: 80%;
+    color: #305b8c;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 15px;
+}
+
+.formSmallText {font-size: 45%;}
+
+.formSmallText a {
+    color: #305b8c !important;
+    text-decoration: underline;
+}
+
+.form input {
+    padding: 4%;
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    display: block;
+}
+
+.createForm {
+    padding: 0 40px;
+    display: block;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.resetForm {
+    padding: 0 30px;
+    padding-top: 25px;
+    display: block;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 80%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.resetForm p:first-child {
+    color: #305b8c;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 15px;
+}
+
+.resetForm input {
+    width: 80%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.signinForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.signUpForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.createMeetupForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 30px;
+}
+
+.passwordResetForm {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 30px;
+}
+
+
+/* Icons */
+/* i {color: #305b8c;} */
+
+.thumbs-down-red {color: #352b35;}
+
+.thumbs-up-green {color: green !important;}
+
+/* Inputs */
+input:focus {
+    outline-color: #f39e3e;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.iconText {float: right;}
+
+.clear {clear: both;}
+
+.sectionBackground {background-color: #e6e6e6;}
+
+
+footer {
+    font-size: 120%;
+    text-align: center;
+    font-family: 'Tangerine', cursive !important;
+    color: #305b8c;
+    height: 50px;
+}
+
+footer p { 
+    margin: 0;
+    padding-top: 10px;
+}
+
+/* Container */
+.row {
+    width: 1140px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.row:not(:last-child) {margin-bottom: 50px;}
+
+.col-1-of-4 {
+    float: left;
+    width: calc((100% - 18px) / 4);
+}
+
+.col-1-of-4:not(:last-child) {margin-right: 6px;}
+
+/*
+* End of General CSS
+*/
+
+
+
+
+
+/*
+* Landing Page
+*/
+
+
+
+/* Header */
+#landingHeader {
+    background-color: #f39e3e;
+}
+
+.headerDiv {
+    display: inline-block;
+}
+
+#headerLogo {
+    font-family: 'Tangerine', cursive !important;
+    font-size: 120%;
+    padding-left: 1%;
+}
+
+#headerNav {float: right;}
+
+#headerNavCopy {float: right;}
+
+#headerNav p {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+#headerNavCopy p {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+#burgerMenuNav {
+    display: none;
+    text-align: center;
+}
+
+#burgerMenuNav p {
+    padding-bottom: 2px;
+    margin: 0;
+}
+
+#burgerMenuNav p:not(:last-child) {border-bottom: 1px solid #305b8c;}
+
+#headerNavBurger {display: none;}
+
+#headerNavBurger:hover {cursor: pointer;}
+
+#headerNavCopy {display: none;}
+
+#headerNav p:not(:last-child) {border-right: 3px solid #305b8c;}
+
+#headerNavCopy p:not(:last-child) {border-right: 3px solid #305b8c;}
+
+
+/* Hero Image */
+#landingPageHeroImage {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/bg-hero.jpg");
+    width: 100%;
+    height: 80vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align:center;
+    margin:auto;
+    padding:0;
+}
+
+#landingPageHeroImage h1 {
+    font-size: 180%;
+    font-weight: lighter;
+    margin: auto;
+    padding-top: 250px;
+    color: #fff;
+}
+
+#landingPageHeroImage p {
+    margin-top:35px;
+    font-size: 100%;
+}
+
+/*
+* End of Landing Page
+*/
+
+
+/*
+* Sign Up section / Sign In section
+*/
+
+#signInSection, #passwordResetSection {
+    height: 75vh;
+}
+
+#signUpSection {height: 80vh;}
+
+/* Sign Up / Sign In Form */
+#signUpFormSection, #signInFormSection {
+    height: 80vh;
+    position: relative;
+}
+
+
+/*
+* Meetups Section
+*/
+
+#meetUpsSection {
+    height: 95vh;
+    overflow-y: auto;
+}
+
+
+.sectionHeading {
+    margin: 0 0 30px 0;
+    text-align: center;
+    padding: 20px 0 25px 0;
+    color: #305b8c;
+    font-size: 130%;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.meetupBox {
+    height: 320px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3.5px #4c4a4a;
+}
+
+.meetupImage {
+    transition: all .2s;
+    height: 60%;
+}
+
+.meetupImage:hover {
+    transform: scale(.97);
+}
+
+.meetupBox img {
+    width: 100%;
+    height: 100%;
+}
+
+.meetupBoxInfo {
+    width: 100%;
+    overflow: hidden;
+}
+
+.meetupBoxAdmin {
+    height: 114px;
+    border-top: 4px solid #e6e6e6;
+}
+
+.meetupBoxInfo p {
+    text-align: center;
+    color: #305b8c;
+    font-size: 60%;
+    font-weight: 700;
+    overflow-wrap: break-word;
+}
+
+.meetupBoxInfo div { display: inline-block; }
+.meetupBoxInfo div:not(:last-child) {margin-right: 15%;}
+
+.attendeesLogo {
+    cursor: pointer;
+}
+
+.questionsLogo {
+    margin-left: 20%;
+    cursor: pointer;
+}
+
+.deleteLogo {
+    margin-left: 10%;
+    cursor: pointer;
+}
+
+.editLogo {
+    margin-left: 20%;
+    cursor: pointer;
+}
+
+.adminMeetupEdit i {color: #222a33;}
+
+.adminMeetupDelete i {color: #352b35;}
+
+
+/*
+* Meetup Details Section
+*/
+
+#meetUpDetailsSection {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#meetUpDetailsImage {
+    width: 40%;
+    height: 100%;
+}
+
+#meetupEventDetails {
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+#meetupEventDetails i {
+    margin-left: 15px;
+    color: #009012;
+}
+
+#meetupDescription {
+    margin-bottom: 100px;
+    padding: 10px;
+    /* border: 1px solid #f39e3e; */
+    border-radius: 5px;
+}
+
+#meetupDescTitle {
+    border-bottom: 1px solid #4c4a4a;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+#rsvpBox {
+    position: relative;
+}
+
+.rsvpBadge {
+    display: inline-block;
+    padding-right: 10px;
+    height: 40px;
+    font-size: 70%;
+    transition: all .2s;
+}
+
+.rsvpBadge:hover {
+    transform: translateY(-2px);
+}
+
+.rsvpBadge p {
+    padding: 10px;
+    margin-top: 0;
+    border-radius: 5px;
+}
+
+.badgeRight {
+    float: right;
+    cursor: pointer;
+    color: #fff;
+}
+
+#rsvp p {
+    background-color: #fff;
+}
+
+#yesBadge p {background-color: green;}
+
+#noBadge p {background-color: #352b35;}
+
+#maybeBadge p {background-color: #305b8c;}
+
+#rsvp span {
+    border-left: 1px solid #f39e3e;
+    padding-left: 5px;
+}
+
+
+#meetUpDetailsImage img {
+    padding: 0 10%;
+    width: 60%;
+    height: 40%;
+    /* border-right: 1px solid #4c4a4a; */
+}
+
+#meetUpDetailsInfo {
+    width: 60%;
+    height: 100%;
+}
+
+.meetUpDetailsInfoDesc {
+    width: 81%;
+    text-align: left;
+    margin-left: -60px;
+    margin-bottom: 30px;
+}
+
+.details {float: left;}
+
+.meetUpDetailsQuestion {
+    height: 100px;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0 0 14px 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+
+.meetUpDetailsQuestion p {
+    padding: 10px;
+    overflow-wrap: break-word;
+    color: #4c4a4a;
+}
+
+.meetUpDetailsQuestion i {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#postQuestionBox {
+    background-color: transparent !important;
+    position: relative;
+    margin-bottom: 90px;
+}
+
+#postQuestionBox textarea{
+    width: 100%;
+    background-color: #fff;
+    height: 100%;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: -15px;
+}
+
+#postQuestionBox a {
+    color: #fff;
+    position: absolute;
+    right: 0;
+}
+
+
+#meetupCommentBackground {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+#meetUpCommentSection {
+    margin: 15% auto;
+    width: 50%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 10px 0;
+}
+
+.meetupDetailsCommentBtn:hover {
+    cursor: pointer;
+}
+
+.close {
+    color: rgba(243, 158, 62, 0.5);
+    float: right;
+    font-size: 200%;
+    font-weight: bold;
+    margin-top: -9px;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(243, 158, 62);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#meetUpCommentSection h3 {
+    margin: 0;
+    text-align: center;
+}
+
+#commentContainer {
+    display: block;
+    height: 100%;
+    margin: auto;
+}
+
+#postCommentBox { 
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.commentBox {
+    width: 80%;
+    display: block;
+    margin-left: 10%;
+    padding-bottom: 5px;
+    font-size: 60%;
+    margin-bottom: 15px;
+}
+
+.commentBox p {margin:0;}
+
+.commentAuthor {
+    /* background-color: #e6e6e6; */
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 3px;
+    text-align: right;
+    margin-bottom: 2px;
+}
+
+.commentAuthor span {
+    color: #305b8c;
+    font-weight: bold;
+}
+
+.commentAuthor + p {padding-top: 5px;}
+
+#postCommentBox textarea {
+    width: 96%;
+    padding: 2%;
+    border-radius: 5px;
+}
+
+#postCommentBox button{
+    color: #fff;
+    position: absolute;
+    right: 0;
+}
+
+
+/*
+* Password reset Section
+*/
+
+#passwordResetSection {
+    text-align: center;
+    height: 80vh;
+}
+
+.passwordResetSubHeading {
+    border-bottom: 1px dotted #4c4a4a;
+    width: 70%;
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+#passwordResetFormBox {
+    height: 60vh;
+    display: block;
+    position: relative;
+}
+
+/*
+* Create Meetup Section
+*/
+
+#createMeetupSection {
+    height: 100%;
+}
+
+.createMeetupEntryBox {
+    height: 90vh;
+    display: block;
+    text-align: center;
+    padding-bottom: 50px;
+    position: relative;
+}
+
+.createMeetupEntryBoxForm {font-size: 60%;}
+
+.createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
+    border: 2px solid #e6e6e6;
+    padding: 10px;
+    width: 97%;
+}
+
+.createMeetupEntryBoxForm input[type="file"] {margin-bottom: 15px;}
+
+#createBtn {
+    margin-top: 30px;
+}
+
+
+/*
+*  Dashboard Section
+*/
+
+#dashboardSectionSummary {
+    width: 90%;
+    display: block;
+    margin: auto;
+}
+
+.dashboardStat {float: left;}
+
+.dashboardStatBox {
+    background-color: #fff;
+    margin: 30px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dashboardStatBoxIcon {font-size: 200%;}
+
+#summaryBoxMeetupLink {
+    color: #305b8c !important;
+}
+
+#summaryBox {
+    width: 30%;
+    margin-top: 65px;
+}
+
+#feedBox {width: 70%;}
+
+#feedBox h2 {color: #305b8c;}
+
+#feedBoxQuestions {
+    background-color: #fff;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+    margin-bottom: 40px;
+}
+
+#feedBoxQuestions h4 {
+    padding: 30px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+#feedBoxQuestions a {color: #000;}
+
+#feedBoxQuestions a:hover {
+    text-decoration: underline;
+}
+
+.feedQuestion {
+    width: 80%;
+    display: block;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #4c4a4a;
+    padding-bottom: 5px;
+}
+
+.feedQuestion i {padding: 5px;}
+
+.profileBox {box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);}
+
+
+/*
+* My Meetup Section
+*/
+
+#myMeetupSection {
+    height: 80vh;
+}
+
+.meetupListingQuestion {
+    border-radius: 5px;
+    width: 70%;
+    /* padding: 40px; */
+    display: block;
+    margin-left: 15%;
+    background-color: #fff;
+    box-shadow: 2px 2px #4c4a4a;
+    margin-bottom: 20px;
+}
+
+.meetupListingQuestionWrapper {color: #000 !important;}
+
+.meetupListingQuestion p {display: inline-block;}
+
+.meetupListingQuestion i {margin-left: 5%;}
+
+.meetupListingQuestion div {display: inline-block;}
+
+.meetupListItem {float: left;}
+
+.meetupListQuestion {
+    width: 70%;
+}
+
+.meetupListDelete {
+    width: 30%;
+    padding-top: 25px;
+}
+
+.meetupListDelete i {
+    font-size: 80%;
+}
+
+#deleteMeetupButton {color: #4c4a4a;}
+
+#editMeetupButton {color: red;}
+
+.editDeleteMeetupButton:hover {cursor: pointer;}
+
