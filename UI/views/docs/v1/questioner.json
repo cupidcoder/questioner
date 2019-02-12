@@ -19,7 +19,7 @@
     "https"
   ],
   "paths": {
-    "/auth/singup": {
+    "/auth/signup": {
       "post": {
         "tags": ["Auth"],
         "summary": "Registers a new User on the application",
