@@ -196,6 +196,11 @@ const Meetup = {
       response.setFailure(statusCodes.unauthorized, 'You do not have permission to add tags');
       return response.send(res);
     }
+    const meetupRecord = await Meetup.findOne(req.params.id);
+    if (meetupRecord.length === 0) {
+      response.setFailure(statusCodes.forbidden, 'Meetup does not exist');
+      return response.send(res);
+    }
     try {
       const { rows, rowCount } = await db.query(MeetupModels.updateTags,
         [req.params.id, req.body.tags]);
