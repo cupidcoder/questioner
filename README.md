@@ -18,10 +18,16 @@
 - Users can downvote a question
 - Users can comment on a question
 - Admin Users can delete meetup
+- Admin Users can add tags to a meetup
+- Admin Users can add images to a meetup
+- Users can see all questions asked on a meetup
+- Users can see all comments made to a question
+- Admin User or question owner can delete question
+- Admin User or comment owner can delete comment
 ---
 
 ## Templates
-UI template for the application is hosted on [Github pages](https://cupidcoder.github.io/questioner)
+UI template for the application is hosted on [Github pages](https://cupidcoder.github.io/questioner/UI)
 
 ---
 
@@ -45,6 +51,8 @@ UI template for the application is hosted on [Github pages](https://cupidcoder.g
 
 The API endpoints are hosted on [Heroku](#https://heroku.com) - https://questioner40.herokuapp.com/api/v1/
 
+API documentation was created using Swagger-UI and can be viewed at [API Documentation](https://cupidcoder.github.io/questioner/UI/views/docs/v1) - https://cupidcoder.github.io/questioner/UI/views/docs/v1 
+
 METHOD | DESCRIPTION | ENDPOINTS
 -------|-------------|-----------
 POST   | User registration | `/api/v1/auth/signup`
@@ -59,6 +67,13 @@ POST   | Post a question to a meetup     | `/api/v1/questions`
 POST   | Post a comment to a question     | `/api/v1/comments`
 PATCH  | Upvote a question | `/api/v1/questions/:questionID/upvote`
 PATCH  | Downvote a question | `/api/v1/questions/:questionID/downvote`
+PATCH  | Add tags | `/api/v1/meetups/:meetupID/tags`
+PATCH  | Add images | `/api/v1/meetups/:meetupID/images`
+GET    | Get all meetup questions | `/api/v1/meetups/:meetupID/questions`
+GET    | Get all question comments | `/api/v1/questions/:questionID/comments`
+DELETE | Delete question | `/api/v1/questions/:questionID`
+DELETE | Delete comment | `/api/v1/comments/:commentID`
+
 
 
 ---
@@ -70,6 +85,14 @@ PATCH  | Downvote a question | `/api/v1/questions/:questionID/downvote`
 #### Clone
 
 - Clone this repo to your local machine using `git clone https://github.com/cupidcoder/questioner.git`
+
+#### Database Credentials
+
+- Create a new PostgreSQL database and user. Also ensure to grant all database privileges to the user.
+
+#### Environment variables
+
+- Create a `.env` file using the contents in the `.env.example` file, replacing the placeholder with actual values
 
 #### Setup
 
@@ -87,7 +110,7 @@ $ npm install
 $ npm start
 ```
 
-> Navigate to `http://localhost:7000/api/v1` to use the application
+> Consume endpoints at `http://localhost:7000/api/v1`
 
 
 ---
@@ -101,6 +124,10 @@ $ npm test
 ```
 
 ---
+
+## Acknowledgements
+
+* Andela
 
 ## Author
 

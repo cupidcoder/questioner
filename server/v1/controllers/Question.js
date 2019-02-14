@@ -113,7 +113,7 @@ const Question = {
       response.setSuccess(statusCodes.created, 'Question submitted successfully', rows[0]);
       return response.send(res);
     } catch (error) {
-      response.setFailure(statusCodes.badRequest, 'Non existent user ID was supplied');
+      response.setFailure(statusCodes.badRequest, 'Some error occurred. Try again');
       return response.send(res);
     }
   },

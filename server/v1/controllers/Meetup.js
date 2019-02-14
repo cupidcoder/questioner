@@ -196,6 +196,11 @@ const Meetup = {
       response.setFailure(statusCodes.unauthorized, 'You do not have permission to add tags');
       return response.send(res);
     }
+    const meetupRecord = await Meetup.findOne(req.params.id);
+    if (meetupRecord.length === 0) {
+      response.setFailure(statusCodes.forbidden, 'Meetup does not exist');
+      return response.send(res);
+    }
     try {
       const { rows, rowCount } = await db.query(MeetupModels.updateTags,
         [req.params.id, req.body.tags]);
@@ -217,7 +222,7 @@ const Meetup = {
   async addImages(req, res) {
     const response = new APIResponse();
     if (!req.user.isAdmin) {
-      response.setFailure(statusCodes.unauthorized, 'You do not have permission to add tags');
+      response.setFailure(statusCodes.unauthorized, 'You do not have permission to add images');
       return response.send(res);
     }
     if (!req.files) {
@@ -226,7 +231,7 @@ const Meetup = {
     }
     const meetupRecord = await Meetup.findOne(req.params.id);
     if (meetupRecord.length === 0) {
-      response.setFailure(statusCodes.forbidden, 'Cannot respond to a meetup that does not exist');
+      response.setFailure(statusCodes.forbidden, 'Meetup does not exist');
       return response.send(res);
     }
     const imagesArray = [];
@@ -260,7 +265,7 @@ const Meetup = {
     }
     try {
       const { rows } = await db.query(MeetupModels.getQuestionsQuery, [req.params.id]);
-      response.setSuccess(statusCodes.success, 'Quetions retrieved successfully', rows);
+      response.setSuccess(statusCodes.success, 'Questions retrieved successfully', rows);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');

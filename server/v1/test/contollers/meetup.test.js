@@ -600,6 +600,7 @@ describe('PATCH /api/v1/meetups/:id/tags', () => {
   };
   const fakeToken = 'liojlklaodoie123DSDD.laodiw!!lljad';
   const meetupID = 3; // As created by the DB seeder
+  const fakeMeetupID = 99;
 
   it('should return error if token is not provided', (done) => {
     chai.request(app)
@@ -670,6 +671,17 @@ describe('PATCH /api/v1/meetups/:id/tags', () => {
       .send(invalidTagsObj)
       .end((err, res) => {
         res.should.have.status(statusCodes.badRequest);
+        done();
+      });
+  });
+
+  it('should return error if meetup does not exist', (done) => {
+    chai.request(app)
+      .patch(`/api/v1/meetups/${fakeMeetupID}/tags`)
+      .set('x-access-token', adminLoginResponse.token)
+      .send(tagsObject)
+      .end((err, res) => {
+        res.should.have.status(statusCodes.forbidden);
         done();
       });
   });
