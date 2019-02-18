@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf8">
         <link rel="icon" type="image" href="../css/img/favicon.ico">
@@ -22,20 +23,24 @@
                 <p><a href="signin.html">Log In</a></p>
                 <p><a href="signup.html">Sign Up</a></p>
             </div>
+            <div class="clear"></div>
         </header>
         <!-- End of Landing page header -->
 
         <!-- Sign In section -->
         <section id="signInSection" class="sectionBackground">
-            <div id="signInImage" class="bgImage"></div>
-            <div id="signInFormSection">
-                <form class="form">
-                    <p>Sign In <br> <span id="formSubHeading">Don't have an account? Sign up&nbsp;<a href="signup.html">here</a></span></p>
-                    <input type="email" id="email" placeholder="Email" required>
-                    <input type="password" id="f_password" placeholder="Password" required>
-                    <p><a href="admin/meetups.html" class="darkBtn">Sign In</a>&nbsp;<a href="password-reset.html" class="darkBtn" id="resetBtn">Reset</a></p>
-                    <!-- <input type="submit" class="darkBtn" value="Sign In"> -->
-                </form>
+            <div class="row">
+                <div id="signInFormSection">
+                    <form class="form signinForm">
+                        <p>Welcome</p>
+                        <input type="email" id="email" placeholder="Email" required>
+                        <input type="password" id="f_password" placeholder="Password" required>
+                        <p><a href="admin/meetups.html" class="darkBtn">Login</a></p>
+                        <p><span class="formSmallText">Don't have an account? Sign up&nbsp;<a href="signup.html">here</a></span><br>
+                        <span class="formSmallText">Forgot password? Reset&nbsp;<a href="password-reset.html">here</a></span></p>
+                        <!-- <input type="submit" class="darkBtn" value="Login"> -->
+                    </form>
+                </div>
             </div>
         </section>
         <!-- End of Sign In section -->
