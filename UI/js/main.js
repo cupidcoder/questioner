@@ -17,10 +17,10 @@ const meetupCommentBackground = document.getElementById('meetupCommentBackground
 *
 * @return null
 */
-function showBurgerNav() {
+const showBurgerNav = () => {
   const style = (burgerMenuNav.style.display === 'none') ? 'block' : 'none';
   burgerMenuNav.style.display = style;
-}
+};
 
 /*
  * Show comments dialog Box in meetup details page
@@ -28,10 +28,10 @@ function showBurgerNav() {
  * @return null
  */
 
-function showCommentDialog() {
+const showCommentDialog = () => {
   const style = (meetupCommentBackground.style.display === 'none') ? 'block' : 'none';
   meetupCommentBackground.style.display = style;
-}
+};
 
 /*
  * Where window.onclick events are handled
