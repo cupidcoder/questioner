@@ -13,7 +13,7 @@
 
 /* HTML */
 html {
-    max-width: 1400px;
+    /* max-width: 1400px; */
     margin: 0 auto;
 }
 
@@ -21,7 +21,7 @@ html {
 
 body {
     font-family: Boing, serif;
-    font-size: 22px;
+    font-size: 25px;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -39,12 +39,15 @@ a:link, a:visited {
 li {list-style-type:none;}
 
 /* Buttons */
-.darkBtn {
-    padding: 10px;
+.darkBtn,
+.darkBtn:link,
+.darkBtn:visited {
+    padding: 10px 25px;
     background-color: #305b8c;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    font-size: 100%;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    font-size: 70%;
+    transition: all .4s;
 }
 
 /* Background images */
@@ -68,40 +71,104 @@ li {list-style-type:none;}
 
 /* Forms */
 .form {
-    width: 40%; 
+    padding: 0 40px;
     display: block;
-    margin-top: 5%;
-    margin-left: 25%;
-    border: 1px solid #4c4a4a;
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
+    font-size: 100%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
 }
 
 .form p:first-child {
     font-size: 80%;
     color: #305b8c;
-    border-bottom: 1px solid #d0caca;
+    border-bottom: 1px solid #e6e6e6;
     padding-bottom: 15px;
 }
 
-#formSubHeading {font-size: 70%;}
+.formSmallText {font-size: 45%;}
 
-#formSubHeading a {
+.formSmallText a {
     color: #305b8c !important;
     text-decoration: underline;
 }
 
 .form input {
-    padding: 2%;
-    margin-bottom: 5px;
+    padding: 4%;
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    display: block;
+}
+
+.createForm {
+    padding: 0 40px;
+    display: block;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.resetForm {
+    padding: 0 30px;
+    padding-top: 25px;
+    display: block;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 80%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.resetForm p:first-child {
+    color: #305b8c;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 15px;
+}
+
+.resetForm input {
+    width: 80%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.signinForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.signUpForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.createMeetupForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 30px;
+}
+
+.passwordResetForm {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 30px;
 }
 
 
 /* Icons */
-i {color: #305b8c;}
+/* i {color: #305b8c;} */
 
-.thumbs-down-red {color: red;}
+.thumbs-down-red {color: #352b35;}
 
 .thumbs-up-green {color: green !important;}
 
@@ -111,14 +178,14 @@ input:focus {
 }
 
 textarea:focus {
-    outline-color: #f39e3e;
+    outline: none;
 }
 
 .iconText {float: right;}
 
 .clear {clear: both;}
 
-.sectionBackground {background-color: #d0caca;}
+.sectionBackground {background-color: #e6e6e6;}
 
 
 footer {
@@ -133,6 +200,22 @@ footer p {
     margin: 0;
     padding-top: 10px;
 }
+
+/* Container */
+.row {
+    width: 1140px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.row:not(:last-child) {margin-bottom: 50px;}
+
+.col-1-of-4 {
+    float: left;
+    width: calc((100% - 18px) / 4);
+}
+
+.col-1-of-4:not(:last-child) {margin-right: 6px;}
 
 /*
 * End of General CSS
@@ -206,7 +289,7 @@ footer p {
 #landingPageHeroImage {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/bg-hero.jpg");
     width: 100%;
-    height: 70vh;
+    height: 80vh;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -216,14 +299,17 @@ footer p {
 }
 
 #landingPageHeroImage h1 {
-    font-size: 250%;
+    font-size: 180%;
     font-weight: lighter;
     margin: auto;
     padding-top: 250px;
     color: #fff;
 }
 
-#landingPageHeroImage p {margin-top:35px;}
+#landingPageHeroImage p {
+    margin-top:35px;
+    font-size: 100%;
+}
 
 /*
 * End of Landing Page
@@ -234,23 +320,16 @@ footer p {
 * Sign Up section / Sign In section
 */
 
-#signUpSection, #signInSection, #passwordResetSection {
-    height: 70vh;
+#signInSection, #passwordResetSection {
+    height: 75vh;
 }
 
-#signUpSection div, #signInSection div {float: left;}
-
-/* Sign Up / In image */
-#signUpImage, #signInImage {
-    width: 50%;
-    height: 100%;
-    background-image: url('../img/bg-signup.jpg');
-}
+#signUpSection {height: 80vh;}
 
 /* Sign Up / Sign In Form */
 #signUpFormSection, #signInFormSection {
-    width: 50%;
-    height: 100%;
+    height: 80vh;
+    position: relative;
 }
 
 
@@ -259,8 +338,8 @@ footer p {
 */
 
 #meetUpsSection {
-    height: 100%;
-    /* overflow: scroll; */
+    height: 95vh;
+    overflow-y: auto;
 }
 
 
@@ -275,19 +354,28 @@ footer p {
 }
 
 .meetupBox {
-    margin-left: 50px;
-    height: 300px;
-    width: 20%;
-    display: block;
+    height: 320px;
+    width: 90%;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
-    float: left;
-    margin-bottom: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3.5px #4c4a4a;
+}
+
+.meetupImage {
+    transition: all .2s;
+    height: 60%;
+}
+
+.meetupImage:hover {
+    transform: scale(.97);
 }
 
 .meetupBox img {
     width: 100%;
-    height: 60%;
+    height: 100%;
 }
 
 .meetupBoxInfo {
@@ -297,24 +385,21 @@ footer p {
 
 .meetupBoxAdmin {
     height: 114px;
-    background-color: #a59898;
+    border-top: 4px solid #e6e6e6;
 }
 
 .meetupBoxInfo p {
     text-align: center;
     color: #305b8c;
-    font-size: 90%;
+    font-size: 60%;
     font-weight: 700;
     overflow-wrap: break-word;
 }
 
-.meetupBoxInfo div {
-    float: left;
-    padding-left: 2%;
-}
+.meetupBoxInfo div { display: inline-block; }
+.meetupBoxInfo div:not(:last-child) {margin-right: 15%;}
 
 .attendeesLogo {
-    margin-left: 10%;
     cursor: pointer;
 }
 
@@ -323,9 +408,19 @@ footer p {
     cursor: pointer;
 }
 
+.deleteLogo {
+    margin-left: 10%;
+    cursor: pointer;
+}
+
+.editLogo {
+    margin-left: 20%;
+    cursor: pointer;
+}
+
 .adminMeetupEdit i {color: #222a33;}
 
-.adminMeetupDelete i {color: red;}
+.adminMeetupDelete i {color: #352b35;}
 
 
 /*
@@ -378,6 +473,11 @@ footer p {
     padding-right: 10px;
     height: 40px;
     font-size: 70%;
+    transition: all .2s;
+}
+
+.rsvpBadge:hover {
+    transform: translateY(-2px);
 }
 
 .rsvpBadge p {
@@ -398,7 +498,7 @@ footer p {
 
 #yesBadge p {background-color: green;}
 
-#noBadge p {background-color: red;}
+#noBadge p {background-color: #352b35;}
 
 #maybeBadge p {background-color: #305b8c;}
 
@@ -435,6 +535,7 @@ footer p {
     background-color: #fff;
     border-radius: 5px;
     padding: 0 0 14px 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.4);
 }
 
 .meetUpDetailsQuestion p {
@@ -460,14 +561,14 @@ footer p {
     height: 100%;
     margin-bottom: 5px;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
     margin-left: -15px;
 }
 
 #postQuestionBox a {
     color: #fff;
     position: absolute;
-    left: 89%;
+    right: 0;
 }
 
 
@@ -499,7 +600,7 @@ footer p {
 .close {
     color: rgba(243, 158, 62, 0.5);
     float: right;
-    font-size: 273%;
+    font-size: 200%;
     font-weight: bold;
     margin-top: -9px;
 }
@@ -539,7 +640,9 @@ footer p {
 .commentBox p {margin:0;}
 
 .commentAuthor {
-    background-color: #d0caca;
+    /* background-color: #e6e6e6; */
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 3px;
     text-align: right;
     margin-bottom: 2px;
 }
@@ -549,15 +652,18 @@ footer p {
     font-weight: bold;
 }
 
+.commentAuthor + p {padding-top: 5px;}
+
 #postCommentBox textarea {
     width: 96%;
     padding: 2%;
+    border-radius: 5px;
 }
 
 #postCommentBox button{
     color: #fff;
     position: absolute;
-    left: 85%;
+    right: 0;
 }
 
 
@@ -578,27 +684,10 @@ footer p {
 }
 
 #passwordResetFormBox {
-    height: 50%;
-    width: 20%;
+    height: 60vh;
     display: block;
-    margin: auto;
+    position: relative;
 }
-
-#passwordResetFormBox p {
-    text-align: left;
-}
-
-#passwordResetFormBox input {
-    background-color: #fff;
-    padding: 10%;
-    font-size: 120%;
-    margin-bottom: 10px;
-}
-
-#passwordResetFormBox .darkBtn {
-    width: 100%;
-}
-
 
 /*
 * Create Meetup Section
@@ -609,31 +698,25 @@ footer p {
 }
 
 .createMeetupEntryBox {
-    width: 40%;
+    height: 90vh;
     display: block;
-    margin: auto;
-    text-align: left;
+    text-align: center;
     padding-bottom: 50px;
     position: relative;
 }
 
-.createMeetupEntryBoxForm p {
-    font-weight: 700;
-    font-size: 80%;
-}
+.createMeetupEntryBoxForm {font-size: 60%;}
 
 .createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
-    padding: 8px;
-    width: 90%;
-    font-size: 50%;
+    border: 2px solid #e6e6e6;
+    padding: 10px;
+    width: 97%;
 }
 
-.createMeetupEntryBoxForm input[type="file"] {margin-bottom: 25px;}
+.createMeetupEntryBoxForm input[type="file"] {margin-bottom: 15px;}
 
 #createBtn {
-    position: absolute;
-    left: 60%;
-    bottom: 1%;
+    margin-top: 30px;
 }
 
 
@@ -681,7 +764,7 @@ footer p {
 
 #feedBoxQuestions h4 {
     padding: 30px;
-    border-bottom: 1px solid #d0caca;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 #feedBoxQuestions a {color: #000;}
@@ -701,23 +784,15 @@ footer p {
 
 .feedQuestion i {padding: 5px;}
 
+.profileBox {box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);}
+
 
 /*
 * My Meetup Section
 */
 
 #myMeetupSection {
-    height: 100%;
-}
-
-#meetupListingSection {
-    width: 60%;
-    display: block;
-    margin: auto;
-    padding-top: 50px;
-    text-align: center;
-    font-size: 150%;
-    
+    height: 80vh;
 }
 
 .meetupListingQuestion {

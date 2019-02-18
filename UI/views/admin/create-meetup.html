@@ -38,34 +38,32 @@
                 <h3 class="sectionHeading">CREATE MEETUP</h3>
             </div>
 
-            <!-- Creaet meetup form -->
-            <div class="createMeetupEntryBox">
-                <div class="createMeetupEntryBoxForm">
-                    <p>Topic:</p>
-                    <input type="text" required>
-                </div>
-                <div class="createMeetupEntryBoxForm">
-                    <p>Location:</p>
-                    <input type="text" required>
-                </div>
-                <div class="createMeetupEntryBoxForm">
-                    <p>Description:</p>
-                    <textarea id="" cols="30" rows="2"></textarea>
-                </div>
-                <div class="createMeetupEntryBoxForm">
-                    <p>Happening on:</p>
-                    <input type="text" required placeholder="dd/mm/yyyy">
-                </div>
-                <div class="createMeetupEntryBoxForm">
-                    <p>Tags (optional):</p>
-                    <textarea id="" cols="30" rows="2"></textarea>
-                </div>
-                <div class="createMeetupEntryBoxForm">
-                    <p>Picture (optional):</p>
-                    <input type="file">
-                </div>
-                <div class="createMeetupEntryBoxForm">
-                    <a href="meetups.html" class="darkBtn" id="createBtn">Create meetup</a>
+            <div class="row">
+                <!-- Creaet meetup form -->
+                <div class="createMeetupEntryBox">
+                    <form class="createForm createMeetupForm">
+                        <div class="createMeetupEntryBoxForm">
+                            <p>Topic:</p>
+                            <input type="text" required>
+                        </div>
+                        <div class="createMeetupEntryBoxForm">
+                            <p>Location:</p>
+                            <input type="text" required>
+                        </div>
+                        <div class="createMeetupEntryBoxForm">
+                            <p>Description:</p>
+                            <textarea id="" cols="30" rows="2"></textarea>
+                        </div>
+                        <div class="createMeetupEntryBoxForm">
+                            <p>Date:</p>
+                            <input type="text" placeholder="YYYY-MM-DD" required>
+                        </div>
+                        <div class="createMeetupEntryBoxForm">
+                            <p>Time:</p>
+                            <input type="time" placeholder="HH:mm" required>
+                        </div>
+                        <p><a href="meetups.html" class="darkBtn" id="createBtn">Submit</a></p>
+                    </form>
                 </div>
             </div>
         </section>

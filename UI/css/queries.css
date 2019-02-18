@@ -1,3 +1,19 @@
+@media screen and (min-width: 1400px) {
+    .body {
+      width: 1370px;
+    }
+  }
+  @media screen and (min-width: 1600px) {
+    .body {
+      width: 1570px;
+    }
+  }
+  @media screen and (min-width: 1900px) {
+    .body {
+      width: 1870px;
+    }
+  }
+
 /* Media queries for big tablets to 1200px (Widths smaller than the 1140px row) */
 @media only screen and (max-width: 1200px) {
     /* Header */
