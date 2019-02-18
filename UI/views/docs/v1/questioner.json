@@ -27,32 +27,32 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "type": "string",
             "name": "firstname",
             "in": "body",
             "description": "First name of the new user",
-            "required": true
+            "required": true,
+            "type": "string"
           },
           {
-            "type": "string",
             "name": "lastname",
             "in": "body",
             "description": "Last name of the new user",
-            "required": true
+            "required": true,
+            "type": "string"
           },
           {
-            "type": "string",
             "name": "email",
             "in": "body",
             "description": "Email of the new user",
-            "required": true
+            "required": true,
+            "type": "string"
           },
           {
-            "type": "string",
             "name": "password",
             "in": "body",
             "description": "Password of the new user",
-            "required": true
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -76,18 +76,18 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "type": "string",
             "name": "email",
             "in": "body",
             "description": "Email of the user",
-            "required": true
+            "required": true,
+            "type": "string"
           },
           {
-            "type": "string",
             "name": "password",
             "in": "body",
             "description": "Password of the user",
-            "required": true
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -111,33 +111,34 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "type": "string",
             "name": "location",
             "in": "body",
             "description": "Where the meetup would be taking place",
-            "required": true
+            "required": true,
+            "type": "string"
+
           },
           {
-            "type": "string",
             "name": "topic",
             "in": "body",
             "description": "Topic of discussion",
-            "required": true
+            "required": true,
+            "type": "string"
           },
           {
-            "type": "string",
             "name": "description",
             "in": "body",
             "description": "What the meetup is about",
-            "required": true
+            "required": true,
+            "type": "string"
           },
           {
-            "type": "string",
-            "format": "date-time",
             "name": "happeningOn",
             "in": "body",
             "description": "When the meetup is taking place",
-            "required": true
+            "required": true,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
@@ -469,26 +470,26 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "type": "integer",
-            "format": "int64",
             "name": "meetupID",
             "in": "body",
             "description": "The id of the meetup the question is being posted to",
-            "required": true
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           },
           {
-            "type": "string",
             "name": "title",
             "in": "body",
             "description": "Title of question",
-            "required": true
+            "required": true,
+            "type": "string"
           },
           {
-            "type": "string",
             "name": "body",
             "in": "body",
             "description": "Question body",
-            "required": true
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -591,12 +592,12 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "type": "integer",
-            "format": "int64",
             "name": "questionID",
             "in": "path",
             "description": "The id of the question",
-            "required": true
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -664,19 +665,19 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "type": "integer",
-            "format": "int64",
             "name": "questionID",
             "in": "body",
             "description": "The id of the question the comment is being posted to",
-            "required": true
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           },
           {
-            "type": "string",
             "name": "comment",
             "in": "body",
             "description": "The comment to be posted",
-            "required": true
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -705,12 +706,12 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "type": "integer",
-            "format": "int64",
             "name": "commentID",
             "in": "path",
             "description": "The id of the question the comment is being posted to",
-            "required": true
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {

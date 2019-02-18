@@ -1,0 +1,8 @@
+{
+  "version": "2",
+  "exclude_patterns": [
+    "UI/",
+    "server/db/",
+    "server/v1/test/"
+  ]
+}
