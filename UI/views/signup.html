@@ -31,12 +31,21 @@
                 <div id="signUpFormSection">
                     <form class="form signUpForm">
                         <p>Sign up</p>
-                        <input type="text" id="firstName" placeholder="First Name" required>
-                        <input type="text" id="lastName" placeholder="Last Name" required>
-                        <input type="email" id="email" placeholder="Email" required>
-                        <input type="password" id="f_password" placeholder="Password" required>
-                        <input type="password" id="s_password" placeholder="Confirm password" required>
-                        <a href="user/meetups.html" class="darkBtn">Sign up</a>
+                        <input type="text" id="firstName" class="formInput" placeholder="First Name" required>
+                        <p id="firstNameInfo" class="validateInfo"></p>
+                        <input type="text" id="lastName" class="formInput" placeholder="Last Name" required>
+                        <p id="lastNameInfo" class="validateInfo"></p>
+                        <input type="email" id="email" class="formInput" placeholder="Email" required>
+                        <p id="emailInfo" class="validateInfo"></p>
+                        <input type="password" id="f_password" class="formInput" placeholder="Password" required>
+                        <p id="passInfo" class="validateInfo"></p>
+                        <input type="password" id="s_password" class="formInput" placeholder="Confirm password" required>
+                        <p id="secondPassInfo" class="validateInfo"></p>
+                        <div id="buttonContainer">
+                            <input type="submit" id="signupBtn" class="darkBtn" value="Sign up">
+                        </div>
+                        <p id="signupButtonInfo" class="validateInfo"></p>
+                        <!-- <a href="user/meetups.html" class="darkBtn">Sign up</a> -->
                         <p><span class="formSmallText">Already have an account? Log in&nbsp;<a href="signin.html">here</a></span></p>
                         <!-- <input type="submit" class="darkBtn" value="Sign up"> -->
                     </form>
@@ -48,6 +57,11 @@
             <p>Questioner</p>
         </footer>
         <script src="../js/main.js"></script>
+        <script src="../js/helpers/request.js"></script>
+        <script src="../js/helpers/baseURL.js"></script>
+        <script src="../js/helpers/misc.js"></script>
+        <script src="../js/helpers/validateSignup.js"></script>
+        <script src="../js/pages/signup.js"></script>
     </body>
 
 </html>

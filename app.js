@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import meetups from './server/v1/routes/meetups';
 import questions from './server/v1/routes/questions';
 import comments from './server/v1/routes/comments';
@@ -7,6 +8,7 @@ import auth from './server/v1/routes/auth';
 const app = express();
 
 // JSON middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
