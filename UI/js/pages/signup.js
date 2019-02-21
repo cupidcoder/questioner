@@ -31,7 +31,8 @@ const processSignup = async (e) => {
         signupBtn.disabled = false;
       }
     } catch (error) {
-      displayErrorBox(error.message);
+      hideButtonSpinner();
+      displayErrorBox('Could not connect to server');
       hideErrorBox();
       signupBtn.disabled = false;
     }
