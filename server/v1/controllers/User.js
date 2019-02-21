@@ -72,6 +72,7 @@ const User = {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
+        isAdmin: user.is_admin,
       };
       const token = Utility.generateToken(user.id, user.is_admin);
       const loggedInUser = {

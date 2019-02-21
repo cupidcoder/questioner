@@ -1,44 +1,44 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-const singupURL = `${BASE_URL}/auth/signup`;
-const processSignup = async (e) => {
+const singinURL = `${BASE_URL}/auth/login`;
+const processSignin = async (e) => {
   e.preventDefault();
   if (!errors) {
     showButtonSpinner();
-    signupBtn.disabled = true;
-    const userObject = {
-      firstname: firstName.value,
-      lastname: lastName.value,
+    signinBtn.disabled = true;
+    const userCredentials = {
       email: email.value,
-      password: secondPassword.value,
+      password: password.value,
     };
     try {
-      const data = await makeRequest(singupURL, 'POST', userObject);
-      if (data.status === 201) {
+      const data = await makeRequest(singinURL, 'POST', userCredentials);
+      if (data.status === 200) {
         hideButtonSpinner();
         displaySuccessBox(data.message);
         hideSuccessBox();
 
+        const location = data.data[0].user.isAdmin ? 'admin/meetups.html' : 'user/meetups.html';
+
         // Save token
         const storage = window.localStorage;
         storage.setItem('token', data.data[0].token);
-        redirect('user/meetups.html');
+        redirect(location);
       } else {
         hideButtonSpinner();
         displayErrorBox(data.error);
         hideErrorBox();
-        signupBtn.disabled = false;
+        signinBtn.disabled = false;
       }
     } catch (error) {
       hideButtonSpinner();
       displayErrorBox('Could not connect to server');
       hideErrorBox();
-      signupBtn.disabled = false;
+      signinBtn.disabled = false;
     }
   } else {
-    document.getElementById('signupButtonInfo').innerText = 'Form is not filled properly';
+    document.getElementById('signinButtonInfo').innerText = 'Form is not filled properly';
   }
 };
 
-signupBtn.addEventListener('click', processSignup);
+signinBtn.addEventListener('click', processSignin);

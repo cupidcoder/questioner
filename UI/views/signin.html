@@ -33,12 +33,16 @@
                 <div id="signInFormSection">
                     <form class="form signinForm">
                         <p>Welcome</p>
-                        <input type="email" id="email" placeholder="Email" required>
-                        <input type="password" id="f_password" placeholder="Password" required>
-                        <p><a href="admin/meetups.html" class="darkBtn">Login</a></p>
+                        <input type="email" id="email" class="formInput" placeholder="Email" required>
+                        <p id="emailInfo" class="validateInfo"></p>
+                        <input type="password" id="password" class="formInput" placeholder="Password" required>
+                        <p id="passwordInfo" class="validateInfo"></p>
+                        <div id="buttonContainer">
+                            <input type="submit" class="darkBtn" id="signinBtn" value="Login">
+                        </div>
+                        <p id="signinButtonInfo" class="validateInfo"></p>
                         <p><span class="formSmallText">Don't have an account? Sign up&nbsp;<a href="signup.html">here</a></span><br>
                         <span class="formSmallText">Forgot password? Reset&nbsp;<a href="password-reset.html">here</a></span></p>
-                        <!-- <input type="submit" class="darkBtn" value="Login"> -->
                     </form>
                 </div>
             </div>
@@ -48,6 +52,11 @@
             <p>Questioner</p>
         </footer>
         <script src="../js/main.js"></script>
+        <script src="../js/helpers/request.js"></script>
+        <script src="../js/helpers/baseURL.js"></script>
+        <script src="../js/helpers/misc.js"></script>
+        <script src="../js/helpers/validateSignin.js"></script>
+        <script src="../js/pages/signin.js"></script>
     </body>
 
 </html>
