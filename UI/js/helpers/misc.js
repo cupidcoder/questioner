@@ -169,18 +169,18 @@ const deleteMeetup = (e) => {
 const addMeetupEventListeners = () => {
   const viewMeetups = document.querySelectorAll('.viewMeetup');
   Array.prototype.forEach.call(viewMeetups, (el) => {
-    el.addEventListener('click', e => viewMeetup);
+    el.addEventListener('click', viewMeetup);
   });
 
   if (isAdmin()) {
     const editMeetups = document.querySelectorAll('.editMeetup');
     Array.prototype.forEach.call(editMeetups, (el) => {
-      el.addEventListener('click', e => editMeetup);
+      el.addEventListener('click', editMeetup);
     });
 
     const deleteMeetups = document.querySelectorAll('.deleteMeetup');
     Array.prototype.forEach.call(deleteMeetups, (el) => {
-      el.addEventListener('click', e => deleteMeetup);
+      el.addEventListener('click', deleteMeetup);
     });
   }
 };
