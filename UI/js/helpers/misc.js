@@ -96,6 +96,12 @@ const hidePageLoader = () => {
 };
 
 /**
+ * check if admin page is being viewed
+ * @returns {boolean} true/false
+ */
+const isAdmin = () => ((window.location.href.search('user') > 0) ? false : true);
+
+/**
  * Populate Meetups page
  * @param {Array} meetups
  */
@@ -103,8 +109,7 @@ const populateMeetups = (meetups) => {
   const meetupsListingDiv = document.getElementById('meetupsListing');
   const rowStart = '<div class="row">';
   const rowEnd = '</div>';
-  const isAdmin = (window.location.href.search('user') > 0) ? false : true;
-  const meetupString = (!isAdmin) ? '<div class="col-1-of-4"><!-- Div to hold a meetup --><div class="meetupBox"><div class="meetupImage"><img src="%image%" alt="meetup logo" class="viewMeetup" id="%meetupID%"></div><div class="meetupBoxInfo meetupBoxAdmin"><p>%topic%</p><p class="meetupDesc">%description%</p></div></div><!--  End of Div to hold a meetup --></div>' : '<div class="col-1-of-4"><!-- Div to hold a meetup --><div class="meetupBox"><div class="meetupImage"><img src="%image%" alt="meetup logo" class="viewMeetup" id="%meetupID%"></div><div class="meetupBoxInfo meetupBoxAdmin"><p>%topic%</p><div class="editLogo adminMeetupEdit"><i class="far fa-edit editMeetup" id="%editID%"></i></div><div class="deleteLogo adminMeetupDelete"><i class="fas fa-trash deleteMeetup" id="%deleteID%"></i></div></div></div><!--  End of Div to hold a meetup --></div>';
+  const meetupString = (!isAdmin()) ? '<div class="col-1-of-4"><!-- Div to hold a meetup --><div class="meetupBox"><div class="meetupImage"><img src="%image%" alt="meetup logo" class="viewMeetup" id="%meetupID%"></div><div class="meetupBoxInfo meetupBoxAdmin"><p>%topic%</p><p class="meetupDesc">%description%</p></div></div><!--  End of Div to hold a meetup --></div>' : '<div class="col-1-of-4"><!-- Div to hold a meetup --><div class="meetupBox"><div class="meetupImage"><img src="%image%" alt="meetup logo" class="viewMeetup" id="%meetupID%"></div><div class="meetupBoxInfo meetupBoxAdmin"><p>%topic%</p><div class="editLogo adminMeetupEdit"><i class="far fa-edit editMeetup" id="%editID%"></i></div><div class="deleteLogo adminMeetupDelete"><i class="fas fa-trash deleteMeetup" id="%deleteID%"></i></div></div></div><!--  End of Div to hold a meetup --></div>';
 
   let meetupRow = '';
 
@@ -113,11 +118,11 @@ const populateMeetups = (meetups) => {
     let meetup = meetupString.replace('%image%', imageURL);
     meetup = meetup.replace('%topic%', meetups[i].topic);
     meetup = meetup.replace('%meetupID%', `meetup-id-${meetups[i].id}`);
-    if (!isAdmin) {
+    if (!isAdmin()) {
       meetup = meetup.replace('%description%', meetups[i].description);
     }
 
-    if (isAdmin) {
+    if (isAdmin()) {
       meetup = meetup.replace('%editID%', `edit-id-${meetups[i].id}`);
       meetup = meetup.replace('%deleteID%', `delete-id-${meetups[i].id}`);
     }
@@ -162,13 +167,12 @@ const deleteMeetup = (e) => {
  */
 
 const addMeetupEventListeners = () => {
-  const isAdmin = (window.location.href.search('user') > 0) ? false : true;
   const viewMeetups = document.querySelectorAll('.viewMeetup');
   Array.prototype.forEach.call(viewMeetups, (el) => {
     el.addEventListener('click', e => viewMeetup);
   });
 
-  if (isAdmin) {
+  if (isAdmin()) {
     const editMeetups = document.querySelectorAll('.editMeetup');
     Array.prototype.forEach.call(editMeetups, (el) => {
       el.addEventListener('click', e => editMeetup);
