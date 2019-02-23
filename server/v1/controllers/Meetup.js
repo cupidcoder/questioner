@@ -109,7 +109,7 @@ const Meetup = {
     const response = new APIResponse();
     try {
       const { rows } = await db.query(MeetupModels.getUpcomingQuery);
-      response.setSuccess(statusCodes.success, 'Upcoming meetups retrieved successfully', rows);
+      response.setSuccess(statusCodes.success, 'Meetups retrieved successfully', rows);
       return response.send(res);
     } catch (error) {
       response.setFailure(statusCodes.unavailable, 'Some error occurred. Please try again');
