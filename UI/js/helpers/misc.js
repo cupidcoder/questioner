@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unneeded-ternary */
 /* eslint-disable no-unused-vars */
 /**
@@ -142,8 +143,27 @@ const populateMeetups = (meetups) => {
  * View meetup details function
  * @param {object} global event object
  */
-const viewMeetup = (e) => {
-
+const viewMeetup = async (e) => {
+  const meetup = e.target.id.split('-');
+  const meetupID = meetup[2];
+  const url = `${BASE_URL}/meetups/${meetupID}`;
+  const myHeaders = new Headers({ 'x-access-token': `${localStorage.getItem('token')}` });
+  try {
+    const response = await makeGETRequest(url, myHeaders);
+    if (response.status === 200) {
+      localStorage.setItem('meetup-details', JSON.stringify(response.data[0]));
+      displaySuccessBox('Redirecting...');
+      setTimeout(() => {
+        redirect('meetup-details.html');
+      }, 2000);
+    } else {
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
 };
 
 /**
@@ -169,18 +189,36 @@ const deleteMeetup = (e) => {
 const addMeetupEventListeners = () => {
   const viewMeetups = document.querySelectorAll('.viewMeetup');
   Array.prototype.forEach.call(viewMeetups, (el) => {
-    el.addEventListener('click', e => viewMeetup);
+    el.addEventListener('click', viewMeetup);
   });
 
   if (isAdmin()) {
     const editMeetups = document.querySelectorAll('.editMeetup');
     Array.prototype.forEach.call(editMeetups, (el) => {
-      el.addEventListener('click', e => editMeetup);
+      el.addEventListener('click', editMeetup);
     });
 
     const deleteMeetups = document.querySelectorAll('.deleteMeetup');
     Array.prototype.forEach.call(deleteMeetups, (el) => {
-      el.addEventListener('click', e => deleteMeetup);
+      el.addEventListener('click', deleteMeetup);
     });
   }
+};
+
+/**
+ * Populate Details of meetup
+ * @param {object} meetupDetails
+ */
+const populateMeetupDetails = (meetupDetails) => {
+  const imageURL = (meetupDetails.images === null) ? '../../img/uploads/default-meetup.jpg' : meetupDetails.images[0];
+  let meetupImageHTML = '<img src="%image%" alt="Meetup logo">';
+  meetupImageHTML = meetupImageHTML.replace('%image%', imageURL);
+  let meetupTimeLocationHTML = '<i class="fas fa-calendar-day"></i> %date%<span> <i class="fas fa-map-marker-alt"></i> %location%</span>';
+  meetupTimeLocationHTML = meetupTimeLocationHTML.replace('%date%', moment(meetupDetails.happening_on).format('MMMM Do, YYYY'));
+  meetupTimeLocationHTML = meetupTimeLocationHTML.replace('%location%', meetupDetails.location);
+
+  document.getElementById('meetupTimeLocation').innerHTML = meetupTimeLocationHTML;
+  document.getElementById('meetupTopic').innerText = meetupDetails.topic;
+  document.getElementById('meetUpDetailsImage').innerHTML = meetupImageHTML;
+  document.getElementById('meetupDescTitle').innerText = meetupDetails.description;
 };
