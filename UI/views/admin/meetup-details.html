@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../../css/main.css">
         <link rel="stylesheet" type="text/css" href="../../css/queries.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <title>Questioner | Meetups</title>
     </head>
     <body>
@@ -35,23 +36,23 @@
         <section id="meetUpDetailsSection" class="sectionBackground">
             <!-- Image heading -->
             <div class="bgImage imageHeading">
-                <h3 class="sectionHeading">Nodejs Nigeria Meetup</h3>
+                <h3 class="sectionHeading" id="meetupTopic">Nodejs Nigeria Meetup</h3>
                 <div id="meetupEventDetails">
-                    <p>
-                        <i class="fas fa-calendar-day"></i> February 27, 2019
+                    <p id="meetupTimeLocation">
+                        <!-- <i class="fas fa-calendar-day"></i> February 27, 2019
                         <span> <i class="fas fa-map-marker-alt"></i> Ikeja, Lagos.</span>
-                        <span> <i class="fas fa-users"></i> 82 Persons</span>
+                        <span> <i class="fas fa-users"></i> 82 Persons</span> -->
                     </p>
                 </div>
             </div>
             <!-- Meetup Picture -->
             <div id="meetUpDetailsImage" class="details">
-                <img src="../../img/uploads/nodejs.jpg" alt="Nodejs logo">
+                <!-- <img src="../../img/uploads/nodejs.jpg" alt="Nodejs logo"> -->
             </div>
             <!-- Meetup Details -->
             <div id="meetUpDetailsInfo" class="details">
                 <div class="meetUpDetailsInfoDesc" id="meetupDescription">
-                    <p id="meetupDescTitle">We are Nodejs enthusiasts in the Nigerian space, promoting standard practices that lead to building robust and efficient softwares using Nodejs</p>
+                    <p id="meetupDescTitle"></p>
 
                     <div id="rsvpBox">
                         <div id="rsvp" class="rsvpBadge">
@@ -147,6 +148,10 @@
             <p>Questioner</p>
         </footer>
         <script src="../../js/main.js"></script>
+        <script src="../../js/helpers/baseURL.js"></script>
+        <script src="../../js/helpers/request.js"></script>
+        <script src="../../js/helpers/misc.js"></script>
+        <script src="../../js/pages/meetup-details.js"></script>
     </body>
 
 </html>

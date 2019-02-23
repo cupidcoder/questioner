@@ -31,7 +31,7 @@ const loadMeetups = async () => {
     }
   } catch (error) {
     hidePageLoader();
-    displayErrorBox(error.message);
+    displayErrorBox('Could not connect to server');
     hideErrorBox();
   }
 };
