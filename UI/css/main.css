@@ -248,6 +248,32 @@ footer p {
     padding-top: 10px;
 }
 
+/* Page loader */
+/* #meetupListing {
+    position: relative;
+} */
+
+#page-loader-container {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.788);
+}
+
+#page-loader {
+    position: absolute;
+    z-index: 900;
+    height: 100px;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 /* Container */
 .row {
     width: 1140px;
@@ -411,6 +437,10 @@ footer p {
     box-shadow: 0 1px 3.5px #4c4a4a;
 }
 
+.viewMeetup:hover {
+    cursor: pointer;
+}
+
 .meetupImage {
     transition: all .2s;
     height: 60%;
@@ -441,6 +471,11 @@ footer p {
     font-size: 60%;
     font-weight: 700;
     overflow-wrap: break-word;
+}
+
+.meetupDesc {
+    padding-top: 10px;
+    border-top: 4px solid #e6e6e6;
 }
 
 .meetupBoxInfo div { display: inline-block; }
