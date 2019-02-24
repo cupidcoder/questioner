@@ -108,7 +108,7 @@ const Question = {
     }
     try {
       const { rows } = await db.query(QuestionModels.insertQuestionQuery, [
-        new Date().toUTCString(), req.user.id, question.meetupID, question.title, question.body,
+        new Date().toUTCString(), req.user.id, question.meetupID, question.body,
       ]);
       response.setSuccess(statusCodes.created, 'Question submitted successfully', rows[0]);
       return response.send(res);

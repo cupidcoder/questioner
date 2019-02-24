@@ -866,9 +866,8 @@ describe('GET /api/v1/meetups/:meetupID/questions', () => {
       .end((err, res) => {
         res.should.have.status(statusCodes.success);
         res.body.should.have.property('data');
-        res.body.data[0].should.have.property('title').eql('Item 7');
-        res.body.data[1].should.have.property('title').eql('Item 7 again');
-        res.body.data[2].should.have.property('title').eql('Stickers');
+        res.body.data[0].should.have.property('body').eql('Will item 7 be provided?');
+        res.body.data[1].should.have.property('body').eql('Will item 7 be provided again?');
         done();
       });
   });

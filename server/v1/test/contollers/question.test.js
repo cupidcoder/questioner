@@ -11,15 +11,13 @@ describe('POST /api/v1/questions', () => {
   // Sample valid question request data
   const questionRecord = {
     meetupID: 2,
-    title: 'Transportation',
     body: 'I would like to know if there would provisions for transportation',
   };
 
   // sample invalid question request data
   const invalidQuestionRecord = {
     meetupID: 2,
-    title: '',
-    body: 'I would like to know if there would provisions for transportation',
+    body: '',
   };
 
   it('should return error if token is not provided', (done) => {
@@ -98,7 +96,7 @@ describe('POST /api/v1/questions', () => {
         .end((err, res) => {
           res.should.have.status(statusCodes.created);
           res.body.data[0].should.have.property('user_id').eql(2);
-          res.body.data[0].should.have.property('title').eql('Transportation');
+          res.body.data[0].should.have.property('body').eql('I would like to know if there would provisions for transportation');
           done();
         });
     });

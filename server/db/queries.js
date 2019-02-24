@@ -42,7 +42,6 @@ const createQueries = {
     created_on TIMESTAMP NOT NULL DEFAULT NOW(),
     user_id INT REFERENCES users (id) ON DELETE CASCADE,
     meetup_id INT REFERENCES meetups (id) ON DELETE CASCADE,
-    title VARCHAR(255) NOT NULL,
     body VARCHAR(255) NOT NULL
   )`,
 
@@ -128,13 +127,13 @@ const seedQueries = {
   `,
 
   questionsTable: `
-    INSERT INTO questions(created_on, user_id, meetup_id, title, body)
-      VALUES ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 2, 'What about', 'Okay. this is not so great. Is it?'),
-              ('${moment().format('YYYY-MM-DD HH:mm')}', 2, 1, 'Transportation', 'Will transport be provided?'),
-              ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 3, 'Item 7', 'Will item 7 be provided?'),
-              ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 3, 'Item 7 again', 'Will item 7 be provided again?'),
-              ('${moment().format('YYYY-MM-DD HH:mm')}', 2, 3, 'Stickers', 'Would we be getting stickers?'),
-              ('${moment().format('YYYY-MM-DD HH:mm')}', 3, 3, 'Stickers 2', 'Would we be getting stickers again?')
+    INSERT INTO questions(created_on, user_id, meetup_id, body)
+      VALUES ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 2, 'Okay. this is not so great. Is it?'),
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 2, 1, 'Will transport be provided?'),
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 3, 'Will item 7 be provided?'),
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 1, 3, 'Will item 7 be provided again?'),
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 2, 3, 'Would we be getting stickers?'),
+              ('${moment().format('YYYY-MM-DD HH:mm')}', 3, 3, 'Would we be getting stickers again?')
   `,
 
   rsvpTable: `

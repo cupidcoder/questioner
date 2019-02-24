@@ -63,7 +63,6 @@ const validation = {
     req.body = utility.objectTrim(req.body);
     const questionObjectRules = joi.object().keys({
       meetupID: joi.number().required(),
-      title: joi.string().trim().min(3).required(),
       body: joi.string().trim().min(3).required(),
     });
     const { error } = joi.validate(req.body, questionObjectRules);
