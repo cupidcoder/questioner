@@ -287,8 +287,46 @@ const addQuestionEventListeners = () => {
 /**
  * post question to meetup
  */
-const postQuestion = () => {
+const postQuestion = async (e) => {
+  e.preventDefault();
+  pageLoader();
+  const postQuestionURL = `${BASE_URL}/questions`;
+  const meetupID = JSON.parse(localStorage.getItem('meetup-details')).id;
+  const questionBody = document.getElementById('questionBody');
+  const questionObject = {
+    meetupID,
+    body: questionBody.value,
+  };
 
+  const myHeaders = new Headers({
+    'Content-type': 'Application/json',
+    'x-access-token': `${localStorage.getItem('token')}`,
+  });
+
+  try {
+    const response = await makeRequest(postQuestionURL, 'POST', myHeaders, questionObject);
+    if (response.status === 201) {
+      hidePageLoader();
+      displaySuccessBox(response.message);
+      hideSuccessBox();
+      setTimeout(() => {
+        populateQuestions(response.data);
+        questionBody.value = '';
+      }, 3000);
+    } else if (response.status === 400) {
+      hidePageLoader();
+      displayErrorBox('Question cannot be empty');
+      hideErrorBox();
+    } else {
+      hidePageLoader();
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    hidePageLoader();
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
 };
 
 /**

@@ -4,8 +4,8 @@
 
 const Question = {
   insertQuestionQuery: ` INSERT INTO
-    questions(created_on, user_id, meetup_id, title, body)
-    VALUES($1, $2, $3, $4, $5)
+    questions(created_on, user_id, meetup_id, body)
+    VALUES($1, $2, $3, $4)
     returning *`,
   getOneQuery: 'SELECT * FROM questions WHERE id = $1',
   deleteOneQuery: 'DELETE FROM questions WHERE id = $1',
