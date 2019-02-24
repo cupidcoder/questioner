@@ -292,10 +292,60 @@ const downvoteQuestion = async (e) => {
 };
 
 /**
+ * Populate comments dialog box
+ * @param {Array} comments
+ */
+const populateComments = (comments) => {
+  const commentHTML = '<div class="commentBox" id="%commentID%"><div class="commentAuthor"><p>by&nbsp;&nbsp;<span>John Doe</span></p></div><p>%comment%</p></div>';
+
+  for (let i = 0; i < comments.length; i += 1) {
+    let comment = commentHTML.replace('%comment%', comments[i].comment);
+    comment = comment.replace('%commentID%', `comment-id-${comments[i].id}`);
+    document.getElementById('questionComments').insertAdjacentHTML('afterbegin', comment);
+  }
+};
+
+/**
  * comment question
  */
-const commentQuestion = (e) => {
-  document.getElementById('meetupCommentBackground').style.display = 'block';
+const commentQuestion = async (e) => {
+  pageLoader();
+  const questionID = e.target.parentNode.id.split('-')[2];
+  // Save questionID in localStorage for use in comment dialog box
+  localStorage.setItem('questionID', questionID);
+  const questionCommentsURL = `${BASE_URL}/questions/${questionID}/comments`;
+  const myHeaders = new Headers({ 'x-access-token': `${localStorage.getItem('token')}` });
+  try {
+    const response = await makeGETRequest(questionCommentsURL, myHeaders);
+    if (response.status === 200) {
+      hidePageLoader();
+      if (response.data.length > 0) {
+        setTimeout(() => {
+          populateComments(response.data);
+          document.getElementById('meetupCommentBackground').style.display = 'block';
+        }, 3000);
+      } else {
+        setTimeout(() => {
+          document.getElementById('meetupCommentBackground').style.display = 'block';
+        }, 3000);
+      }
+    } else {
+      hidePageLoader();
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    hidePageLoader();
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
+};
+
+/**
+ * Post comment to question
+ */
+const postComment = () => {
+
 };
 
 /**
@@ -306,6 +356,7 @@ const addQuestionEventListeners = () => {
   const downvoteIcons = document.querySelectorAll('.downvoteQuestion');
   const commentIcons = document.querySelectorAll('.meetupDetailsCommentBtn');
   const closeCommentDialogBox = document.querySelector('.close');
+  const postCommentBtn = document.getElementById('postCommentBtn');
 
   Array.prototype.forEach.call(upvoteIcons, (el) => {
     el.addEventListener('click', upvoteQuestion);
@@ -321,7 +372,13 @@ const addQuestionEventListeners = () => {
 
   closeCommentDialogBox.addEventListener('click', () => {
     document.getElementById('meetupCommentBackground').style.display = 'none';
+    const questionComments = document.getElementById('questionComments');
+    while (questionComments.firstChild) {
+      questionComments.removeChild(questionComments.firstChild);
+    }
   });
+
+  postCommentBtn.addEventListener('click', postComment);
 };
 
 /**
