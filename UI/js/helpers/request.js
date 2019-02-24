@@ -3,17 +3,16 @@
  * Makes HTTP POST calls to Backend APIs
  * @param {string} url
  * @param {string} method
+ * @param {object} headers
  * @param {string} data
  * @returns {object} response
  */
 
-const makeRequest = (url, method, data = {}) => new Promise((resolve, reject) => {
+const makeRequest = (url, method, myHeaders, data = {}) => new Promise((resolve, reject) => {
   fetch(url, {
     method,
     mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: myHeaders,
     body: JSON.stringify(data),
   })
     .then(response => resolve(response.json()))

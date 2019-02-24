@@ -292,24 +292,37 @@ const postQuestion = () => {
 };
 
 /**
- * respond 'maybe' to meetup
+ * respond to meetup
  */
-const rsvpMaybe = () => {
+const respondToMeetup = async (e) => {
+  pageLoader();
+  const meetupID = JSON.parse(localStorage.getItem('meetup-details')).id;
+  const rsvpURL = `${BASE_URL}/meetups/${meetupID}/rsvp`;
+  const action = {
+    response: e.target.parentNode.id.split('-')[0],
+  };
 
-};
+  const myHeaders = new Headers({
+    'Content-type': 'Application/json',
+    'x-access-token': `${localStorage.getItem('token')}`,
+  });
 
-/**
- * respond 'yes' to meetup
- */
-const rsvpYes = () => {
-
-};
-
-/**
- * respond 'no' to meetup
- */
-const rsvpNo = () => {
-
+  try {
+    const response = await makeRequest(rsvpURL, 'POST', myHeaders, action);
+    if (response.status === 201) {
+      hidePageLoader();
+      displaySuccessBox(response.message);
+      hideSuccessBox();
+    } else {
+      hidePageLoader();
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    hidePageLoader();
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
 };
 
 /**
@@ -322,7 +335,7 @@ const addMeetupDetailsEventListeners = () => {
   const yesRSVP = document.getElementById('yesResponse');
 
   postQuestionBtn.addEventListener('click', postQuestion);
-  maybeRSVP.addEventListener('click', rsvpMaybe);
-  noRSVP.addEventListener('click', rsvpNo);
-  yesRSVP.addEventListener('click', rsvpYes);
+  maybeRSVP.addEventListener('click', respondToMeetup);
+  noRSVP.addEventListener('click', respondToMeetup);
+  yesRSVP.addEventListener('click', respondToMeetup);
 };

@@ -578,11 +578,11 @@ footer p {
     background-color: #fff;
 }
 
-#yesBadge p {background-color: green;}
+#yes-Badge p {background-color: green;}
 
-#noBadge p {background-color: #352b35;}
+#no-Badge p {background-color: #352b35;}
 
-#maybeBadge p {background-color: #305b8c;}
+#maybe-Badge p {background-color: #305b8c;}
 
 #rsvp span {
     border-left: 1px solid #f39e3e;
