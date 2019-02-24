@@ -240,8 +240,28 @@ const populateQuestions = (questions) => {
 /**
  * upvote question
  */
-const upvoteQuestion = (e) => {
+const upvoteQuestion = async (e) => {
+  pageLoader();
+  const questionID = e.target.parentNode.id.split('-')[2];
+  const upvoteQuestionURL = `${BASE_URL}/questions/${questionID}/upvote`;
+  const myHeaders = new Headers({ 'x-access-token': `${localStorage.getItem('token')}` });
 
+  try {
+    const response = await makeRequest(upvoteQuestionURL, 'PATCH', myHeaders);
+    if (response.status === 200) {
+      hidePageLoader();
+      displaySuccessBox(response.message);
+      hideSuccessBox();
+    } else {
+      hidePageLoader();
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    hidePageLoader();
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
 };
 
 /**
@@ -312,6 +332,7 @@ const postQuestion = async (e) => {
       setTimeout(() => {
         populateQuestions(response.data);
         questionBody.value = '';
+        addQuestionEventListeners();
       }, 3000);
     } else if (response.status === 400) {
       hidePageLoader();
