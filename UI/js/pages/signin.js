@@ -11,8 +11,9 @@ const processSignin = async (e) => {
       email: email.value,
       password: password.value,
     };
+    const myHeaders = new Headers({ 'Content-type': 'Application/json' });
     try {
-      const data = await makeRequest(singinURL, 'POST', userCredentials);
+      const data = await makeRequest(singinURL, 'POST', myHeaders, userCredentials);
       if (data.status === 200) {
         hideButtonSpinner();
         displaySuccessBox(data.message);
