@@ -267,8 +267,28 @@ const upvoteQuestion = async (e) => {
 /**
  * downvote question
  */
-const downvoteQuestion = (e) => {
+const downvoteQuestion = async (e) => {
+  pageLoader();
+  const questionID = e.target.parentNode.id.split('-')[2];
+  const downvoteQuestionURL = `${BASE_URL}/questions/${questionID}/downvote`;
+  const myHeaders = new Headers({ 'x-access-token': `${localStorage.getItem('token')}` });
 
+  try {
+    const response = await makeRequest(downvoteQuestionURL, 'PATCH', myHeaders);
+    if (response.status === 200) {
+      hidePageLoader();
+      displaySuccessBox(response.message);
+      hideSuccessBox();
+    } else {
+      hidePageLoader();
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    hidePageLoader();
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
 };
 
 /**
