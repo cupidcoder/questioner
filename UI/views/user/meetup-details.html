@@ -34,7 +34,7 @@
         <section id="meetUpDetailsSection" class="sectionBackground">
             <!-- Image heading -->
             <div class="bgImage imageHeading">
-                <h3 class="sectionHeading" id="meetupTopic">Nodejs Nigeria Meetup</h3>
+                <h3 class="sectionHeading" id="meetupTopic"></h3>
                 <div id="meetupEventDetails">
                     <p id="meetupTimeLocation">
                         <!-- <i class="fas fa-calendar-day"></i> February 27, 2019
@@ -57,13 +57,13 @@
                             <p>RSVP</p>
                         </div>
                         <div id="maybeBadge" class="rsvpBadge badgeRight">
-                            <p>MAYBE</p>
+                            <p id="maybeResponse">MAYBE</p>
                         </div>
                         <div id="noBadge" class="rsvpBadge badgeRight">
-                            <p>NO</p>
+                            <p id="noResponse">NO</p>
                         </div>
                         <div id="yesBadge" class="rsvpBadge badgeRight">
-                            <p>YES</p>
+                            <p id="yesResponse">YES</p>
                         </div>
                     </div>
                 </div>
@@ -75,35 +75,13 @@
                     <a href="#" class="darkBtn" id="postQuestion">Post</a>
                 </div>
 
-                <div class="meetUpDetailsQuestion meetUpDetailsInfoDesc">
-                    <p>Are we getting stickers?</p>
-                    <i class="far fa-thumbs-up"></i>
-                    <i class="fas fa-thumbs-down thumbs-down-red"></i>
-                    <i class="far fa-comments meetupDetailsCommentBtn">&nbsp;100</i>
-                </div>
-                <div class="meetUpDetailsQuestion meetUpDetailsInfoDesc">
-                        <p>Will there be item 7?</p>
+                <div id="meetupQuestions">
+                    <!-- <div class="meetUpDetailsQuestion meetUpDetailsInfoDesc">
+                        <p>Are we getting stickers?</p>
                         <i class="far fa-thumbs-up"></i>
                         <i class="fas fa-thumbs-down thumbs-down-red"></i>
-                        <i class="far fa-comments meetupDetailsCommentBtn">&nbsp;19</i>
-                </div>
-                <div class="meetUpDetailsQuestion meetUpDetailsInfoDesc">
-                        <p>Are we to come with our laptops?</p>
-                        <i class="far fa-thumbs-up"></i>
-                        <i class="fas fa-thumbs-down thumbs-down-red"></i>
-                        <i class="far fa-comments meetupDetailsCommentBtn">&nbsp;43</i>
-                </div>
-                <div class="meetUpDetailsQuestion meetUpDetailsInfoDesc">
-                        <p>Will recruiters be present?</p>
-                        <i class="far fa-thumbs-up"></i>
-                        <i class="fas fa-thumbs-down thumbs-down-red"></i>
-                        <i class="far fa-comments meetupDetailsCommentBtn">&nbsp;21</i>
-                </div>
-                <div class="meetUpDetailsQuestion meetUpDetailsInfoDesc">
-                        <p>Should be expectant of freebies?</p>
-                        <i class="far fa-thumbs-up"></i>
-                        <i class="fas fa-thumbs-down thumbs-down-red"></i>
-                        <i class="far fa-comments meetupDetailsCommentBtn">&nbsp;10</i>
+                        <i class="far fa-comments meetupDetailsCommentBtn">&nbsp;100</i>
+                    </div> -->
                 </div>
             </div>
             <div class="clear"></div>
@@ -111,7 +89,7 @@
         <!-- Comments dialog box -->
         <div id="meetupCommentBackground">
             <div id="meetUpCommentSection">
-                <span class="close meetupDetailsCommentBtn">&times;</span>
+                <span class="close">&times;</span>
                 <h3 class="sectionHeading">Comments</h3>
                 <div id="commentContainer">
                     <div id="postCommentBox" class="commentBox">
@@ -139,6 +117,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- Page loader -->
+        <div id="page-loader-container">
+            <img src="../../img/page-loader.gif" alt="page loader gif" id="page-loader">
         </div>
         <!-- End of Comments dialog box -->
         <!-- End of Meetups section -->

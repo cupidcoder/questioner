@@ -222,3 +222,107 @@ const populateMeetupDetails = (meetupDetails) => {
   document.getElementById('meetUpDetailsImage').innerHTML = meetupImageHTML;
   document.getElementById('meetupDescTitle').innerText = meetupDetails.description;
 };
+
+/**
+ * Populate questions
+ * @param {Array} questions
+ */
+const populateQuestions = (questions) => {
+  const questionHTML = '<div class="meetUpDetailsQuestion meetUpDetailsInfoDesc" id="%questionID%"><p>%body%</p><i class="far fa-thumbs-up upvoteQuestion"></i><i class="fas fa-thumbs-down downvoteQuestion"></i><i class="far fa-comments meetupDetailsCommentBtn"></i></div>';
+
+  for (let i = 0; i < questions.length; i += 1) {
+    let meetup = questionHTML.replace('%body%', questions[i].body);
+    meetup = meetup.replace('%questionID%', `question-id-${questions[i].id}`);
+    document.getElementById('meetupQuestions').insertAdjacentHTML('afterbegin', meetup);
+  }
+};
+
+/**
+ * upvote question
+ */
+const upvoteQuestion = (e) => {
+
+};
+
+/**
+ * downvote question
+ */
+const downvoteQuestion = (e) => {
+
+};
+
+/**
+ * comment question
+ */
+const commentQuestion = (e) => {
+  document.getElementById('meetupCommentBackground').style.display = 'block';
+};
+
+/**
+ * Add eventListeners for upvote, downvote and comment functions
+ */
+const addQuestionEventListeners = () => {
+  const upvoteIcons = document.querySelectorAll('.upvoteQuestion');
+  const downvoteIcons = document.querySelectorAll('.downvoteQuestion');
+  const commentIcons = document.querySelectorAll('.meetupDetailsCommentBtn');
+  const closeCommentDialogBox = document.querySelector('.close');
+
+  Array.prototype.forEach.call(upvoteIcons, (el) => {
+    el.addEventListener('click', upvoteQuestion);
+  });
+
+  Array.prototype.forEach.call(downvoteIcons, (el) => {
+    el.addEventListener('click', downvoteQuestion);
+  });
+
+  Array.prototype.forEach.call(commentIcons, (el) => {
+    el.addEventListener('click', commentQuestion);
+  });
+
+  closeCommentDialogBox.addEventListener('click', () => {
+    document.getElementById('meetupCommentBackground').style.display = 'none';
+  });
+};
+
+/**
+ * post question to meetup
+ */
+const postQuestion = () => {
+
+};
+
+/**
+ * respond 'maybe' to meetup
+ */
+const rsvpMaybe = () => {
+
+};
+
+/**
+ * respond 'yes' to meetup
+ */
+const rsvpYes = () => {
+
+};
+
+/**
+ * respond 'no' to meetup
+ */
+const rsvpNo = () => {
+
+};
+
+/**
+ * Add eventListeners for rsvp and post question
+ */
+const addMeetupDetailsEventListeners = () => {
+  const postQuestionBtn = document.getElementById('postQuestion');
+  const maybeRSVP = document.getElementById('maybeResponse');
+  const noRSVP = document.getElementById('noResponse');
+  const yesRSVP = document.getElementById('yesResponse');
+
+  postQuestionBtn.addEventListener('click', postQuestion);
+  maybeRSVP.addEventListener('click', rsvpMaybe);
+  noRSVP.addEventListener('click', rsvpNo);
+  yesRSVP.addEventListener('click', rsvpYes);
+};
