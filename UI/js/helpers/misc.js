@@ -312,6 +312,7 @@ const postQuestion = async (e) => {
       setTimeout(() => {
         populateQuestions(response.data);
         questionBody.value = '';
+        addQuestionEventListeners();
       }, 3000);
     } else if (response.status === 400) {
       hidePageLoader();
