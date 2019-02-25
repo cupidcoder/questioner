@@ -84,7 +84,7 @@ const isLoggedIn = () => {
 const pageLoader = () => {
   window.setTimeout(() => {
     document.getElementById('page-loader-container').style.display = 'block';
-  }, 1000);
+  }, 50);
 };
 
 /**
@@ -344,8 +344,42 @@ const commentQuestion = async (e) => {
 /**
  * Post comment to question
  */
-const postComment = () => {
+const postComment = async () => {
+  pageLoader();
+  const comment = document.getElementById('commentInput');
+  const questionID = localStorage.getItem('questionID');
+  const commentURL = `${BASE_URL}/comments`;
+  const myHeaders = new Headers({
+    'Content-type': 'Application/json',
+    'x-access-token': `${localStorage.getItem('token')}`,
+  });
+  const newCommentObject = {
+    questionID,
+    comment: comment.value,
+  };
 
+  try {
+    const response = await makeRequest(commentURL, 'POST', myHeaders, newCommentObject);
+    if (response.status === 201) {
+      hidePageLoader();
+      setTimeout(() => {
+        populateComments(response.data);
+        comment.value = '';
+      }, 3000);
+    } else if (response.status === 400) {
+      hidePageLoader();
+      displayErrorBox('Comment cannot be empty');
+      hideErrorBox();
+    } else {
+      hidePageLoader();
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    hidePageLoader();
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
 };
 
 /**
