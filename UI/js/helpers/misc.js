@@ -12,6 +12,16 @@ const showButtonSpinner = () => {
 };
 
 /**
+ * Inserts spinners into the DOM for Create Meetup
+ */
+
+const showButtonSpinnerMeetup = () => {
+  setTimeout(() => {
+    document.getElementById('buttonContainer').insertAdjacentHTML('beforeend', '<img src="../../img/small-spinner.gif" alt="Small spinner" id="small-spinner">');
+  }, 500);
+};
+
+/**
  * Remove spinners from the DOM
  */
 const hideButtonSpinner = () => {

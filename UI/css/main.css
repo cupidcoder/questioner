@@ -150,6 +150,14 @@ li {list-style-type:none;}
     margin-top: -10px;
 }
 
+.validateMeetup {
+    font-size: 50%;
+    color: #ef5c5c;
+    text-align: left;
+    margin: 0;
+    margin-top: 3px;
+}
+
 .createForm {
     padding: 0 40px;
     display: block;
@@ -790,7 +798,7 @@ footer p {
 .createMeetupEntryBoxForm {font-size: 60%;}
 
 .createMeetupEntryBoxForm input, .createMeetupEntryBoxForm textarea {
-    border: 2px solid #e6e6e6;
+    border: 2px solid #a09898;
     padding: 10px;
     width: 97%;
 }
@@ -798,7 +806,7 @@ footer p {
 .createMeetupEntryBoxForm input[type="file"] {margin-bottom: 15px;}
 
 #createBtn {
-    margin-top: 30px;
+    margin-top: 5px;
 }
 
 
