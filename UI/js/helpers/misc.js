@@ -185,11 +185,50 @@ const editMeetup = (e) => {
 };
 
 /**
+ * Processes the deletion of a meetup record
+ */
+const processDeleteMeetup = async () => {
+  pageLoader();
+  document.getElementById('confirmDialogContainer').style.display = 'none';
+  const meetupID = localStorage.getItem('meetupID');
+  const meetupURL = `${BASE_URL}/meetups/${meetupID}`;
+  const myHeaders = new Headers({ 'x-access-token': `${localStorage.getItem('token')}` });
+  try {
+    const response = await makeRequest(meetupURL, 'DELETE', myHeaders);
+    if (response.status === 200) {
+      hidePageLoader();
+      displaySuccessBox(response.message);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    } else {
+      hidePageLoader();
+      displayErrorBox(response.error);
+      hideErrorBox();
+    }
+  } catch (error) {
+    hidePageLoader();
+    displayErrorBox('Could not connect to server');
+    hideErrorBox();
+  }
+};
+
+/**
  * delete meetup function
  * @param {object} global event object
  */
 const deleteMeetup = (e) => {
+  const confirmDialogBox = document.getElementById('confirmDialogContainer');
+  const meetupID = e.target.id.split('-')[2];
+  // Save meetupID to localStorage for delete meetup dialog box
+  localStorage.setItem('meetupID', meetupID);
+  confirmDialogBox.style.display = 'block';
 
+  document.getElementById('cancelAction').addEventListener('click', () => {
+    confirmDialogBox.style.display = 'none';
+  });
+
+  document.getElementById('acceptAction').addEventListener('click', processDeleteMeetup);
 };
 
 /**

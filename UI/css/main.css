@@ -283,6 +283,55 @@ footer p {
     transform: translateX(-50%);
 }
 
+/* Confirm dialog box */
+#confirmDialogContainer {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+}
+
+#confirmDialog {
+    width: 55%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d2c7be;
+    padding: 28px;
+    border-radius: 5px;
+}
+
+.confirmDialogHeading {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.confirmDialogBtn {
+    padding: 10px;
+    color: #fff;
+}
+
+.confirmDialogBtn:hover { cursor: pointer; }
+
+#acceptAction {
+    background-color: rgb(145, 49, 49);
+    position: absolute;
+    right: 15px;
+    bottom: 5px;
+}
+
+#cancelAction {
+    background-color: rgb(72, 105, 72);
+    position: absolute;
+    left: 15px;
+    bottom: 5px;
+}
+
 /* Container */
 .row {
     width: 1140px;

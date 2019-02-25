@@ -17,8 +17,6 @@ const loadMeetups = async () => {
       if (data.data.length === 0) {
         displaySuccessBox('No meetup available at the moment');
       } else {
-        displaySuccessBox(data.message);
-        hideSuccessBox();
         setTimeout(() => {
           populateMeetups(data.data);
           addMeetupEventListeners();
