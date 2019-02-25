@@ -82,6 +82,7 @@ li {list-style-type:none;}
     opacity: .95;
     z-index: 400;
     color: #fff;
+    border-radius: 8px;
 }
 
 #successBox { background-color: rgb(140, 204, 140); }
