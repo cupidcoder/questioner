@@ -44,25 +44,32 @@
                     <form class="createForm createMeetupForm">
                         <div class="createMeetupEntryBoxForm">
                             <p>Topic:</p>
-                            <input type="text" required>
+                            <input type="text" id="topicInput" required>
                         </div>
+                        <p id="topicInfo" class="validateMeetup"></p>
                         <div class="createMeetupEntryBoxForm">
                             <p>Location:</p>
-                            <input type="text" required>
+                            <input type="text" id="locationInput" required>
                         </div>
+                        <p id="locationInfo" class="validateMeetup"></p>
                         <div class="createMeetupEntryBoxForm">
                             <p>Description:</p>
-                            <textarea id="" cols="30" rows="2"></textarea>
+                            <textarea id="descriptionInput" cols="30" rows="2"></textarea>
                         </div>
+                        <p id="descriptionInfo" class="validateMeetup"></p>
                         <div class="createMeetupEntryBoxForm">
                             <p>Date:</p>
-                            <input type="text" placeholder="YYYY-MM-DD" required>
+                            <input type="text" id="dateInput" placeholder="YYYY-MM-DD" required>
                         </div>
+                        <p id="dateInfo" class="validateMeetup"></p>
                         <div class="createMeetupEntryBoxForm">
                             <p>Time:</p>
-                            <input type="time" placeholder="HH:mm" required>
+                            <input type="time" id="timeInput" required>
                         </div>
-                        <p><a href="meetups.html" class="darkBtn" id="createBtn">Submit</a></p>
+                        <p id="timeInfo" class="validateMeetup"></p>
+                        <div id="buttonContainer">
+                            <button class="darkBtn" id="createBtn">Submit</button>    
+                        </div>
                     </form>
                 </div>
             </div>
@@ -72,6 +79,11 @@
             <p>Questioner</p>
         </footer>
         <script src="../../js/main.js"></script>
+        <script src="../../js/helpers/baseURL.js"></script>
+        <script src="../../js/helpers/request.js"></script>
+        <script src="../../js/helpers/misc.js"></script>
+        <script src="../../js/helpers/validateMeetup.js"></script>
+        <script src="../../js/pages/create-meetup.js"></script>
     </body>
 
 </html>
