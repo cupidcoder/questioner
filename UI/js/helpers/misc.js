@@ -84,7 +84,7 @@ const isLoggedIn = () => {
 const pageLoader = () => {
   window.setTimeout(() => {
     document.getElementById('page-loader-container').style.display = 'block';
-  }, 1000);
+  }, 50);
 };
 
 /**
