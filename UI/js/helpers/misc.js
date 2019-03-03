@@ -177,11 +177,40 @@ const viewMeetup = async (e) => {
 };
 
 /**
+ * Validate meetup tags input
+ */
+const validateMeetupTags = () => {
+  const addTagsBtn = document.getElementById('addTagsBtn');
+  const tagInput = document.getElementById('tagInput');
+  const validTagPattern = /^[a-zA-Z]+(,*[a-zA-Z]*)*$/;
+  tagInput.addEventListener('blur', () => {
+    if (validTagPattern.test(tagInput.value)) {
+      addTagsBtn.disabled = false;
+    }
+  });
+};
+
+/**
  * Edit meetup function
  * @param {object} global event object
  */
 const editMeetup = (e) => {
+  // Save meetupID in localStorage
+  localStorage.setItem('meetupID', e.target.id.split('-')[2]);
+  // Show update meetup dialog box
+  document.getElementById('updateMeetupBackground').style.display = 'block';
 
+  // Begin tags validation
+  document.getElementById('tagInput').focus();
+  document.getElementById('addTagsBtn').disabled = true;
+
+  // Assign event listener to close update meetup dialog box
+  document.querySelector('.close').addEventListener('click', () => {
+    document.getElementById('updateMeetupBackground').style.display = 'none';
+  });
+
+  // Add input validator for tagInput
+  document.getElementById('tagInput').addEventListener('focus', validateMeetupTags);
 };
 
 /**
